@@ -30,7 +30,11 @@ export class HomeComponent implements OnInit {
 
 
   }
+<<<<<<< HEAD
 
 
 
+=======
+  
+>>>>>>> f4436045a64ed527945f7a53d617f69e89680bcd
 }

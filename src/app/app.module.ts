@@ -12,7 +12,15 @@ import { HttpClientModule } from '@angular/common/http';
 import {CardModule} from 'primeng/card';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ProfileComponent } from './profile/profile.component';
+import {TabViewModule} from 'primeng/tabview';
+import { Routes,RouterModule} from '@angular/router';
 
+const appRoutes: Routes = [
+  { path: ' ',component: AppComponent},
+  { path: 'login',component: LoginComponent},
+  { path: 'home',component: HomeComponent},
+  { path: 'profile',component: ProfileComponent},
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +36,9 @@ import { ProfileComponent } from './profile/profile.component';
     InputTextModule,
     ButtonModule,
     CardModule,
-    InputTextareaModule
+    InputTextareaModule,
+    TabViewModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
