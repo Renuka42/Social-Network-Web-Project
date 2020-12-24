@@ -11,12 +11,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
+  pose_all: any;
   ngOnInit(): void {
 
 
     let json = { user_id: "17" };
     this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json)).subscribe(response => {
       console.log(response);
+      this.pose_all = response;
     }, error => {
       console.log("fail");
     });
@@ -30,38 +32,5 @@ export class HomeComponent implements OnInit {
     // });
 
 
-  }
-}
-export class MenubarDemo {
-
-  items!: MenuItem[];
-
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'File',
-        icon: 'pi pi-fw pi-file',
-
-      },
-      {
-        label: 'Edit',
-        icon: 'pi pi-fw pi-pencil',
-
-      },
-      {
-        label: 'Users',
-        icon: 'pi pi-fw pi-user',
-
-      },
-      {
-        label: 'Events',
-        icon: 'pi pi-fw pi-calendar',
-
-      },
-      {
-        label: 'Quit',
-        icon: 'pi pi-fw pi-power-off'
-      }
-    ];
   }
 }
