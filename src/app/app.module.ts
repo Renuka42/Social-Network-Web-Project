@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {CardModule} from 'primeng/card';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ProfileComponent } from './profile/profile.component';
-
+import {TabViewModule} from 'primeng/tabview';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +29,7 @@ import { ProfileComponent } from './profile/profile.component';
     ButtonModule,
     CardModule,
     InputTextareaModule,
-    
+    TabViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]
