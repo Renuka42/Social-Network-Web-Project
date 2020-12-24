@@ -28,7 +28,8 @@ import { ProfileComponent } from './profile/profile.component';
     InputTextModule,
     ButtonModule,
     CardModule,
-    InputTextareaModule
+    InputTextareaModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
