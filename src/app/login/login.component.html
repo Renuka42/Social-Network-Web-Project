@@ -1,36 +1,64 @@
-<style>
-    h5 {
-    color: rgb(3, 3, 3);
-    text-align: center;
-  }
-  .div {
-    justify-content: center;
-  }
 
-</style>
+<html>
+    <body>
 
+        <div class="p-grid">
+            <div class="p-col-7" style="background-color: hotpink;">
+                
+            </div>
+            <div class="p-col-5"  >
+                
+                
+                <div class="p-grid">
+                    <div class="p-col-2" ></div>
+                    <div class="p-col-8" style="height: 100vh;">
+                    
+                        <div style="margin-top: 50%;">
+                            <br><h2 style="text-align: center;">PINTAGRAM</h2><br>
 
-<div class="p-grid">
-    <div class="p-col-8">
+                            <p-card >
+                                
+                                <br>
+
+                                <div class="p-fluid">
+                                    <div class="p-field">
+                                        <label for="firstname1">Username</label>
+                                        <input id="firstname1" type="text" pInputText> 
+                                    </div>
+                                    <div class="p-field">
+                                        <label for="lastname1">Password</label>
+                                        <input id="lastname1" type="text" pInputText> 
+                                    </div>
+
+                                    <div class="p-formgroup-inline" style="align-items: center;justify-content: center;">
+                                        <div class="p-field">
+                                                <button pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>    
+                                        </div>
+                                        <div class="p-field">
+                                                <button pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                </div>
+
+                                <br>
+                            </p-card>
+
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="p-col-2"></div>
+                </div>
         
-    </div>
-    <div class="p-col-4">
-        <br><h5>PINTAGRAM</h5><br>
-        <div>
-            <div>
-                <div class="p-field" >
-                    <label for="username" >Username</label><br>
-                    <input id="username" type="username" size="50" class="div"/><br>
-                </div>
-                <div class="p-field">
-                    <label for="password">Password</label><br>
-                    <input id="password" type="password" size="50" /><br> 
-                </div>
-                <div>
-                    <button pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>&nbsp;
-                    <button pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
-                </div> 
+        
             </div>
         </div>
-    </div>
-</div>
+
+    </body>
+</html>
+
+
+
+

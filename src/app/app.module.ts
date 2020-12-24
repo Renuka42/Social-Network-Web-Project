@@ -14,6 +14,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ProfileComponent } from './profile/profile.component';
 import {TabViewModule} from 'primeng/tabview';
 import { Routes,RouterModule} from '@angular/router';
+import {MenubarModule} from 'primeng/menubar';
+import {MenuItem} from 'primeng/api';
 
 const appRoutes: Routes = [
   { path: ' ',component: AppComponent},
@@ -38,6 +40,7 @@ const appRoutes: Routes = [
     CardModule,
     InputTextareaModule,
     TabViewModule,
+    MenubarModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
