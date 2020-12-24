@@ -1,1 +1,113 @@
-<p>profile !</p>
+<html>
+    <style>
+        .grid-container {
+          display: grid;
+          grid-gap: 50px 10px;
+          grid-template-columns: auto 250px 500px auto;
+          /* background-color: #2196F3; */
+          /* text-align: center; */
+          padding: 10px;
+        }
+        
+        .grid-item {
+          /* background-color: rgba(255, 255, 255, 0.8); */
+          /* border: 1px solid rgba(0, 0, 0, 0.8); */
+          padding: 10px;
+          font-size: 20px;
+          text-align: center;
+        }
+        .item1 {
+            /* grid-row-start: 1;
+            grid-row-end: 3; */
+            /* grid-template-columns: auto auto auto;
+            border: 1px solid rgba(0, 0, 0, 0.8); */
+            grid-column: 2 / span 2;
+            grid-row: 2;
+        }
+
+        /* The grid container */
+        .grid-container1 {
+            display: grid;
+            grid-template-areas: 
+                'header header header header header header' 
+                'left middle middle middle middle right' 
+                'footer footer footer footer footer footer';
+            /* grid-column-gap: 10px; - if you want gap between the columns */
+        } 
+
+        /* Style the left column */
+        .left {
+            grid-area: left;
+        }
+
+        /* Style the middle column */
+        .middle {
+            grid-area: middle;
+        }
+
+        /* Style the right column */
+        .right {
+            grid-area: right;
+        }
+
+        /* Style the footer */
+        .footer {
+            grid-area: footer;
+            /* background-color: #f1f1f1; */
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+    <body>
+        <!-- <p-menubar [model]="items">
+            <ng-template pTemplate="start">
+                <img src="assets/showcase/images/primeng.svg" height="40" class="p-mr-2">
+            </ng-template>
+            <ng-template pTemplate="end">
+                <input type="text" pInputText placeholder="Search">
+            </ng-template>
+        </p-menubar>
+        <p-menubar [model]="items">
+            <input type="text" pInputText placeholder="Search">
+            <button pButton label="Logout" icon="pi pi-power-off"></button>
+        </p-menubar> -->
+
+        <!-- <div class="p-col-10" > -->
+            <div class="grid-container">
+                <!-- <div style="text-align: center;"> -->
+                    <div class="grid-item"></div>
+                    <div class="grid-item" style="width: 5px;" style="text-align: right;">
+                        <img src="../assets/por.jpg" width="200px">
+                    </div>
+                    <div class="grid-item" >
+                        <h1 >NAME</h1>
+                        <!-- <p style="text-align: left;">1 post</p> -->
+                        <span style="display: inline;">1 post</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span style="display: inline;">1 follower</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>1 following</span><br>
+                        <p >my infomationnnnnnnnnnnnnnnnnnnnnnnnnnn</p>
+                    </div>
+                    <div class="grid-item"></div>
+                    
+                    
+                    <!-- <span>name</span> -->
+                <!-- </div> -->         
+            </div><br>
+            <div class="grid-container1">
+                <div class="middle" style="text-align: center;">
+                    <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="../assets/por.jpg" width="250px"><br><br>
+                    <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="../assets/por.jpg" width="250px"><br>
+                </div>
+            </div>
+            
+                
+        <!-- </div> -->
+
+        
+    </body>
+</html>
+
