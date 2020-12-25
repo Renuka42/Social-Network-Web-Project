@@ -22,6 +22,7 @@ const appRoutes: Routes = [
   { path: '',component: LoginComponent},
   { path: 'home/:id',component: HomeComponent},
   { path: 'profile',component: ProfileComponent},
+
 ];
 @NgModule({
   declarations: [
