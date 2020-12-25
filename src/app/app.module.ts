@@ -24,11 +24,7 @@ const appRoutes: Routes = [
   { path: '',component: LoginComponent},
   { path: 'home/:id',component: HomeComponent},
   { path: 'profile',component: ProfileComponent},
-<<<<<<< HEAD
-
-=======
   { path: 'signin',component: SigninComponent},
->>>>>>> e3d3182ea917e2ef9e7bd038d4aea7749b265005
 ];
 @NgModule({
   declarations: [
