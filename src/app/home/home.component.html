@@ -1,18 +1,44 @@
 
-<p-menubar >
-    <ng-template pTemplate="start">
-        <img src="assets/photo.svg" height="40" class="p-mr-2">
-    </ng-template>
-    <ng-template pTemplate="end">
-        <input type="text" pInputText placeholder="Search">
-    </ng-template>
-</p-menubar>
+
 
 <html>
-    <body>
+    <body >
+    
+        <div >
+            <div class="p-grid,demo-container p-p-0" style="text-align: center;display: flex;justify-content: center;">
+                <div class="p-col-2" ></div>
+                <div class="p-col-7" >
+
+                    
+                        <div class="p-grid"  >
+                             
+                                <div class="p-col-3" style="text-align: left;"> 
+                                    <h4>PINSTAGRAME</h4>
+
+                                </div>
+                                <div class="p-col-6" > 
+
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input  class="p-inputtext-sm" type="text" pInputText placeholder="Search"  />
+                                    </span>
+
+                                </div>
+                                <div class="p-col-3" >
+                                    <div class="p-grid" style="float: right;">
+                                        <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-secondary p-button-sm"></button>  </div>
+                                        <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                                        <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-secondary p-button-sm"></button></div>
+                                    </div>                         
+                                </div>
+                        </div>
+                </div>
+                <div class="p-col-2" ></div>
+            </div>
+
+        </div>
         
-        
-            <div class="p-grid" >
+            <div class="p-grid" scroll="no" style="position: fixed; width: 100%;background-color: rgb(243, 243, 243);">
                 <div class="p-col-10" >
                     <div class="box" >
                     
@@ -23,128 +49,323 @@
                                 <div class="box" style="background-color: brown;"></div>
                             </div>
                             <!-- สำหรับแสดงโพสทั้งหมด -->
-                            <div class="p-col-5">
+                            <div class="p-col-5" >
                                 <!-- สำหรับแสดงโพสทั้งหมด -->
-                                <div class="box" style="background-color: darkcyan;text-align: center;">
-                                    
-                                    <p-card>
 
-                                        <div style="text-align: left;">
-                                            
-                                            <div class="p-grid">
-                                                <div class="p-col-fixed" style="width:13%;height: 13%;">
-                                                    <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
-                                                    alt="Girl in a jacket" width="100%" height="100%" >
-                                                </div>
-                                                <div class="p-col" style="width: auto;height: auto;">
-                                                    <h5>Ricado</h5>
-                                                   <p>โพสอะไรหน่อยสิ</p>
+                                <div style="width: 100%; height: 100vh; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">  
+  
+
+                                    <div class="box" >
+                                        
+                                        <p-card>
+
+                                            <div style="text-align: left;">
+                                                
+                                                <div class="p-grid">
+                                                    <div class="p-col-fixed" style="width:13%;height: 13%;">
+                                                        <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
+                                                        alt="Girl in a jacket" width="100%" height="100%" >
+                                                    </div>
+                                                    <div class="p-col" style="width: auto;height: auto;">
+                                                        <h5>Ricado</h5>
+                                                    <p>โพสอะไรหน่อยสิ</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        
-                                    
-                                        
-                                        <div style="text-align: left;">
-                                           
                                             
-                                            <textarea style="width: 100%;" pInputTextarea></textarea>
-
-                                        </div>
                                         
-                                        <div style="text-align: left;">
+                                            
+                                            <div style="text-align: left;">
+                                            
+                                                
+                                                <textarea style="width: 100%;" pInputTextarea></textarea>
 
-                                            <button style="width: 50%;" pButton type="button" label="โพสเลย" class="p-button-outlined"></button>
-                                            <button style="width: 50%;" pButton type="button" label="ยกเลิก" class="p-button-outlined p-button-danger"></button>
+                                            </div>
+                                            
+                                            <div style="text-align: left;">
 
-                                        </div>
-                                        
-                                        
-                                    </p-card>
+                                                <button style="width: 50%;" pButton type="button" label="โพสเลย" class="p-button-outlined"></button>
+                                                <button style="width: 50%;" pButton type="button" label="ยกเลิก" class="p-button-outlined p-button-danger"></button>
+
+                                            </div>
+                                            
+                                            
+                                        </p-card>
                                     
+                                        <br>
+                                        
+                                        <div *ngFor="let item of this.pose_all" class="box" >
+
+                                            <p-card >
+                                                <div style="text-align: left;">
+                                                    <div class="p-grid">
+                                                        <div class="p-col-fixed" style="width:13%;height: 13%;">
+                                                            <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"                                                     alt="Girl in a jacket" width="100%" height="100%" >
+                                                        </div>
+                                                        <div class="p-col" style="width: auto;height: auto;">
+                                                            <h5>{{item.name}}</h5>
+                                                            <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            
+                                                <!-- <img src="https://t3.ftcdn.net/jpg/01/90/34/66/360_F_190346625_nZcDFX7YeZD8uUO2PtUwV2Ty33RMGyNt.jpg" 
+                                                alt="Girl in a jacket" width="100%" height="100%"> -->
+                                                <div style="text-align: left;">
+                                                    <br>
+                                                    {{item.Text}}
+                                                
+                                                </div>
+                                                <div style="text-align: left;">
+                                                    <hr>
+                                                    <div class="p-grid">
+                                                        <div class="p-col-fixed" >
+                                                            ถูกใจ
+                                                        </div>
+                                                        <div class="p-col" >
+                                                            80 แสดงความคิดเห็น                                       
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                                <div style="text-align: left;">
+                                                    <hr>
+        
+                                                    <button style="width: 50%;" pButton type="button" label="ถูกใจ" class="p-button-text"></button>
+                                                    <button style="width: 50%;" pButton type="button" label="แสดงความคิดเห็น" class="p-button-text"></button>
+                                                    
+                                                </div>
+                                                
+                                            </p-card>
+                                            <br>
+                                            
+                                        </div>
+
+
+                                    </div>
                                 </div>
                                 <!-- สำหรับแสดงโพสทั้งหมด -->
-                                <br>
+                                
                                 
                             </div>
-                            <!-- สำหรับแสดงโพสทั้งหมด -->
+                           
                             <div class="p-col-3">
-                                <div class="box" style="background-color: darkcyan;"></div>
+                                <div class="box" >
+                                    
+                                  
+
+                                           
+
+                                            <div class="p-grid">
+                                                <div class="p-col-12 " ></div>
+                                                <div class="p-col-12" >
+                                                
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-3" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-6" >
+                                                            <div class="p-col" >
+                                                                <h5>Ricado</h5>
+                                                                <p>R_pto1975</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-3 demo-container p-p-5" >
+                                                                <h6>โปรไฟล์</h6>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <hr>
+
+                                                <div>
+                                                    <!-- For -->
+                                                    <div class="p-grid">
+                                                        <div class="p-col-6"><h6>เพื่อน</h6></div>
+                                                        <div class="p-col-6" style="text-align: right;"><h6>ดูทั้งหมด</h6></div>
+                                                    </div>
+
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2">
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://scontent.fkkc2-1.fna.fbcdn.net/v/t1.0-9/108008209_110395534078235_2825595987495462454_n.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeEJEhrrcHTskRV3dcsJPpSfyn-uJ6r4dFrKf64nqvh0Wl9gLer-caqIYdNfBlIik3RCznYC6bPqUnWFkuG1mnbs&_nc_ohc=bn0NrkwqhsMAX_tIbw4&_nc_ht=scontent.fkkc2-1.fna&oh=ed739e08030700adb0b87776e8d2d53f&oe=600B790A" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่คาซึยะ</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://i.kym-cdn.com/entries/icons/original/000/010/848/icon-van.jpg" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่อู๋</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://i.kym-cdn.com/entries/icons/original/000/010/845/icon-crotch.jpg" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่หลาม</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่กล้ามโต</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2">
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://scontent.fkkc2-1.fna.fbcdn.net/v/t1.0-9/108008209_110395534078235_2825595987495462454_n.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeEJEhrrcHTskRV3dcsJPpSfyn-uJ6r4dFrKf64nqvh0Wl9gLer-caqIYdNfBlIik3RCznYC6bPqUnWFkuG1mnbs&_nc_ohc=bn0NrkwqhsMAX_tIbw4&_nc_ht=scontent.fkkc2-1.fna&oh=ed739e08030700adb0b87776e8d2d53f&oe=600B790A" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่คาซึยะ</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://i.kym-cdn.com/entries/icons/original/000/010/848/icon-van.jpg" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่อู๋</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://i.kym-cdn.com/entries/icons/original/000/010/845/icon-crotch.jpg" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่หลาม</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่กล้ามโต</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2">
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://scontent.fkkc2-1.fna.fbcdn.net/v/t1.0-9/108008209_110395534078235_2825595987495462454_n.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeEJEhrrcHTskRV3dcsJPpSfyn-uJ6r4dFrKf64nqvh0Wl9gLer-caqIYdNfBlIik3RCznYC6bPqUnWFkuG1mnbs&_nc_ohc=bn0NrkwqhsMAX_tIbw4&_nc_ht=scontent.fkkc2-1.fna&oh=ed739e08030700adb0b87776e8d2d53f&oe=600B790A" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่คาซึยะ</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://i.kym-cdn.com/entries/icons/original/000/010/848/icon-van.jpg" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่อู๋</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://i.kym-cdn.com/entries/icons/original/000/010/845/icon-crotch.jpg" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่หลาม</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-grid" >
+                                                        <div class="p-col-2" >
+                                                            <div class="p-col-fixed" >
+                                                                <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
+                                                                alt="Girl in a jacket" width="100%" height="100%" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-col-10" >
+                                                            <div class="p-col" >
+                                                                <h6>พี่กล้ามโต</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                
+                                                
+                                                
+                                                </div>
+                                                <div class="p-col-12" > </div>
+                                            </div>
+
+                                        
+                                
+                                </div>
                             </div>
                         </div>
                         <!-- Main -->
-
-
-
-                        
-                        <div class="p-grid">
-                            <div class="p-col-3" >
-                                <div class="box" style="background-color: brown;"></div>
-                            </div>
-                        
-                            <div class="p-col-5" >
-                             
-                                <div *ngFor="let item of this.pose_all" class="box" >
-
-                                    <p-card >
-
-                                        <div style="text-align: left;">
-                                            
-                                            <div class="p-grid">
-                                                <div class="p-col-fixed" style="width:13%;height: 13%;">
-                                                    <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"                                                     alt="Girl in a jacket" width="100%" height="100%" >
-                                                </div>
-                                                <div class="p-col" style="width: auto;height: auto;">
-                                                    <h5>{{item.name}}</h5>
-                                                    <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    
-                                        <!-- <img src="https://t3.ftcdn.net/jpg/01/90/34/66/360_F_190346625_nZcDFX7YeZD8uUO2PtUwV2Ty33RMGyNt.jpg" 
-                                        alt="Girl in a jacket" width="100%" height="100%"> -->
-                                        <div style="text-align: left;">
-                                            <br>
-                                            {{item.Text}}
-                                          
-                                        </div>
-                                        <div style="text-align: left;">
-                                            <hr>
-                                            <div class="p-grid">
-                                                <div class="p-col-fixed" >
-                                                     ถูกใจ
-                                                </div>
-                                                <div class="p-col" >
-                                                    80 แสดงความคิดเห็น                                       
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                        </div>
-                                        <div style="text-align: left;">
-                                            <hr>
-
-                                            <button style="width: 50%;" pButton type="button" label="ถูกใจ" class="p-button-text"></button>
-                                            <button style="width: 50%;" pButton type="button" label="แสดงความคิดเห็น" class="p-button-text"></button>
-                                            
-                                        </div>
-                                        
-                                    </p-card>
-                                    <br>
-                                    
-                                 </div>
-                            
-                                 
-                                
-                            </div>
-                      
-                            <div class="p-col-3" >
-                                <div class="box" style="background-color: darkcyan;"></div>
-                            </div>
-                        </div>
-                        
-                    
+      
                     
                     </div>
                 </div>

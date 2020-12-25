@@ -14,12 +14,11 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ProfileComponent } from './profile/profile.component';
 import { Routes,RouterModule} from '@angular/router';
 import {MenubarModule} from 'primeng/menubar';
-import {MenuItem} from 'primeng/api';
+import {FormsModule} from '@angular/forms'
 
 const appRoutes: Routes = [
-  { path: ' ',component: AppComponent},
-  { path: 'login',component: LoginComponent},
-  { path: 'home',component: HomeComponent},
+  { path: '',component: LoginComponent},
+  { path: 'home/:id',component: HomeComponent},
   { path: 'profile',component: ProfileComponent},
 ];
 @NgModule({
@@ -39,6 +38,7 @@ const appRoutes: Routes = [
     CardModule,
     InputTextareaModule,
     MenubarModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

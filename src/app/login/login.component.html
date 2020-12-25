@@ -2,9 +2,23 @@
 <html>
     <body>
 
-        <div class="p-grid">
-            <div class="p-col-7" style="background-color: hotpink;">
+        <div class="p-grid" >
+            <div class="p-col-7" style="background: url(https://image.freepik.com/free-vector/winter-background-with-pastel-color-brushes-leaves_220290-42.jpg);background-repeat: no-repeat;background-size: 140%;">
                 
+                <div  style="margin-top: 20%;display: flex;justify-content: center;">
+
+                    <div class="p-col-fixed" style="width:40%;height: 40%;">
+                        <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
+                        alt="Girl in a jacket" width="100%" height="100%" >
+                    </div>
+                    
+
+                </div>
+                <div style="display: flex;justify-content: center;">
+                    <h1>ช่วยคุณเชื่อมต่อและแชร์</h1><br>
+                    <h1>กับผู้คนมากมาย</h1>
+                </div>
+
             </div>
             <div class="p-col-5"  >
                 
@@ -14,7 +28,7 @@
                     <div class="p-col-8" style="height: 100vh;">
                     
                         <div style="margin-top: 50%;">
-                            <br><h2 style="text-align: center;">PINTAGRAM</h2><br>
+                            <br><h2 style="text-align: center;">PINSTAGRAM</h2><br>
 
                             <p-card >
                                 
@@ -23,16 +37,16 @@
                                 <div class="p-fluid">
                                     <div class="p-field">
                                         <label for="firstname1">Username</label>
-                                        <input id="firstname1" type="text" pInputText> 
+                                        <input id="firstname1" type="text" pInputText [(ngModel)]="username"> 
                                     </div>
                                     <div class="p-field">
                                         <label for="lastname1">Password</label>
-                                        <input id="lastname1" type="text" pInputText> 
+                                        <input id="lastname1" type="text" pInputText [(ngModel)]="password"> 
                                     </div>
 
                                     <div class="p-formgroup-inline" style="align-items: center;justify-content: center;">
                                         <div class="p-field">
-                                                <button pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>    
+                                                <button (click)="login()" pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>    
                                         </div>
                                         <div class="p-field">
                                                 <button pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>

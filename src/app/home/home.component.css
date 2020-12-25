@@ -4,3 +4,18 @@
   top: 0; /* Sets the sticky toolbar to be on top */
   z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
+
+.ui-menubar  {
+  border: 1px solid #aed0ea !important;
+  background: #74b2e2  50% 50% repeat-x !important;
+  color: #ffffff !important;
+  font-weight: bolder !important;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
