@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   password: any;
   todayNumber: number = Date.now();
   todayDate : Date = new Date();
+
   constructor(private http: HttpClient, private router: Router) {
 
    }
@@ -41,9 +42,4 @@ export class LoginComponent implements OnInit {
   }
 
 
-}
-
-export interface Login{
-  check:number;
-  user_id:number;
 }

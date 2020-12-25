@@ -19,6 +19,7 @@ import { ListgroupComponent } from './listgroup/listgroup.component';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { SigninComponent } from './signin/signin.component';
 import {SidebarModule} from 'primeng/sidebar';
+import {CalendarModule} from 'primeng/calendar';
 
 const appRoutes: Routes = [
   { path: '',component: LoginComponent},
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     OverlayPanelModule,
-    SidebarModule
+    SidebarModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
