@@ -1,3 +1,8 @@
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        
+    </ng-template>
+</p-overlayPanel>
 <html>
     <style>
         .grid-container {
@@ -59,18 +64,44 @@
         }
     </style>
     <body>
-        <p-menubar >
+        <!-- <p-menubar >
             <ng-template pTemplate="start">
                 <img src="../assets/hh.jpg" height="40" class="p-mr-2">
             </ng-template>
             <ng-template pTemplate="end">
                 <input type="text" pInputText placeholder="Search">
             </ng-template>
-        </p-menubar>
-        <!-- <p-menubar [model]="items">
-            <input type="text" pInputText placeholder="Search">
-            <button pButton label="Logout" icon="pi pi-power-off"></button>
         </p-menubar> -->
+        <div class="p-grid,demo-container p-p-0" style="text-align: center;display: flex;justify-content: center;">
+            <div class="p-col-2" ></div>
+            <div class="p-col-7" >
+
+                
+                    <div class="p-grid"  >
+                         
+                            <div class="p-col-3" style="text-align: left;"> 
+                                <h4>PINSTAGRAME</h4>
+
+                            </div>
+                            <div class="p-col-6" > 
+
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input  class="p-inputtext-sm" type="text" pInputText placeholder="Search"  />
+                                </span>
+
+                            </div>
+                            <div class="p-col-3" >
+                                <div class="p-grid" style="float: right;">
+                                    <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-secondary p-button-sm"></button>  </div>
+                                    <div class="p-col-4"><button (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                                    <div class="p-col-4"><button  pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-secondary p-button-sm"></button></div>
+                                </div>                         
+                            </div>
+                    </div>
+            </div>
+            <div class="p-col-2" ></div>
+        </div>
 
         <!-- <div class="p-col-10" > -->
             <div class="grid-container">

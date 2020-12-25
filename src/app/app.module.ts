@@ -26,6 +26,8 @@ const appRoutes: Routes = [
   { path: 'home/:id',component: HomeComponent},
   { path: 'profile',component: ProfileComponent},
   { path: 'signin',component: SigninComponent},
+  { path: 'listgroup',component: ListgroupComponent},
+  // 48484848
 ];
 @NgModule({
   declarations: [
