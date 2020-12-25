@@ -19,3 +19,8 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

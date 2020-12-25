@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit {
       console.log(array[0]["check"]);
     
       if(array[0]["check"] == "True"){
-
-        this.pofile()
         this.router.navigateByUrl("/home/"+array[0]["user_id"]);
       }
     }, error => {
@@ -36,11 +34,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  pofile(){
-
-    console.log("fffffffffffff");
-
-  }
 
 }
 
