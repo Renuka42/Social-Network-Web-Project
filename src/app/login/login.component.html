@@ -1,4 +1,32 @@
-
+<p-sidebar  position="right" [style]="{width:'40em'}">
+    <div class="p-fluid">
+        <h5>Sign In</h5>
+        <div class="p-field">
+            <label for="firstname1">Firstname</label>
+            <input id="firstname1" type="text" pInputText> 
+        </div><div class="p-field">
+            <label for="firstname1">Lastname</label>
+            <input id="firstname1" type="text" pInputText > 
+        </div>
+        <div class="p-field">
+            <label for="firstname1">Username</label>
+            <input id="firstname1" type="text" pInputText [(ngModel)]="username"> 
+        </div>
+        <div class="p-field">
+            <label for="lastname1">Password</label>
+            <input id="lastname1" type="password" pInputText [(ngModel)]="password"> 
+        </div>  
+        <div class="p-formgroup-inline" style="align-items: center;justify-content: center;">
+            <div class="p-field">
+                    <button pButton pRipple type="button" label="Sign Up" class="p-button-rounded p-button-success"></button>    
+            </div>
+            <div class="p-field">
+                    <button pButton pRipple type="button" label="Cancel" class="p-button-rounded p-button-danger"></button>
+            </div>
+           
+        </div>
+    </div>
+</p-sidebar>
 <html style="overflow: hidden;">
     <body>
 
@@ -49,7 +77,7 @@
                                                 <button (click)="login()" pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>    
                                         </div>
                                         <div class="p-field">
-                                                <button pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
+                                                <button  pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
                                         </div>
                                        
                                     </div>

@@ -17,11 +17,14 @@ import {MenubarModule} from 'primeng/menubar';
 import {FormsModule} from '@angular/forms';
 import { ListgroupComponent } from './listgroup/listgroup.component';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { SigninComponent } from './signin/signin.component';
+import {SidebarModule} from 'primeng/sidebar';
 
 const appRoutes: Routes = [
   { path: '',component: LoginComponent},
   { path: 'home/:id',component: HomeComponent},
   { path: 'profile',component: ProfileComponent},
+  { path: 'signin',component: SigninComponent},
 ];
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ const appRoutes: Routes = [
     LoginComponent,
     HomeComponent,
     ProfileComponent,
-    ListgroupComponent
+    ListgroupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ const appRoutes: Routes = [
     MenubarModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    OverlayPanelModule
+    OverlayPanelModule,
+    SidebarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
