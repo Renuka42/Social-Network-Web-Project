@@ -15,7 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { Routes,RouterModule} from '@angular/router';
 import {MenubarModule} from 'primeng/menubar';
 import {FormsModule} from '@angular/forms';
-import { ListgroupComponent } from './listgroup/listgroup.component'
+import { ListgroupComponent } from './listgroup/listgroup.component';
 
 const appRoutes: Routes = [
   { path: '',component: LoginComponent},
