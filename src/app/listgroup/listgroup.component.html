@@ -1,0 +1,95 @@
+<html>
+    <style>
+        .grid-container {
+          display: grid;
+          grid-gap: 50px 10px;
+          grid-template-columns: auto 100px 500px 100px 500px auto;
+          /* background-color: #2196F3; */
+          /* text-align: center; */
+          padding: 10px;
+        }
+        
+        .grid-item {
+          /* background-color: rgba(255, 255, 255, 0.8); */
+          border: 1px solid rgba(0, 0, 0, 0.8);
+          
+          padding: 10px;
+          font-size: 20px;
+          text-align: left;
+        }
+        .grid-contain {
+          display: grid;
+          grid-gap: 50px 10px;
+          grid-template-columns: auto auto;
+          padding: 10px;
+          border: 1px solid rgba(0, 0, 0, 0.8);
+        }
+        /* The grid container */
+        .grid-container1 {
+            display: grid;
+            grid-template-areas: 
+                'header header header header header header' 
+                'left middle middle middle middle right' 
+                'footer footer footer footer footer footer';
+            /* grid-column-gap: 10px; - if you want gap between the columns */
+        } 
+    </style>
+
+    <body>
+        <p-menubar >
+            <ng-template pTemplate="start">
+                <img src="../assets/hh.jpg" height="40" class="p-mr-2">
+            </ng-template>
+            <ng-template pTemplate="end">
+                <input type="text" pInputText placeholder="Search">
+            </ng-template>
+        </p-menubar><br><br>
+
+        <div class="grid-container">
+            <!-- <div style="text-align: center;"> -->
+                <div class="grid-item"></div>
+                <div class="grid-item" style="text-align: right;">
+                    <img src="../assets/por.jpg" width="80px">
+                </div>
+                <div class="grid-item" >
+                    <!-- <div class="p-grid">
+                        <div class="p-col">1</div>
+                        <div class="p-col">2</div>
+                        <div class="p-col">3</div>
+                    </div> -->
+                    <div class="grid-contain">
+                        <p class="p-text-bold">groupNAME 
+                            <button pButton type="button" label="Primary" class="p-button-outlined"></button></p>
+                        <span style="font-size: 15px;" >6 member</span><br>
+                        <span style="font-size: 15px;">my infomationnnnnnnnnnnnnnnnnnnnnn</span>
+                    </div>
+                    
+                </div>
+                <div class="grid-item" style="text-align: right;">
+                    <img src="../assets/por.jpg" width="80px">
+                </div>
+                <div class="grid-item" >
+                    <p class="p-text-bold">groupNAME</p>
+                    <p style="font-size: 15px;" >6 member</p>
+                    <p style="font-size: 15px;">my infomationnnnnnnnnnnnnnnnnnnnnn</p>
+                </div>
+                <div class="grid-item"></div>
+                
+            <!-- </div> -->         
+        </div><br>
+        
+
+        <!-- <div class="grid-container1">
+            <div class="middle" style="text-align: center;">
+                <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="../assets/por.jpg" width="250px"><br><br>
+                <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="../assets/por.jpg" width="250px">&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="../assets/por.jpg" width="250px"><br>
+            </div>
+        </div> -->
+
+
+    </body>
+</html>

@@ -14,7 +14,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ProfileComponent } from './profile/profile.component';
 import { Routes,RouterModule} from '@angular/router';
 import {MenubarModule} from 'primeng/menubar';
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { ListgroupComponent } from './listgroup/listgroup.component'
 
 const appRoutes: Routes = [
   { path: '',component: LoginComponent},
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    ListgroupComponent
   ],
   imports: [
     BrowserModule,
