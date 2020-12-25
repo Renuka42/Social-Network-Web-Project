@@ -1,5 +1,9 @@
 
-
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        
+    </ng-template>
+</p-overlayPanel>
 
 <html>
     <body >
@@ -27,8 +31,8 @@
                                 <div class="p-col-3" >
                                     <div class="p-grid" style="float: right;">
                                         <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-secondary p-button-sm"></button>  </div>
-                                        <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                                        <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-secondary p-button-sm"></button></div>
+                                        <div class="p-col-4"><button (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                                        <div class="p-col-4"><button  pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-secondary p-button-sm"></button></div>
                                     </div>                         
                                 </div>
                         </div>

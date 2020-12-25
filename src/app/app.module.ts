@@ -15,7 +15,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { Routes,RouterModule} from '@angular/router';
 import {MenubarModule} from 'primeng/menubar';
 import {FormsModule} from '@angular/forms';
-import { ListgroupComponent } from './listgroup/listgroup.component'
+import { ListgroupComponent } from './listgroup/listgroup.component';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 const appRoutes: Routes = [
   { path: '',component: LoginComponent},
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     InputTextareaModule,
     MenubarModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    OverlayPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]
