@@ -16,7 +16,10 @@ import { Routes,RouterModule} from '@angular/router';
 import {MenubarModule} from 'primeng/menubar';
 import {FormsModule} from '@angular/forms';
 import { ListgroupComponent } from './listgroup/listgroup.component';
+<<<<<<< HEAD
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+=======
+>>>>>>> 99eb17a85b55135988e4be74b610091e4fd7991e
 
 const appRoutes: Routes = [
   { path: '',component: LoginComponent},
