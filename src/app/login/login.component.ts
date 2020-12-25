@@ -11,14 +11,20 @@ export class LoginComponent implements OnInit {
 
   username: any;
   password: any;
-  constructor(private http: HttpClient, private router: Router) { }
+  todayNumber: number = Date.now();
+  todayDate : Date = new Date();
+  constructor(private http: HttpClient, private router: Router) {
 
-  ngOnInit(): void {
+   }
     
+    
+  ngOnInit(): void {
   }
 
   login(){
 
+    console.log(this.todayNumber);
+    console.log(this.todayDate);
     let json = { username: this.username,password: this.password };
     this.http.post("http://203.154.83.62:1238/user/login", JSON.stringify(json)).subscribe(response => {
 
