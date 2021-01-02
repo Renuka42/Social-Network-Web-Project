@@ -190,8 +190,8 @@
                                             
                                                 <br>
                                                 
-                                                <div *ngFor="let item of this.pose_all" class="box" >
-        
+                                                <div *ngFor="let item of this.pose_all; index as i" class="box" >
+                                                    
                                                     <p-card >
                                                         <div style="text-align: left;">
                                                             <div class="p-grid">
@@ -219,6 +219,7 @@
                                                             <hr *ngIf="item.like != 0" >
                                                             <div class="p-grid">
                                                                 <div *ngIf="item.like != 0" class="p-col-fixed" >
+                                                                    
                                                                     {{item.like}} ถูกใจ
                                                                 </div>
                                                                 <div *ngIf="item.like != 0" class="p-col" >
@@ -230,8 +231,9 @@
                                                         </div>
                                                         <div style="text-align: left;">
                                                             <hr>
-                
-                                                            <button (click)="but_like(item.pose_id)"  style="width: 50%;" pButton type="button" label="ถูกใจ" class="p-button-text"></button>
+                                                            
+                                                            <button *ngIf="item.liked_but == false" (click)="but_like(item.pose_id,i)"  style="width: 50%;" pButton type="button" label="ถูกใจ" class="p-button-text"></button>
+                                                            <button *ngIf="item.liked_but == true" (click)="but_like(item.pose_id,i)"  style="width: 50%;" pButton type="button" label="ถูกใจ" class="p-button-raised"></button>
                                                             <button style="width: 50%;" pButton type="button" label="แสดงความคิดเห็น" class="p-button-text"></button>
                                                             
                                                         </div>
