@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { InputTextareaModule} from 'primeng/inputtextarea';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -10,7 +11,6 @@ import {ButtonModule} from 'primeng/button';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import {CardModule} from 'primeng/card';
-import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ProfileComponent } from './profile/profile.component';
 import { Routes,RouterModule} from '@angular/router';
 import {MenubarModule} from 'primeng/menubar';
@@ -20,6 +20,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { SigninComponent } from './signin/signin.component';
 import {SidebarModule} from 'primeng/sidebar';
 import {CalendarModule} from 'primeng/calendar';
+import {DialogModule} from 'primeng/dialog';
 
 const appRoutes: Routes = [
   { path: '',component: LoginComponent},
@@ -27,7 +28,6 @@ const appRoutes: Routes = [
   { path: 'profile',component: ProfileComponent},
   { path: 'signin',component: SigninComponent},
   { path: 'listgroup',component: ListgroupComponent},
-  // 48484848
 ];
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ const appRoutes: Routes = [
     SigninComponent
   ],
   imports: [
+   
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -46,13 +47,14 @@ const appRoutes: Routes = [
     InputTextModule,
     ButtonModule,
     CardModule,
-    InputTextareaModule,
     MenubarModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    InputTextareaModule,
     OverlayPanelModule,
     SidebarModule,
-    CalendarModule
+    CalendarModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

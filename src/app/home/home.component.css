@@ -43,3 +43,22 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
+.editableDiv1,
+.editableDiv2 {
+  border-bottom: 1px solid gray;
+  outline: none;
+  margin-top: 20px;
+}
+
+.editableDiv1[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(placeholder)
+}
+
+.editableDiv2[contentEditable="true"]:empty:before {
+  content: attr(placeholder)
+}
