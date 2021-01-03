@@ -9,7 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+  innerHeight: any;
+  innerWidth: any;
   user_id: any;
   pose_all: any;
   like_user_all: Object=[];
@@ -17,11 +18,18 @@ export class HomeComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute) { 
     this.user_id = this.route.snapshot.params["id"];
-    
+
+
   }
 
   comment_text: any;
+
   ngOnInit(): void {
+    this.innerHeight = (window.innerHeight);
+    this.innerWidth = (window.innerWidth);
+
+    console.log( this.innerHeight +"Height");
+    console.log(  this.innerWidth  +"Width");
     
     let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json)).subscribe(response => {
@@ -107,11 +115,57 @@ export class HomeComponent implements OnInit {
 
   };
 
-
   display: boolean = false;
 
-    showDialog() {
-        this.display = true;
+  showDialog() {
+      this.display = true;
+  }
+
+  setMyStyles() {
+    // var elmnt = document.getElementById("myDiv")?.offsetHeight;
+    // console.log(document.getElementById("myDiv"));
+    let styles ;
+    if(this.innerWidth > 1250){
+      styles = {
+        'width':  1200+ 'px'
+      }
+    }else if(this.innerWidth > 900){
+      styles = {
+        'width':  800+ 'px'
+      }
+    }else {
+      styles = {
+        'width':  800+ 'px'
+      }
     }
+    return styles;
+  }
+  setMyClass() {
+    // var elmnt = document.getElementById("myDiv")?.offsetHeight;
+    // console.log(document.getElementById("myDiv"));
+    let Class ;
+    if(this.innerWidth > 1250){
+      Class = "p-col-6"
+    }
+    else if(this.innerWidth > 900){
+      Class = "p-col-7"
+    }else{
+      Class = "p-col-10"
+    }
+    return Class;
+  }
+  setMyClassRow() {
+    let Class ;
+    if(this.innerWidth > 1250){
+      Class = "p-col"
+    }
+    else if(this.innerWidth > 900){
+      Class = "p-col-4"
+    }else{
+      Class = "p-col-5"
+    }
+    return Class;
+  }
+
 
 }

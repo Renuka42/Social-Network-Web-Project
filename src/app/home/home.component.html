@@ -1,8 +1,8 @@
 
 <p-dialog header="แสดงความคิดเห็น" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}">
     <div class="p-grid">
-        <div class="p-col" style="background-color: darkcyan;"></div>
-        <div class="p-col-fixed" style="width: 1200px;" style="background-color: darkgreen;">
+        <div class="p-col" ></div>
+        <div class="p-col-fixed" style="width: 700px;" >
             <div class="p-grid">
                 <div class="p-col-7 " >
                     <div class="element">
@@ -82,12 +82,7 @@
                         
                         <!-- แสดงความคิดเห็น -->
                         <div class="p-grid" >
-                            <div class="p-col-fixed " style="width: 50px;">
-                                
-                                    <img style="border-radius: 50%;width: 40px;height: 40px;" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M" 
-                                    alt="Girl in a jacket"  >
-                                
-                            </div>
+                           
                             <div class="p-col-fixed " style="width: 73%;" >
                                 <textarea   [rows]="1" style="border-radius: 10px 10px 10px 10px;width: 100%;" pInputTextarea  placeholder="แสดงความคิดเห็น"></textarea>
                             </div>
@@ -102,7 +97,7 @@
             </div>
 
         </div>
-        <div class="p-col" style="background-color: darkred;"></div>
+        <div class="p-col" ></div>
     </div>
 </p-dialog>
 
@@ -161,10 +156,12 @@
                         <div class="p-grid">
                             <div class="p-col" >
                             </div>
-                            <div class="p-col-fixed" style="width: 1200px;">
+                            <div class="p-col-fixed" [ngStyle]="setMyStyles()" >
                                 <div class="p-grid">
-
-                                    <div class="p-col-3" >
+                                    <div   class="p-col" *ngIf="this.innerWidth < 900"></div>
+                                    <div class="p-col" *ngIf="this.innerWidth < 1250"></div>
+                                    
+                                    <div [ngClass]="setMyClassRow()"  class="p-col" *ngIf="this.innerWidth > 900">
                                         <div class="box" >
                                             <div class="p-grid">
                                                 <div class="p-col-12 " ></div>
@@ -253,11 +250,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="p-col-6" >
+                                    <div [ngClass]="setMyClass()" >
                                 
 
-                                        <div style="width: 100%; height: 100vh; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">  
-                                            <div class="box" >
+                                        <div  style="height: 150vh;overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">  
+                                            <div class="box" id="myDiv">    
                                         
                                                 <p-card>
         
@@ -368,7 +365,6 @@
                                                                 </div>
                                                             </div>
                                                             <div class="p-col" >
-                                                                <button class="element" style="margin-top: 4px;" pButton pRipple type="button" icon="pi pi-filter" class="p-button-rounded p-button-text p-button-plain"></button>
                                                             </div>
 
                                                         </div>
@@ -379,7 +375,7 @@
                                                         <div class="p-grid" >
                                                             <div class="p-col-1 " >
                                                                 
-                                                                    <img style="border-radius: 50%;width: 40px;height: 40px;" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M" 
+                                                                    <img style="border-radius: 50%;width: 30px;height: 30px;margin-top: 5px;margin-left: 5px;" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M" 
                                                                     alt="Girl in a jacket"  >
                                                                 
                                                             </div>
@@ -391,10 +387,10 @@
 
                                                                 
                                                                 <!-- <textarea (keydown.enter)="onKeyPress($event)" [rows]="1" style="width: 100%;" pInputTextarea placeholder="แสดงความคิดเห็น" [(ngModel)]="comment_text" ></textarea> -->
-                                                                <textarea (keydown.enter)="comment(item.pose_id)" autoResize="autoResize" [rows]="1" style="border-radius: 10px 10px 10px 10px;width: 100%;" pInputTextarea [(ngModel)]="comment_text" placeholder="แสดงความคิดเห็น"></textarea>
+                                                                <textarea (keydown.enter)="comment(item.pose_id)"  [rows]="1" style="border-radius: 10px 10px 10px 10px;width: 100%;" pInputTextarea [(ngModel)]="comment_text" placeholder="แสดงความคิดเห็น"></textarea>
                                                             </div>
-                                                            <div class="p-col-1 ">
-                                                                <button  class="element" style="border-radius: 10px 10px 10px 10px;" pButton pRipple type="submit" icon="pi pi-check" class="p-button-rounded p-button-outlined"></button>
+                                                            <div class="p-col-1 " >
+                                                                <button  class="element" style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;" pButton pRipple type="submit" icon="pi pi-check" class="p-button-rounded p-button-outlined"></button>
                                                             </div>
 
                                                         </div>
@@ -413,7 +409,7 @@
                                         
                                     </div>
                                    
-                                    <div class="p-col-3" >
+                                    <div class="p-col" *ngIf="this.innerWidth > 1250" >
                                         <div class="box" >
                                             <div class="p-grid">
                                                 <div class="p-col-12 " ></div>
@@ -502,6 +498,9 @@
                                         
                                         </div>
                                     </div>
+
+                                    <div  class="p-col" *ngIf="this.innerWidth < 1250"></div>
+                                    <div  class="p-col" *ngIf="this.innerWidth < 900 "></div>
 
                                 </div>
                             </div>
