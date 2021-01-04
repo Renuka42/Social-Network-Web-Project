@@ -35,8 +35,8 @@
 
  
 
-        <div class="p-grid" >
-            <div class="p-col-7" style="background: url(https://image.freepik.com/free-vector/winter-background-with-pastel-color-brushes-leaves_220290-42.jpg);background-repeat: no-repeat;background-size: 140%;">
+        <div class="p-grid" [ngStyle]="setUrlImg()">
+            <div  *ngIf="this.innerWidth >= 1200" class="p-col-7" style="background: url(https://image.freepik.com/free-vector/winter-background-with-pastel-color-brushes-leaves_220290-42.jpg);background-repeat: no-repeat;background-size: 200%;">
                 
                 <div  style="margin-top: 20%;display: flex;justify-content: center;">
 
@@ -53,14 +53,14 @@
                 </div>
 
             </div>
-            <div class="p-col-5"  >
+            <div [ngClass]="setMyClass()" >
                 
                 
                 <div class="p-grid">
                     <div class="p-col-2" ></div>
-                    <div class="p-col-8" style="height: 100vh;">
+                    <div class="p-col-8" style="height: 100vh;" >
                     
-                        <div style="margin-top: 50%;">
+                        <div [ngStyle]="setMyStyles()">
                             <br><h2 style="text-align: center;">PINSTAGRAM</h2><br>
 <!-- fff -->
                             <p-card >

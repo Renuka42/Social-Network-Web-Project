@@ -109,7 +109,7 @@
     </div>
 </p-dialog>
 
-<button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show"></button>
+<!-- <button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show"></button> -->
 
 <p-overlayPanel #op>
     <ng-template pTemplate>
@@ -120,40 +120,14 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
 
-
-
-
-    <!-- <div class="p-grid">   
-        <div class="p-col"></div>
-        <div class="p-col-fixed d-flex justify-content-between" [ngStyle]="setMyStyles()">
-            <h4 style="margin-top: 10px;">PINSTAGRAME</h4>
-
-            <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
-                style="border-radius: 20px;width: 20%;" />
-
-            <div class="p-grid" style="float: right;">
-                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
-                        type="button" icon="pi pi-bell"
-                        class="p-button-rounded p-button-secondary p-button-sm"></button>
-                </div>
-                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
-                        class="p-button-rounded p-button-secondary p-button-sm"></button></div>
-            </div>
-        </div>
-        <div class="p-col"></div>
-
-    </div> -->
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="this.innerWidth >= 900">
         <div class="container" [ngStyle]="setMyStyles()">
-            <h4 >PINSTAGRAME</h4>
+            <h4>FacesArt</h4>
 
             <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
                 style="border-radius: 10px;width: 20%;" />
@@ -169,19 +143,40 @@
                         class="p-button-rounded p-button-secondary p-button-sm"></button></div>
             </div>
         </div>
-      </nav>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="this.innerWidth < 900">
+        <div class="container" [ngStyle]="setMyStyles()">
+
+            <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
+                style="border-radius: 10px;width: 30%;" />
+            <div class="p-grid" style="float: right;">
+                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
+                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
+                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
+                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-bell"
+                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
+                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
+                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
+
+            </div>
+        </div>
+    </nav>
 
     <div class="p-grid" style="position: fixed; width: 100%;background-color: rgb(243, 243, 243);">
         <div class="p-col-12">
             <div class="box">
                 <div class="p-grid">
 
-                    <div class="p-col">
-                    </div>
+
+                    <div class="p-col"></div>
                     <div class="p-col-fixed" [ngStyle]="setMyStyles()">
                         <div class="p-grid">
-                            <div class="p-col" *ngIf="this.innerWidth < 900"></div>
-                            <div class="p-col" *ngIf="this.innerWidth < 1250"></div>
+                            <div class="p-col" *ngIf="this.innerWidth <= 900"></div>
+                            <div class="p-col" *ngIf="this.innerWidth <= 1250"></div>
 
                             <div [ngClass]="setMyClassRow()" class="p-col" *ngIf="this.innerWidth > 900">
                                 <div class="box">
@@ -191,7 +186,8 @@
 
 
 
-                                            <div class="p-grid">
+                                            <div class="p-grid"
+                                                style="background: rgb(220, 220, 220); border-radius: 30px;">
 
                                                 <div class="p-col-8">
 
@@ -213,9 +209,9 @@
 
                                                 <div class="p-col-4">
                                                     <div class="element" style="text-align: right;">
-                                                        <a routerLink="/profile">
-                                                            <h6>+</h6>
-                                                        </a>
+
+                                                        <i class="pi pi-plus" style="font-size: 2rem;color: snow;"></i>
+
                                                     </div>
 
                                                 </div>
@@ -238,35 +234,25 @@
 
 
 
-                                                <div class="p-grid" *ngFor="let number of [0,1,2,3,4]">
-                                                    <div class="p-col-2">
-                                                        <div class="p-col-fixed">
-                                                            <img style="border-radius: 50%;"
-                                                                src="https://scontent.fkkc2-1.fna.fbcdn.net/v/t1.0-9/108008209_110395534078235_2825595987495462454_n.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeEJEhrrcHTskRV3dcsJPpSfyn-uJ6r4dFrKf64nqvh0Wl9gLer-caqIYdNfBlIik3RCznYC6bPqUnWFkuG1mnbs&_nc_ohc=bn0NrkwqhsMAX_tIbw4&_nc_ht=scontent.fkkc2-1.fna&oh=ed739e08030700adb0b87776e8d2d53f&oe=600B790A"
-                                                                alt="Girl in a jacket" width="100%" height="100%">
-                                                        </div>
-                                                    </div>
-                                                    <div class="p-col-10">
-                                                        <div class="p-col">
-                                                            <h6>กลุ่มที่จะแกล้งเป็นพี่โต</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="p-grid">
-                                                    <div class="p-col-2">
-                                                        <div class="p-col-fixed">
-                                                            <img style="border-radius: 50%;"
-                                                                src="https://i.kym-cdn.com/entries/icons/original/000/010/848/icon-van.jpg"
-                                                                alt="Girl in a jacket" width="100%" height="100%">
-                                                        </div>
-                                                    </div>
-                                                    <div class="p-col-10">
-                                                        <div class="p-col">
-                                                            <h6>พี่อู๋</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div class="p-grid" *ngFor="let groups of this.group"
+                                                    style="margin-top: 5px;">
 
+
+                                                    <div class="p-col-fixed " style="width:70px;">
+                                                        <img class="element"
+                                                            style="border-radius: 50%;width: 30px;height: 30px;"
+                                                            src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
+                                                            alt="Girl in a jacket">
+                                                    </div>
+
+                                                    <div class="p-col">
+                                                        <div class="element">
+                                                            <h6>{{groups.name}}</h6>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
                                             </div>
 
 
@@ -288,21 +274,20 @@
                                 <div [ngStyle]="setHeightDivauto()"
                                     style="height: 500px;overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
                                     <div class="box">
-
                                         <p-card>
 
 
 
                                             <div class="p-grid">
-                                                <div class="p-col-fixed " style="width:80px;">
+                                                <div class="p-col-fixed " style="width:70px;">
                                                     <img class="element"
-                                                        style="border-radius: 50%;width: 60px;height: 60px;"
+                                                        style="border-radius: 50%;width: 50px;height: 50px;"
                                                         src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M"
                                                         alt="Girl in a jacket">
                                                 </div>
                                                 <div class="p-col">
-                                                    <div class="element">
-                                                        <h5>Ricado</h5>
+                                                    <div class="element" *ngFor="let profiles of this.profile">
+                                                        <h5>{{profiles.name}}</h5>
                                                         <p>โพสอะไรหน่อยสิ</p>
                                                     </div>
 
@@ -323,24 +308,23 @@
 
                                                 <button style="width: 50%;" pButton type="button" label="โพสเลย"
                                                     class="p-button-outlined"></button>
-                                                <button style="width: 50%;" pButton type="button" label="ยกเลิก"
-                                                    class="p-button-outlined p-button-danger"></button>
+                                                <button style="width: 50%;" pButton type="button" label="รูปภาพ/วีดิโอ"
+                                                    class="p-button-outlined p-button-success"
+                                                    icon="pi pi-image"></button>
 
                                             </div>
 
 
                                         </p-card>
-
                                         <br>
-
                                         <div *ngFor="let item of this.pose_all; index as i" class="box">
 
                                             <p-card>
                                                 <div style="text-align: left;">
                                                     <div class="p-grid">
-                                                        <div class="p-col-fixed " style="width:80px;">
+                                                        <div class="p-col-fixed " style="width:70px;">
                                                             <img class="element"
-                                                                style="border-radius: 50%;width: 60px;height: 60px;"
+                                                                style="border-radius: 50%;width: 50px;height: 50px;"
                                                                 src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
                                                                 alt="Girl in a jacket">
                                                         </div>
@@ -378,12 +362,15 @@
 
                                                     <button *ngIf="item.liked_but == false"
                                                         (click)="but_like(item.pose_id,i)" style="width: 50%;" pButton
-                                                        type="button" label="ถูกใจ" class="p-button-text"></button>
+                                                        type="button" label="ถูกใจ" class="p-button-text"
+                                                        icon="pi pi-thumbs-up"></button>
                                                     <button *ngIf="item.liked_but == true"
                                                         (click)="but_like(item.pose_id,i)" style="width: 50%;" pButton
-                                                        type="button" label="ถูกใจ" class="p-button-raised"></button>
+                                                        type="button" label="ถูกใจ" class="p-button-raised"
+                                                        icon="pi pi-thumbs-up"></button>
                                                     <button style="width: 50%;" pButton type="button"
-                                                        label="แสดงความคิดเห็น" class="p-button-text"></button>
+                                                        label="แสดงความคิดเห็น" class="p-button-text"
+                                                        icon="pi pi-comments"></button>
 
                                                 </div>
                                                 <hr>
@@ -392,7 +379,7 @@
                                                 <div class="p-grid" *ngIf="item.comment_simple != null">
                                                     <div class="p-col-fixed " style="width: 70px;">
 
-                                                        <img style="border-radius: 50%;width: 45px;height: 45px;"
+                                                        <img style="border-radius: 50%;width: 50px;height: 50px;"
                                                             src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M"
                                                             alt="Girl in a jacket">
 
@@ -453,21 +440,20 @@
                                             </p-card>
                                             <br>
 
+                                            
+
                                         </div>
+                                        
                                         <br>
-
-
-
+                                        
                                     </div>
                                     <div><br></div>
+                                    
                                 </div>
-
-
-
 
                             </div>
 
-                            <div class="p-col" *ngIf="this.innerWidth > 1250">
+                            <div class="p-col" *ngIf="this.innerWidth >= 1250">
                                 <div class="box">
                                     <div class="p-grid">
                                         <div class="p-col-12 "></div>
@@ -487,9 +473,9 @@
                                                                 alt="Girl in a jacket">
                                                         </div>
                                                         <div class="p-col">
-                                                            <div class="element">
-                                                                <h5>Ricado</h5>
-                                                                <p>R_pto1975</p>
+                                                            <div class="element" *ngFor="let profiles of this.profile">
+                                                                <h5>{{profiles.name}}</h5> 
+                                                                <p>{{profiles.name_id}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -523,35 +509,25 @@
 
 
 
-                                                <div class="p-grid" *ngFor="let number of [0,1,2,3,4]">
-                                                    <div class="p-col-2">
-                                                        <div class="p-col-fixed">
-                                                            <img style="border-radius: 50%;"
-                                                                src="https://scontent.fkkc2-1.fna.fbcdn.net/v/t1.0-9/108008209_110395534078235_2825595987495462454_n.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeEJEhrrcHTskRV3dcsJPpSfyn-uJ6r4dFrKf64nqvh0Wl9gLer-caqIYdNfBlIik3RCznYC6bPqUnWFkuG1mnbs&_nc_ohc=bn0NrkwqhsMAX_tIbw4&_nc_ht=scontent.fkkc2-1.fna&oh=ed739e08030700adb0b87776e8d2d53f&oe=600B790A"
-                                                                alt="Girl in a jacket" width="100%" height="100%">
-                                                        </div>
-                                                    </div>
-                                                    <div class="p-col-10">
-                                                        <div class="p-col">
-                                                            <h6>พี่คาซึยะ</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="p-grid">
-                                                    <div class="p-col-2">
-                                                        <div class="p-col-fixed">
-                                                            <img style="border-radius: 50%;"
-                                                                src="https://i.kym-cdn.com/entries/icons/original/000/010/848/icon-van.jpg"
-                                                                alt="Girl in a jacket" width="100%" height="100%">
-                                                        </div>
-                                                    </div>
-                                                    <div class="p-col-10">
-                                                        <div class="p-col">
-                                                            <h6>พี่อู๋</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div class="p-grid" *ngFor="let friend of this.friend_all"
+                                                    style="margin-top: 5px;">
 
+
+                                                    <div class="p-col-fixed " style="width:70px;">
+                                                        <img class="element"
+                                                            style="border-radius: 50%;width: 30px;height: 30px;"
+                                                            src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
+                                                            alt="Girl in a jacket">
+                                                    </div>
+
+                                                    <div class="p-col">
+                                                        <div class="element">
+                                                            <h6>{{friend.name}}</h6>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
                                             </div>
 
 
@@ -572,8 +548,7 @@
 
                         </div>
                     </div>
-                    <div class="p-col">
-                    </div>
+                    <div class="p-col"></div>
                 </div>
             </div>
         </div>

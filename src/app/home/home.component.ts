@@ -32,6 +32,9 @@ export class HomeComponent implements OnInit {
   }
 
   comment_text: any;
+  friend_all: any;
+  profile:any;
+  group:any;
 
   ngOnInit(): void {
 
@@ -81,9 +84,41 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.log("fail");
     });
+    this.selectFriend();
+    this.selectProfile();
+    this.selectgroup();
 
   }
 
+  selectgroup(){
+    let json = {user_id: this.user_id};
+    this.http.post("http://203.154.83.62:1238/select/group", JSON.stringify(json)).subscribe(response => {
+      this.group = response;
+    }, error => {
+      console.log("fail");
+    });
+    this.comment_text = "";
+  }
+  selectFriend(){
+    let json = {user_id: this.user_id};
+    this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json)).subscribe(response => {
+      this.friend_all = response;
+    }, error => {
+      console.log("fail");
+    });
+    this.comment_text = "";
+  }
+  selectProfile(){
+    let json = {user_id: this.user_id};
+    this.http.post("http://203.154.83.62:1238/select/profile", JSON.stringify(json)).subscribe(response => {
+      var array = Object.values(response);
+      this.profile = array;
+      console.log(array);
+    }, error => {
+      console.log("fail");
+    });
+    this.comment_text = "";
+  }
   but_like(pose_id: string, index: any) {
     let json = { u_id: this.user_id, pose_id: pose_id };
     this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json)).subscribe(response => {
@@ -99,9 +134,6 @@ export class HomeComponent implements OnInit {
       console.log("fail");
     });
   }
-
-
-
   comment(pose_id: any) {
     let json = { Text: this.comment_text, u_id: this.user_id, pose_id: pose_id };
     this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json)).subscribe(response => {
@@ -118,55 +150,61 @@ export class HomeComponent implements OnInit {
     this.display = true;
   }
 
+
+
+  //สำหรับแสดงผลทุกหน้าจอ
   setMyStyles() {
     let styles;
-    if (this.innerWidth > 1250) {
+    if (this.innerWidth >= 1250) {
       styles = {
         'width': 1200 + 'px'
       }
-    } else if (this.innerWidth > 900) {
+    } else if (this.innerWidth >= 900) {
       styles = {
         'width': 900 + 'px'
       }
-    } else {
+    } else if (this.innerWidth >= 600) {
       styles = {
-        'width': 800 + 'px'
+        'width': 600 + 'px'
+      }
+    }else{
+      styles = {
+        'width': 90 + '%'
       }
     }
     return styles;
   }
   setMyClass() {
     let Class;
-    if (this.innerWidth > 1250) {
+    if (this.innerWidth >= 1250) {
       Class = "p-col-6"
     }
-    else if (this.innerWidth > 900) {
+    else if (this.innerWidth >= 900) {
       Class = "p-col-7"
-    } else {
+    } else if (this.innerWidth >= 600) {
       Class = "p-col-10"
+    }else{
+      Class = "p-col-12"
     }
     return Class;
   }
-
   setMyClassRow() {
     let Class;
-    if (this.innerWidth > 1250) {
+    if (this.innerWidth >= 1250) {
       Class = "p-col"
     }
-    else if (this.innerWidth > 900) {
+    else if (this.innerWidth >= 900) {
       Class = "p-col-4"
     } else {
       Class = "p-col-5"
     }
     return Class;
   }
-  setHeightDivauto(){
+  setHeightDivauto() {
     let styles;
     styles = {
       'height': this.innerHeight + 'px'
     }
     return styles;
   }
-
-
 }
