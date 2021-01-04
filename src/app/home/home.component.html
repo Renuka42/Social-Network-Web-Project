@@ -126,43 +126,50 @@
 <body>
 
 
-    <div id="element_within_div">
-        <div class="p-grid,demo-container p-p-0" style="text-align: center;display: flex;justify-content: center;">
-            <div class="p-col"></div>
-            <div class="p-col-fixed" style="width: 1200px;">
 
 
-                <div class="p-grid">
+    <!-- <div class="p-grid">   
+        <div class="p-col"></div>
+        <div class="p-col-fixed d-flex justify-content-between" [ngStyle]="setMyStyles()">
+            <h4 style="margin-top: 10px;">PINSTAGRAME</h4>
 
-                    <div class="p-col-3" style="text-align: left;">
-                        <h4>PINSTAGRAME</h4>
+            <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
+                style="border-radius: 20px;width: 20%;" />
 
-                    </div>
-                    <div class="p-col-6">
-
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input class="p-inputtext-sm" type="text" pInputText placeholder="Search" />
-                        </span>
-
-                    </div>
-                    <div class="p-col-3">
-                        <div class="p-grid" style="float: right;">
-                            <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-user"
-                                    class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                            <div class="p-col-4"><button (click)="op.toggle($event)" pButton pRipple type="button"
-                                    icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-sm"></button>
-                            </div>
-                            <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-heart"
-                                    class="p-button-rounded p-button-secondary p-button-sm"></button></div>
-                        </div>
-                    </div>
+            <div class="p-grid" style="float: right;">
+                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
+                        type="button" icon="pi pi-bell"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button>
                 </div>
+                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button></div>
             </div>
-            <div class="p-col"></div>
         </div>
+        <div class="p-col"></div>
 
-    </div>
+    </div> -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" [ngStyle]="setMyStyles()">
+            <h4 >PINSTAGRAME</h4>
+
+            <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
+                style="border-radius: 10px;width: 20%;" />
+
+            <div class="p-grid" style="float: right;">
+                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
+                        type="button" icon="pi pi-bell"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button>
+                </div>
+                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button></div>
+            </div>
+        </div>
+      </nav>
 
     <div class="p-grid" style="position: fixed; width: 100%;background-color: rgb(243, 243, 243);">
         <div class="p-col-12">
@@ -278,9 +285,9 @@
                             <div [ngClass]="setMyClass()">
 
 
-                                <div
-                                    style="height: 150vh;overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
-                                    <div class="box" id="myDiv">
+                                <div [ngStyle]="setHeightDivauto()"
+                                    style="height: 500px;overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
+                                    <div class="box">
 
                                         <p-card>
 
@@ -392,7 +399,7 @@
                                                     </div>
                                                     <div class="p-col-9">
                                                         <div class="card"
-                                                            style="border-radius: 10px 10px 10px 10px;background-color: rgb(231, 231, 231);border: none;">
+                                                            style="border-radius: 10px 10px 10px 10px;background-color: rgb(245, 245, 245);border: none;">
 
                                                             <div class="demo-container p-p-2">
                                                                 <div>
@@ -447,10 +454,14 @@
                                             <br>
 
                                         </div>
+                                        <br>
+
 
 
                                     </div>
+                                    <div><br></div>
                                 </div>
+
 
 
 

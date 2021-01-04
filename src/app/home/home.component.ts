@@ -35,8 +35,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var myElement = document.getElementById('element_within_div');
-    console.log(myElement);
 
     let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json)).subscribe(response => {
@@ -161,6 +159,13 @@ export class HomeComponent implements OnInit {
       Class = "p-col-5"
     }
     return Class;
+  }
+  setHeightDivauto(){
+    let styles;
+    styles = {
+      'height': this.innerHeight + 'px'
+    }
+    return styles;
   }
 
 

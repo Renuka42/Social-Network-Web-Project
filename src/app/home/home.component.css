@@ -48,17 +48,5 @@
   outline: 0px solid transparent;
 }
 
-.editableDiv1,
-.editableDiv2 {
-  border-bottom: 1px solid gray;
-  outline: none;
-  margin-top: 20px;
-}
-
-.editableDiv1[contentEditable="true"]:empty:not(:focus):before {
-  content: attr(placeholder)
-}
-
-.editableDiv2[contentEditable="true"]:empty:before {
-  content: attr(placeholder)
-}
+html { height:100%; }
+body { position:absolute; top:0; bottom:0; right:0; left:0; }
