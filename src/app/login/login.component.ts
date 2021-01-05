@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
 
     console.log(this.todayNumber);
     console.log(this.todayDate);
-    this.username = "ff";
-    this.password = "1661";
+    this.username = "oza1238";
+    this.password = "123";
     let json = { username: this.username, password: this.password };
     this.http.post("http://203.154.83.62:1238/user/login", JSON.stringify(json)).subscribe(response => {
 

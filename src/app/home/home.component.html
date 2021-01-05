@@ -1,83 +1,108 @@
-<p-dialog header="แสดงความคิดเห็น" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}">
+<p-dialog header="แสดงความคิดเห็น" [(visible)]="display" [modal]="true" [style]="setDialogWidth()" >
     <div class="p-grid">
-        <div class="p-col"></div>
-        <div class="p-col-fixed" style="width: 700px;">
-            <div class="p-grid">
-                <div class="p-col-7 ">
-                    <div class="element">
-                        <p-card>
-                            <div style="text-align: left;">
-                                <div class="p-grid">
-                                    <div class="p-col-fixed " style="width:80px;">
-                                        <img class="element" style="border-radius: 50%;width: 60px;height: 60px;"
-                                            src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
-                                            alt="Girl in a jacket">
-                                    </div>
-                                    <div class="p-col">
-                                        <div class="element">
-                                            <h5>ttt</h5>
-                                            <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
+        <div  class="p-col-12"></div>
+        <div  class="p-col-fixed" [ngStyle]="setDialog()" >
+            <div class="p-grid" >
+                
+                <div  class="p-col-8 "   *ngIf="this.innerWidth > 1400">
+                    <div  >
+                        <div class="box" >
+
+                            <p-card >
+                               
+                                <div *ngFor="let item of this.pose_all; index as i" >
+                                    <div *ngIf="i == this.pose_temp">
+                                        
+                                        <div style="text-align: left;">
+                                            <div class="p-grid">
+                                                <div class="p-col-fixed " style="width:70px;">
+                                                    <img class="element"
+                                                        style="border-radius: 50%;width: 50px;height: 50px;"
+                                                        src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
+                                                        alt="Girl in a jacket">
+                                                </div>
+                                                <div class="p-col">
+                                                    <div class="element">
+                                                        <h5> <a class="fake-link">{{item.name}}</a></h5>
+                                                        <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div style="text-align: left;">
+                                            <br>
+                                            {{item.Text}} <br>
+                                      
 
+                                        </div>
+                                        <div style="text-align: left;">
+                                            <hr *ngIf="item.like != 0 || item.comment != 0">
+                                            <div class="p-grid">
+                                                <div *ngIf="item.like != 0" class="p-col-fixed">
+                                                    <a class="fake-link">{{item.like}} ถูกใจ</a>
+                                                </div>
+                                                <div *ngIf="item.comment != 0" class="p-col">
+                                                    <a (click)="showDialog();setTempComment(i);"
+                                                        class="fake-link">{{item.comment}} แสดงความคิดเห็น</a>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div style="text-align: left;">
+                                            <hr>
+
+                                            <button *ngIf="item.liked_but == false" (click)="but_like(item.pose_id,i)"
+                                                style="width: 50%;" pButton type="button" label="ถูกใจ"
+                                                class="p-button-text" icon="pi pi-thumbs-up"></button>
+                                            <button *ngIf="item.liked_but == true" (click)="but_like(item.pose_id,i)"
+                                                style="width: 50%;" pButton type="button" label="ถูกใจ"
+                                                class="p-button-raised" icon="pi pi-thumbs-up"></button>
+                                            <button disabled (click)="showDialog();setTempComment(i)"
+                                                style="width: 50%;" pButton type="button" label="แสดงความคิดเห็น"
+                                                class="p-button-text" icon="pi pi-comments"></button>
+
+                                        </div>
+                                        <hr>
                                     </div>
                                 </div>
-                            </div>
+                                
+
+                            </p-card>
+                            
 
 
-                            <div style="text-align: left;">
-                                <br>
-                                awegawefargaewfawegawegaef
 
-                            </div>
-                            <div style="text-align: left;">
-                                <hr>
-                                <div class="p-grid">
-                                    <div class="p-col-fixed">
-                                        5 ถูกใจ
-                                    </div>
-                                    <div class="p-col">
-                                        6 แสดงความคิดเห็น
-                                    </div>
-                                </div>
+                        </div>
 
-
-                            </div>
-                            <div style="text-align: left;">
-                                <hr>
-
-
-                                <button style="width: 50%;" pButton type="button" label="ถูกใจ"
-                                    class="p-button-raised"></button>
-                                <button style="width: 50%;" pButton type="button" label="แสดงความคิดเห็น"
-                                    class="p-button-text"></button>
-
-                            </div>
-                        </p-card>
+                        
                     </div>
                 </div>
-                <div class="p-col-5">
+                <div  [ngClass]="setDialogRow()">
 
                     <div
-                        style="width: 100%; height: 50vh; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
+                        style="width: 100%; height: 60vh; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
                         <!-- คอมเม้น -->
-                        <div class="p-grid">
-                            <div class="p-col-fixed " style="width: 70px;">
+                        <div class="p-grid"  *ngFor="let comment of this.comment_all">
+                            <div class="p-col-fixed " style="width: 50px;">
 
-                                <img style="border-radius: 50%;width: 45px;height: 45px;"
+                                <img style="border-radius: 50%;width: 35px;height: 35px;"
                                     src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M"
                                     alt="Girl in a jacket">
 
                             </div>
-                            <div class="p-col-9">
+                            <div class="p-col-10">
                                 <div class="card"
                                     style="border-radius: 10px 10px 10px 10px;background-color: rgb(231, 231, 231);border: none;">
 
                                     <div class="demo-container p-p-2">
                                         <div>
-                                            <h6><b>awegawefawef</b> </h6>
+                                            <h6><b>{{comment.name}}</b> </h6>
+                                            
                                         </div>
                                         <div style="margin-top: -2px;">
-                                            wefawegawe </div>
+                                            {{comment.Text}} </div>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +113,8 @@
                         <!-- แสดงความคิดเห็น -->
                         <div class="p-grid">
 
-                            <div class="p-col-fixed " style="width: 73%;">
+                            <div class="p-col-1 "></div>
+                            <div class="p-col-fixed " style="width: 70%;">
                                 <textarea [rows]="1" style="border-radius: 10px 10px 10px 10px;width: 100%;"
                                     pInputTextarea placeholder="แสดงความคิดเห็น"></textarea>
                             </div>
@@ -102,14 +128,14 @@
                     </div>
 
                 </div>
+                
             </div>
 
         </div>
-        <div class="p-col"></div>
+        <div class="p-col-12" ></div>
     </div>
 </p-dialog>
 
-<!-- <button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show"></button> -->
 
 <p-overlayPanel #op>
     <ng-template pTemplate>
@@ -330,7 +356,7 @@
                                                         </div>
                                                         <div class="p-col">
                                                             <div class="element">
-                                                                <h5>{{item.name}}</h5>
+                                                                <h5> <a class="fake-link">{{item.name}}</a></h5>
                                                                 <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
                                                             </div>
 
@@ -348,10 +374,11 @@
                                                     <hr *ngIf="item.like != 0 || item.comment != 0">
                                                     <div class="p-grid">
                                                         <div *ngIf="item.like != 0" class="p-col-fixed">
-                                                            {{item.like}} ถูกใจ
+                                                            <a class="fake-link">{{item.like}} ถูกใจ</a>
                                                         </div>
                                                         <div *ngIf="item.comment != 0" class="p-col">
-                                                            {{item.comment}} แสดงความคิดเห็น
+                                                            <a (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"
+                                                                class="fake-link">{{item.comment}} แสดงความคิดเห็น</a>
                                                         </div>
                                                     </div>
 
@@ -368,9 +395,9 @@
                                                         (click)="but_like(item.pose_id,i)" style="width: 50%;" pButton
                                                         type="button" label="ถูกใจ" class="p-button-raised"
                                                         icon="pi pi-thumbs-up"></button>
-                                                    <button style="width: 50%;" pButton type="button"
-                                                        label="แสดงความคิดเห็น" class="p-button-text"
-                                                        icon="pi pi-comments"></button>
+                                                    <button (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)" style="width: 50%;"
+                                                        pButton type="button" label="แสดงความคิดเห็น"
+                                                        class="p-button-text" icon="pi pi-comments"></button>
 
                                                 </div>
                                                 <hr>
@@ -390,7 +417,9 @@
 
                                                             <div class="demo-container p-p-2">
                                                                 <div>
-                                                                    <h6><b>{{item.comment_simple["name"]}}</b> </h6>
+                                                                    <h6><b> <a
+                                                                                class="fake-link">{{item.comment_simple["name"]}}</a></b>
+                                                                    </h6>
                                                                 </div>
                                                                 <div style="margin-top: -2px;">
                                                                     {{item.comment_simple["Text"]}} </div>
@@ -403,7 +432,9 @@
                                                 </div>
                                                 <div *ngIf="item.comment_simple != null && item.comment > 1"
                                                     style="text-align: center;">
-                                                    ดูความคิดเห็นทั้งหมด
+                                                    <a (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"
+                                                        class="fake-link">ดูความคิดเห็นทั้งหมด</a>
+
                                                 </div>
                                                 <!-- แสดงความคิดเห็น -->
                                                 <div class="p-grid">
@@ -422,7 +453,8 @@
 
 
                                                         <!-- <textarea (keydown.enter)="onKeyPress($event)" [rows]="1" style="width: 100%;" pInputTextarea placeholder="แสดงความคิดเห็น" [(ngModel)]="comment_text" ></textarea> -->
-                                                        <textarea (keydown.enter)="comment(item.pose_id)" [rows]="1"
+                                                        <textarea (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"
+                                                            (keydown.enter)="comment(item.pose_id)" [rows]="1"
                                                             style="border-radius: 10px 10px 10px 10px;width: 100%;"
                                                             pInputTextarea [(ngModel)]="comment_text"
                                                             placeholder="แสดงความคิดเห็น"></textarea>
@@ -431,7 +463,8 @@
                                                         <button class="element"
                                                             style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;"
                                                             pButton pRipple type="submit" icon="pi pi-check"
-                                                            class="p-button-rounded p-button-outlined"></button>
+                                                            class="p-button-rounded p-button-outlined"
+                                                            (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"></button>
                                                     </div>
 
                                                 </div>
@@ -440,15 +473,15 @@
                                             </p-card>
                                             <br>
 
-                                            
+
 
                                         </div>
-                                        
+
                                         <br>
-                                        
+
                                     </div>
                                     <div><br></div>
-                                    
+
                                 </div>
 
                             </div>
@@ -474,7 +507,7 @@
                                                         </div>
                                                         <div class="p-col">
                                                             <div class="element" *ngFor="let profiles of this.profile">
-                                                                <h5>{{profiles.name}}</h5> 
+                                                                <h5>{{profiles.name}}</h5>
                                                                 <p>{{profiles.name_id}}</p>
                                                             </div>
                                                         </div>

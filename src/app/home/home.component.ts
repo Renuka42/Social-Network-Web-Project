@@ -9,15 +9,28 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  //หน้าจอ
   innerHeight: any;
   innerWidth: any;
+
+  //แสดงข้อมูล
   user_id: any;
   pose_all: any;
-  like_user_all: Object = [];
+  friend_all: any;
+  profile: any;
+  group: any;
+  comment_all: any;
+
+  //ข้อมูลชั่วคราว
+  pose_temp = 0;
+  comment_text: any;
   checkLike: any;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone) {
     this.user_id = this.route.snapshot.params["id"];
+
+    //ทำให้เว็บรู้จักหน้าจอเริ่มต้นของอุปกรณ์ 
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
 
@@ -26,19 +39,17 @@ export class HomeComponent implements OnInit {
       this.ngZone.run(() => {
         this.innerHeight = window.innerHeight;
         this.innerWidth = window.innerWidth;
+        console.log(this.innerWidth);
       });
     };
 
   }
 
-  comment_text: any;
-  friend_all: any;
-  profile:any;
-  group:any;
+
 
   ngOnInit(): void {
 
-
+    //สำหรับ select โพสต์โดยเริ่มต้น
     let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json)).subscribe(response => {
 
@@ -71,7 +82,6 @@ export class HomeComponent implements OnInit {
             var comment = Object.values(re);
             array[index] = Object.assign({}, array[index], { comment: comment.length });
             array[index] = Object.assign({}, array[index], { comment_simple: comment[0] });
-
           }, err => {
             console.log("re" + JSON.stringify(err));
           });
@@ -84,14 +94,17 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.log("fail");
     });
+
+    //สำหรับเรียกใช้การ select
     this.selectFriend();
     this.selectProfile();
     this.selectgroup();
 
   }
 
-  selectgroup(){
-    let json = {user_id: this.user_id};
+  //สำหรับ select ข้อมูล
+  selectgroup() {
+    let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/group", JSON.stringify(json)).subscribe(response => {
       this.group = response;
     }, error => {
@@ -99,8 +112,8 @@ export class HomeComponent implements OnInit {
     });
     this.comment_text = "";
   }
-  selectFriend(){
-    let json = {user_id: this.user_id};
+  selectFriend() {
+    let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json)).subscribe(response => {
       this.friend_all = response;
     }, error => {
@@ -108,8 +121,8 @@ export class HomeComponent implements OnInit {
     });
     this.comment_text = "";
   }
-  selectProfile(){
-    let json = {user_id: this.user_id};
+  selectProfile() {
+    let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/profile", JSON.stringify(json)).subscribe(response => {
       var array = Object.values(response);
       this.profile = array;
@@ -119,6 +132,17 @@ export class HomeComponent implements OnInit {
     });
     this.comment_text = "";
   }
+  selectComment(pose_id:any) {
+    this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id)
+      .subscribe(re => {
+        this.comment_all = re;
+        console.log(re);
+      }, err => {
+        console.log("re" + JSON.stringify(err));
+      });
+  }
+
+  //สำหรับการกระทำโพสต์
   but_like(pose_id: string, index: any) {
     let json = { u_id: this.user_id, pose_id: pose_id };
     this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json)).subscribe(response => {
@@ -142,15 +166,15 @@ export class HomeComponent implements OnInit {
       console.log("fail");
     });
     this.comment_text = "";
+    
   };
+  
 
-  display: boolean = false;
 
-  showDialog() {
-    this.display = true;
+  //สำหรับตั้งค่า Temp
+  setTempComment(index: any) {
+    this.pose_temp = index;
   }
-
-
 
   //สำหรับแสดงผลทุกหน้าจอ
   setMyStyles() {
@@ -167,7 +191,7 @@ export class HomeComponent implements OnInit {
       styles = {
         'width': 600 + 'px'
       }
-    }else{
+    } else {
       styles = {
         'width': 90 + '%'
       }
@@ -183,7 +207,7 @@ export class HomeComponent implements OnInit {
       Class = "p-col-7"
     } else if (this.innerWidth >= 600) {
       Class = "p-col-10"
-    }else{
+    } else {
       Class = "p-col-12"
     }
     return Class;
@@ -206,5 +230,47 @@ export class HomeComponent implements OnInit {
       'height': this.innerHeight + 'px'
     }
     return styles;
+  }
+  setDialog() {
+    let styles;
+    if (this.innerWidth >= 1800) {
+      styles = {
+        'width': 100 + '%',
+
+      }
+    } else {
+      styles = {
+        'width': 100 + '%'
+      }
+    }
+    return styles;
+  }
+  setDialogRow() {
+    let Class;
+    if (this.innerWidth >= 1800 || this.innerWidth >= 1400) {
+      Class = "p-col-4"
+    } else {
+      Class = "p-col-12"
+    }
+    return Class;
+  }
+  setDialogWidth() {
+    let styles;
+    if (this.innerWidth >= 1800) {
+      styles = {
+        'width': 65 + '%',
+
+      }
+    } else {
+      styles = {
+        'width': 95 + '%',
+
+      }
+    }
+    return styles;
+  }
+  display: boolean = false;
+  showDialog() {
+    this.display = true;
   }
 }

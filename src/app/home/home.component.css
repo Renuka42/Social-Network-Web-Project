@@ -54,3 +54,7 @@ body { top:0; bottom:0; right:0; left:0;}
 button{
   border-radius: 20px;
 }
+.fake-link {
+  color: rgb(60, 60, 60);
+  cursor: pointer;
+}
