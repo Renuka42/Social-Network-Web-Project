@@ -84,7 +84,8 @@
                     <div
                         style="width: 100%; height: 60vh; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
                         <!-- คอมเม้น -->
-                        <div class="p-grid"  *ngFor="let comment of this.comment_all">
+                        <div class="p-grid"   *ngFor="let comment of this.comment_all" >
+                            <div class="p-col"></div>
                             <div class="p-col-fixed " style="width: 50px;">
 
                                 <img style="border-radius: 50%;width: 35px;height: 35px;"
@@ -92,7 +93,7 @@
                                     alt="Girl in a jacket">
 
                             </div>
-                            <div class="p-col-10">
+                            <div class="p-col-9">
                                 <div class="card"
                                     style="border-radius: 10px 10px 10px 10px;background-color: rgb(231, 231, 231);border: none;">
 
@@ -106,6 +107,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="p-col"></div>
 
 
                         </div>
@@ -113,16 +115,17 @@
                         <!-- แสดงความคิดเห็น -->
                         <div class="p-grid">
 
-                            <div class="p-col-1 "></div>
-                            <div class="p-col-fixed " style="width: 70%;">
+                            <div class="p-col-fixed" [ngStyle]="setCommentPoseStyles()"></div>
+                            <div class="p-col-fixed " style="width: 80%;">
                                 <textarea [rows]="1" style="border-radius: 10px 10px 10px 10px;width: 100%;"
                                     pInputTextarea placeholder="แสดงความคิดเห็น"></textarea>
                             </div>
-                            <div class="p-col-1 ">
+                            <div class="p-col-1 " >
                                 <button class="element" style="border-radius: 10px 10px 10px 10px;" pButton pRipple
                                     type="submit" icon="pi pi-check"
                                     class="p-button-rounded p-button-outlined"></button>
                             </div>
+                            
 
                         </div>
                     </div>
@@ -192,7 +195,7 @@
         </div>
     </nav>
 
-    <div class="p-grid" style="position: fixed; width: 100%;background-color: rgb(243, 243, 243);">
+    <div class="p-grid"  style="width: 100%;background-color: rgb(243, 243, 243);position: fixed;" [ngStyle]="setDivPoseStyles()">
         <div class="p-col-12">
             <div class="box">
                 <div class="p-grid">
@@ -201,7 +204,7 @@
                     <div class="p-col"></div>
                     <div class="p-col-fixed" [ngStyle]="setMyStyles()">
                         <div class="p-grid">
-                            <div class="p-col" *ngIf="this.innerWidth <= 900"></div>
+                            <div class="p-col" *ngIf="this.innerWidth <= 900 && this.innerWidth > 500" ></div>
                             <div class="p-col" *ngIf="this.innerWidth <= 1250"></div>
 
                             <div [ngClass]="setMyClassRow()" class="p-col" *ngIf="this.innerWidth > 900">
@@ -294,7 +297,7 @@
                                 </div>
                             </div>
 
-                            <div [ngClass]="setMyClass()">
+                            <div [ngClass]="setMyClass()" >
 
 
                                 <div [ngStyle]="setHeightDivauto()"
@@ -411,7 +414,7 @@
                                                             alt="Girl in a jacket">
 
                                                     </div>
-                                                    <div class="p-col-9">
+                                                    <div class="p-col-10">
                                                         <div class="card"
                                                             style="border-radius: 10px 10px 10px 10px;background-color: rgb(245, 245, 245);border: none;">
 
@@ -438,14 +441,14 @@
                                                 </div>
                                                 <!-- แสดงความคิดเห็น -->
                                                 <div class="p-grid">
-                                                    <div class="p-col-1 ">
+                                                    <div class="p-col-fixed " style="width: 9%;">
 
-                                                        <img style="border-radius: 50%;width: 30px;height: 30px;margin-top: 5px;margin-left: 5px;"
+                                                        <img style="border-radius: 50%;width: 30px;height: 30px;margin-top: 5px;"
                                                             src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M"
                                                             alt="Girl in a jacket">
 
                                                     </div>
-                                                    <div class="p-col-10 ">
+                                                    <div class="p-col-fixed " style="width: 80%;">
                                                         <!-- <div placeholder="click" (keydown.enter)="comment(item.pose_id)" class="editableDiv1 demo-container p-p-2" contenteditable="true"style="border-radius: 20px 20px 20px 20px;background-color: rgb(231, 231, 231);" >
                                                                     
                                                                 </div> -->
@@ -459,7 +462,7 @@
                                                             pInputTextarea [(ngModel)]="comment_text"
                                                             placeholder="แสดงความคิดเห็น"></textarea>
                                                     </div>
-                                                    <div class="p-col-1 ">
+                                                    <div class="p-col-1 " >
                                                         <button class="element"
                                                             style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;"
                                                             pButton pRipple type="submit" icon="pi pi-check"
@@ -480,8 +483,7 @@
                                         <br>
 
                                     </div>
-                                    <div><br></div>
-
+                                   
                                 </div>
 
                             </div>
@@ -577,7 +579,7 @@
                             </div>
 
                             <div class="p-col" *ngIf="this.innerWidth < 1250"></div>
-                            <div class="p-col" *ngIf="this.innerWidth < 900 "></div>
+                            <div class="p-col" *ngIf="this.innerWidth < 900 && this.innerWidth > 500"></div>
 
                         </div>
                     </div>

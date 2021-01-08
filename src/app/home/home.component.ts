@@ -193,7 +193,7 @@ export class HomeComponent implements OnInit {
       }
     } else {
       styles = {
-        'width': 90 + '%'
+        'width': 104 + '%',
       }
     }
     return styles;
@@ -223,6 +223,34 @@ export class HomeComponent implements OnInit {
       Class = "p-col-5"
     }
     return Class;
+  }
+  setDivPoseStyles() {
+    let styles={};
+    if (this.innerWidth < 600) {
+      styles = {
+        'margin-top': 0 + 'px'
+      }
+    } 
+    
+    return styles;
+  }
+  setCommentPoseStyles() {
+    let styles={};
+    if (this.innerWidth > 1400) {
+      styles = {
+        'width': 5 + '%'
+      }
+    }else if (this.innerWidth > 600) {
+      styles = {
+        'width': 10 + '%'
+      }
+    } else{
+      styles = {
+        'width': 6 + '%'
+      }
+    }
+    
+    return styles;
   }
   setHeightDivauto() {
     let styles;
