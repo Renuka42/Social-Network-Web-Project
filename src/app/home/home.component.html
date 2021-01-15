@@ -455,7 +455,7 @@
 
 
                                                         <!-- <textarea (keydown.enter)="onKeyPress($event)" [rows]="1" style="width: 100%;" pInputTextarea placeholder="แสดงความคิดเห็น" [(ngModel)]="comment_text" ></textarea> -->
-                                                        <textarea (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"
+                                                        <textarea (click)="setTempComment(i);this.selectComment(item.pose_id)"
                                                             (keydown.enter)="comment(item.pose_id)" [rows]="1"
                                                             style="border-radius: 10px 10px 10px 10px;width: 100%;"
                                                             pInputTextarea [(ngModel)]="comment_text"

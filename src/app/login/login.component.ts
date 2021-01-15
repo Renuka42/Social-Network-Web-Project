@@ -1,7 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Token } from '@angular/compiler';
 import { TokenService } from '../token.service';
 
 @Component({
