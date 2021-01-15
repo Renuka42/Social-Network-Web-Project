@@ -1,6 +1,8 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Token } from '@angular/compiler';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +20,10 @@ export class LoginComponent implements OnInit {
 
   visibleSidebar2: any;
 
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) {
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService) {
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
+  
 
     //ตรวจจับความกว้างยาวของหน้าจอ //ตลอดเวลา//
     window.onresize = (e: any) => {
@@ -46,10 +49,11 @@ export class LoginComponent implements OnInit {
     this.http.post("http://203.154.83.62:1238/user/login", JSON.stringify(json)).subscribe(response => {
 
       var array = Object.values(response);
-      console.log(array[0]["check"]);
+      this.tokens.token = array[0]["token"];
+      this.tokens.user_id = array[0]["user_id"];
 
       if (array[0]["check"] == "True") {
-        this.router.navigateByUrl("/home/" + array[0]["user_id"]);
+        this.router.navigateByUrl("/home");
       }
     }, error => {
       console.log("fail");
@@ -94,6 +98,7 @@ export class LoginComponent implements OnInit {
     } 
     return styles;
   }
+  visibleSidebar1: any;
 
 
 }

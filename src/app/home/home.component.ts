@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenService } from '../token.service';
 
 
 @Component({
@@ -27,8 +28,8 @@ export class HomeComponent implements OnInit {
   comment_text: any;
   checkLike: any;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone) {
-    this.user_id = this.route.snapshot.params["id"];
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone,private tokens: TokenService) {
+    this.user_id = this.tokens.user_id;
 
     //ทำให้เว็บรู้จักหน้าจอเริ่มต้นของอุปกรณ์ 
     this.innerHeight = window.innerHeight;
@@ -45,22 +46,14 @@ export class HomeComponent implements OnInit {
 
   }
 
-  tokenUser(){
-    const headerDict = {
-      'TOKEN': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoib3phMTIzOCIsImV4cCI6MTYxMDU2MDUxM30.FLkRh9IBM4dNMLp9_2BLlzG2yUKOjs4JGx67iVyjwlQ'
-    }
-    const requestOptions = {
-      headers: new HttpHeaders(headerDict), 
-    };
-    return requestOptions;
-  }
+  
 
 
   ngOnInit(): void {
 
     //สำหรับ select โพสต์โดยเริ่มต้น
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json),this.tokenUser()).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json),this.tokens.tokenUser()).subscribe(response => {
 
 
       var array = Object.values(response);
@@ -68,7 +61,7 @@ export class HomeComponent implements OnInit {
       array.forEach((value, index) => {
 
         //like
-        this.http.get("http://203.154.83.62:1238/select/like/" + value["pose_id"])
+        this.http.get("http://203.154.83.62:1238/select/like/" + value["pose_id"],this.tokens.tokenUser())
           .subscribe(re => {
             var liker = Object.values(re);
             array[index] = Object.assign({}, array[index], { liked_but: false });
@@ -86,7 +79,7 @@ export class HomeComponent implements OnInit {
           });
 
         //comment
-        this.http.get("http://203.154.83.62:1238/select/comment_all/" + value["pose_id"])
+        this.http.get("http://203.154.83.62:1238/select/comment_all/" + value["pose_id"],this.tokens.tokenUser())
           .subscribe(re => {
             var comment = Object.values(re);
             array[index] = Object.assign({}, array[index], { comment: comment.length });
@@ -117,7 +110,7 @@ export class HomeComponent implements OnInit {
   //สำหรับ select ข้อมูล
   selectgroup() {
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/group", JSON.stringify(json)).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/select/group", JSON.stringify(json),this.tokens.tokenUser()).subscribe(response => {
       this.group = response;
     }, error => {
       console.log("fail");
@@ -126,7 +119,7 @@ export class HomeComponent implements OnInit {
   }
   selectFriend() {
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json)).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json),this.tokens.tokenUser()).subscribe(response => {
       this.friend_all = response;
     }, error => {
       console.log("fail");
@@ -135,7 +128,7 @@ export class HomeComponent implements OnInit {
   }
   selectProfile() {
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/profile", JSON.stringify(json)).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/select/profile", JSON.stringify(json),this.tokens.tokenUser()).subscribe(response => {
       var array = Object.values(response);
       this.profile = array;
       console.log(array);
@@ -145,7 +138,7 @@ export class HomeComponent implements OnInit {
     this.comment_text = "";
   }
   selectComment(pose_id:any) {
-    this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id)
+    this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id,this.tokens.tokenUser())
       .subscribe(re => {
         this.comment_all = re;
         console.log(re);
@@ -157,7 +150,7 @@ export class HomeComponent implements OnInit {
   //สำหรับการกระทำโพสต์
   but_like(pose_id: string, index: any) {
     let json = { u_id: this.user_id, pose_id: pose_id };
-    this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json)).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json),this.tokens.tokenUser()).subscribe(response => {
       var pose = Object.values(this.pose_all[index]);
       if (this.pose_all[index]["liked_but"]) {
         this.pose_all[index]["liked_but"] = false;
@@ -172,7 +165,7 @@ export class HomeComponent implements OnInit {
   }
   comment(pose_id: any) {
     let json = { Text: this.comment_text, u_id: this.user_id, pose_id: pose_id };
-    this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json)).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json),this.tokens.tokenUser()).subscribe(response => {
       console.log(response);
     }, error => {
       console.log("fail");
