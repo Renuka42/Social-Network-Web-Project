@@ -1,20 +1,21 @@
-<p-sidebar  position="right" [style]="{width:'40em'}">
-    <div class="p-fluid">
-        <h5>Sign In</h5>
-        <div class="p-field">
-            <label for="firstname1">Firstname</label>
-            <input id="firstname1" type="text" pInputText> 
-        </div><div class="p-field">
-            <label for="firstname1">Lastname</label>
-            <input id="firstname1" type="text" pInputText > 
+<p-sidebar [(visible)]="visibleSidebar2" position="right" [style]="{width:'40em'}">
+    <div class="p-fluid" style="align-items: center;justify-content: center;">
+        <h5 >Sign In</h5>
+        <div class="p-field" style="align-items: center;justify-content: center;">
+            <label for="firstname1">Firstname</label><br>
+            <input id="firstname1" type="text" pInputText [style]="{width:'20em'}"> 
         </div>
         <div class="p-field">
-            <label for="firstname1">Username</label>
-            <input id="firstname1" type="text" pInputText [(ngModel)]="username"> 
+            <label for="firstname1">Lastname</label><br>
+            <input id="firstname1" type="text" pInputText [style]="{width:'20em'}" > 
         </div>
         <div class="p-field">
-            <label for="lastname1">Password</label>
-            <input id="lastname1" type="password" pInputText [(ngModel)]="password"> 
+            <label for="firstname1">Username</label><br>
+            <input id="firstname1" type="text" pInputText [(ngModel)]="username" [style]="{width:'20em'}"> 
+        </div>
+        <div class="p-field">
+            <label for="lastname1">Password</label><br>
+            <input id="lastname1" type="password" pInputText [(ngModel)]="password" [style]="{width:'20em'}"> 
         </div>  
         <div class="p-formgroup-inline" style="align-items: center;justify-content: center;">
             <div class="p-field">
@@ -82,7 +83,7 @@
                                                 <button (click)="login()" pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>    
                                         </div>
                                         <div class="p-field">
-                                                <button  pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
+                                                <button (click)="visibleSidebar2 = true" pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
                                         </div>
                                        
                                     </div>

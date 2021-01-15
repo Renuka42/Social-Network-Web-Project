@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   innerHeight: any;
   innerWidth: any;
 
+  visibleSidebar2: any;
+
   constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) {
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
