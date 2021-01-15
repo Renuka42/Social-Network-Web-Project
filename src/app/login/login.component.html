@@ -1,4 +1,4 @@
-<p-sidebar  position="right" [style]="{width:'40em'}">
+<p-sidebar  position="right" [(visible)]="visibleSidebar1" [style]="{width:'40em'}">
     <div class="p-fluid">
         <h5>Sign In</h5>
         <div class="p-field">
@@ -82,7 +82,7 @@
                                                 <button (click)="login()" pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>    
                                         </div>
                                         <div class="p-field">
-                                                <button  pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
+                                                <button (click)="visibleSidebar1 = true"  pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
                                         </div>
                                        
                                     </div>
