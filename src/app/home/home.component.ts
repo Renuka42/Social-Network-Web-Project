@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -45,13 +45,22 @@ export class HomeComponent implements OnInit {
 
   }
 
+  tokenUser(){
+    const headerDict = {
+      'TOKEN': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoib3phMTIzOCIsImV4cCI6MTYxMDU2MDUxM30.FLkRh9IBM4dNMLp9_2BLlzG2yUKOjs4JGx67iVyjwlQ'
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict), 
+    };
+    return requestOptions;
+  }
 
 
   ngOnInit(): void {
 
     //สำหรับ select โพสต์โดยเริ่มต้น
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json)).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json),this.tokenUser()).subscribe(response => {
 
 
       var array = Object.values(response);
@@ -101,6 +110,9 @@ export class HomeComponent implements OnInit {
     this.selectgroup();
 
   }
+
+
+
 
   //สำหรับ select ข้อมูล
   selectgroup() {
