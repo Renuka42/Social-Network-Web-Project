@@ -24,7 +24,7 @@ import {DialogModule} from 'primeng/dialog';
 
 
 const appRoutes: Routes = [
-  { path: '',component: LoginComponent},
+  { path: '*',component: LoginComponent},
   { path: 'home/:id',component: HomeComponent},
   { path: 'profile',component: ProfileComponent},
   { path: 'signin',component: SigninComponent},
