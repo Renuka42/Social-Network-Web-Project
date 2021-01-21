@@ -328,14 +328,14 @@
                                             <div style="text-align: left;">
 
 
-                                                <textarea style="width: 100%;" pInputTextarea></textarea>
+                                                <textarea style="width: 100%;height: 100px;" [(ngModel)]="getTextPose_Temp" [ngStyle]="setTextPoseheight()"  pInputTextarea></textarea>
 
                                             </div>
 
                                             <div style="text-align: left;">
 
                                                 <button style="width: 50%;" pButton type="button" label="โพสเลย"
-                                                    class="p-button-outlined"></button>
+                                                    class="p-button-outlined" (click)="inputPoseUser()"></button>
                                                 <button style="width: 50%;" pButton type="button" label="รูปภาพ/วีดิโอ"
                                                     class="p-button-outlined p-button-success"
                                                     icon="pi pi-image"></button>
@@ -345,7 +345,7 @@
 
                                         </p-card>
                                         <br>
-                                        <div *ngFor="let item of this.pose_all; index as i" class="box">
+                                        <div *ngFor="let item of this.pose_all_re ; index as i " class="box">
 
                                             <p-card>
                                                 <div style="text-align: left;">
@@ -373,14 +373,14 @@
 
                                                 </div>
                                                 <div style="text-align: left;">
-                                                    <hr *ngIf="item.like != 0 || item.comment != 0">
+                                                    <hr *ngIf="item.like != 0 || item.comment_comment_length != null">
                                                     <div class="p-grid">
                                                         <div *ngIf="item.like != 0" class="p-col-fixed">
                                                             <a class="fake-link">{{item.like}} ถูกใจ</a>
                                                         </div>
-                                                        <div *ngIf="item.comment != 0" class="p-col">
+                                                        <div *ngIf="item.comment_comment_length != null" class="p-col">
                                                             <a (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"
-                                                                class="fake-link">{{item.comment}} แสดงความคิดเห็น</a>
+                                                                class="fake-link">{{item.comment_comment_length}} แสดงความคิดเห็น</a>
                                                         </div>
                                                     </div>
 
@@ -388,7 +388,6 @@
                                                 </div>
                                                 <div style="text-align: left;">
                                                     <hr>
-
                                                     <button *ngIf="item.liked_but == false"
                                                         (click)="but_like(item.pose_id,i)" style="width: 50%;" pButton
                                                         type="button" label="ถูกใจ" class="p-button-text"
@@ -405,7 +404,7 @@
                                                 <hr>
                                                 
                                                 <!-- คอมเม้น -->
-                                                <div class="p-grid" *ngIf="item.comment_simple != null">
+                                                <div class="p-grid" *ngIf="item.comment_comment_length != null">
                                                     <div class="p-col-fixed " style="width: 70px;">
                                                         
                                                         <img style="border-radius: 50%;width: 50px;height: 50px;"
@@ -420,11 +419,11 @@
                                                             <div class="demo-container p-p-2">
                                                                 <div>
                                                                     <h6><b> <a
-                                                                                class="fake-link">{{item.comment_simple["name"]}}</a></b>
+                                                                                class="fake-link">{{item.comment_name}}</a></b>
                                                                     </h6>
                                                                 </div>
                                                                 <div style="margin-top: -2px;">
-                                                                    {{item.comment_simple["Text"]}} </div>
+                                                                    {{item.comment_Text}} </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -475,11 +474,23 @@
                                             </p-card>
                                             <br>
 
+                                        
+
 
 
                                         </div>
-
+                                        <p-card>
+                                            <button class="element"
+                                                            style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;"
+                                                            pButton pRipple type="submit" icon="pi pi-check"
+                                                            class="p-button-rounded p-button-outlined"
+                                                            (click)="selectMorePose()"
+                                                            ></button>
+                                                            <h1>กดโหลดโพตส์เพิ่มเติม</h1>
+                                                            
+                                        </p-card>
                                         <br>
+                                        
 
                                     </div>
                                    

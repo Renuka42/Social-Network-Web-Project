@@ -52,6 +52,8 @@ export class LoginComponent implements OnInit {
       this.tokens.user_id = array[0]["user_id"];
 
       if (array[0]["check"] == "True") {
+        localStorage.setItem("user_id",array[0]["user_id"]);
+        localStorage.setItem("token",array[0]["token"]);
         this.router.navigateByUrl("/home");
       }
     }, error => {

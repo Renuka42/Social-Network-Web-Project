@@ -16,7 +16,6 @@ export class TokenService {
     const requestOptions = {
       headers: new HttpHeaders(headerDict), 
     };
-    console.log(this.token);
     return requestOptions;
   }
 
