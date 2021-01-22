@@ -1,26 +1,29 @@
 <p-sidebar [(visible)]="visibleSidebar2" position="right" [style]="{width:'40em'}">
-    <div class="p-fluid" style="align-items: center;justify-content: center;">
-        <h5 >Sign In</h5>
-        <div class="p-field" style="align-items: center;justify-content: center;">
+    <div class="p-grid">
+        <div class="p-col-12">
+            <h5 style="text-align: center;">Sign In</h5>
+        </div><br>
+        
+        <div class="p-col-12" style="display: flex;justify-content: center;">
             <label for="firstname1">Firstname</label><br>
             <input id="firstname1" type="text" pInputText [style]="{width:'20em'}"> 
         </div>
-        <div class="p-field">
+        <div class="p-col-12" style="display: flex;justify-content: center;">
             <label for="firstname1">Lastname</label><br>
             <input id="firstname1" type="text" pInputText [style]="{width:'20em'}" > 
         </div>
-        <div class="p-field">
+        <div class="p-col-12" style="display: flex;justify-content: center;">
             <label for="firstname1">Username</label><br>
             <input id="firstname1" type="text" pInputText [(ngModel)]="username" [style]="{width:'20em'}"> 
         </div>
-        <div class="p-field">
+        <div class="p-col-12" style="display: flex;justify-content: center;">
             <label for="lastname1">Password</label><br>
-            <input id="lastname1" type="password" pInputText [(ngModel)]="password" [style]="{width:'20em'}"> 
+            <input id="lastname1" type="password" pInputText [(ngModel)]="password" [style]="{width:'20em'}"> <br>
         </div>  
-        <div class="p-formgroup-inline" style="align-items: center;justify-content: center;">
+        <div class="p-formgroup-inline; p-col-12" style="display: flex;justify-content: center;">
             <div class="p-field">
                     <button pButton pRipple type="button" label="Sign Up" class="p-button-rounded p-button-success"></button>    
-            </div>
+            </div>&nbsp;&nbsp;
             <div class="p-field">
                     <button pButton pRipple type="button" label="Cancel" class="p-button-rounded p-button-danger"></button>
             </div>

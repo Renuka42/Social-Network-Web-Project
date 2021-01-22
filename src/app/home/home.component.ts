@@ -130,9 +130,9 @@ export class HomeComponent implements OnInit {
       });
       this.pose_all = array;
       this.pose_all_re = array;
-      if(this.working == 1){
+      // if(this.working == 1){
         
-      }
+      // }
       
 
 
