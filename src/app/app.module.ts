@@ -21,6 +21,8 @@ import { SigninComponent } from './signin/signin.component';
 import {SidebarModule} from 'primeng/sidebar';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
@@ -54,7 +56,9 @@ const appRoutes: Routes = [
     OverlayPanelModule,
     SidebarModule,
     CalendarModule,
-    DialogModule
+    DialogModule,
+    NgxCaptchaModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

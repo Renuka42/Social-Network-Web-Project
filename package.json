@@ -21,6 +21,7 @@
     "@angular/router": "~11.0.4",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.3",
+    "ngx-captcha": "^8.0.1",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^11.0.0",

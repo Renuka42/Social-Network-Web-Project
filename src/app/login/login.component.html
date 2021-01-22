@@ -1,118 +1,128 @@
 <p-sidebar [(visible)]="visibleSidebar2" position="right" [style]="{width:'40em'}">
-    <div class="p-grid">
-        <div class="p-col-12">
-            <h5 style="text-align: center;">Sign In</h5>
-        </div><br>
-        
-        <div class="p-col-12" style="display: flex;justify-content: center;">
-            <label for="username">Username</label><br>
-            <input id="usernameSignin" type="text" pInputText [(ngModel)]="usernameSignin" [style]="{width:'20em'}"> 
-        </div>
-        <div class="p-col-12" style="display: flex;justify-content: center;">
-            <label for="Password">Password</label><br>
-            <input id="PasswordSignin" type="password" pInputText [(ngModel)]="passwordSignin" [style]="{width:'20em'}"> <br>
-        </div>  
-        <div class="p-col-12" style="display: flex;justify-content: center;">
-            <label for="Name_id">Name id</label><br>
-            <input id="Name_idSignin" type="Name_id" pInputText [(ngModel)]="name_idSignin" [style]="{width:'20em'}"> <br>
-        </div>   
-        <div class="p-col-12" style="display: flex;justify-content: center;">
-            <label for="Name">Name</label><br>
-            <input id="NameSignin" type="Name" pInputText [(ngModel)]="nameSignin" [style]="{width:'20em'}"> <br>
-        </div>     
-        
-        
-        <div class="p-formgroup-inline; p-col-12" style="display: flex;justify-content: center;">
-            <div class="p-field">
-                    <button pButton pRipple type="button" label="Sign Up" (click)="Signin()" class="p-button-rounded p-button-success"></button>    
-            </div>&nbsp;&nbsp;
-            <div class="p-field">
-                    <button pButton pRipple type="button" label="Cancel" class="p-button-rounded p-button-danger"></button>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <div style="text-align: center;">
+        <div>
+            <div>
+                <h5>Sign In</h5>
+            </div><br>
+
+            <div style="text-align: center;">
+                <label style="text-align: 30;" for="username">Username</label><br>
+                <input id="usernameSignin" type="text" pInputText [(ngModel)]="usernameSignin" [style]="{width:'20em'}">
             </div>
-           
+            <div style="text-align: center;">
+                <label for="Password">Password</label><br>
+                <input id="PasswordSignin" type="password" pInputText [(ngModel)]="passwordSignin"
+                    [style]="{width:'20em'}">
+                <br>
+            </div>
+            <div style="text-align: center;">
+                <label for="Name_id">Name id</label><br>
+                <input id="Name_idSignin" type="Name_id" pInputText [(ngModel)]="name_idSignin"
+                    [style]="{width:'20em'}">
+                <br>
+            </div>
+            <div style="text-align: center;">
+                <label for="Name">Name</label><br>
+                <input id="NameSignin" type="Name" pInputText [(ngModel)]="nameSignin" [style]="{width:'20em'}"> <br>
+            </div>
+            <!-- <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" ></ngx-recaptcha2> -->
+            <div>
+                <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" (success)="handleSuccess($event)"
+                    [useGlobalDomain]="false" formControlName="recaptcha">
+                </ngx-recaptcha2>
+            </div>
+
+            <div class="p-formgroup-inline; p-col-12" style="display: flex;justify-content: center;">
+                <div class="p-field" *ngIf="dis == true">
+                    <button pButton pRipple type="button" label="Sign Up" (click)="Signin()"
+                        class="p-button-rounded p-button-success"></button>
+                </div>&nbsp;&nbsp;
+                <div class="p-field" *ngIf="dis == false">
+                    <button pButton pRipple type="button" disabled label="Sign Up"
+                        class="p-button-rounded p-button-success"></button>
+                </div>&nbsp;&nbsp;
+                <div class="p-field">
+                    <button pButton pRipple type="button" label="Cancel"
+                        class="p-button-rounded p-button-danger"></button>
+                </div><br>
+            </div>
         </div>
+
     </div>
 </p-sidebar>
 
 
-
 <html style="overflow: hidden;">
 
-    <body>
+<body>
+    <div class="p-grid" [ngStyle]="setUrlImg()">
+        <div *ngIf="this.innerWidth >= 1200" class="p-col-7"
+            style="background: url(https://image.freepik.com/free-vector/winter-background-with-pastel-color-brushes-leaves_220290-42.jpg);background-repeat: no-repeat;background-size: 200%;">
 
- 
+            <div style="margin-top: 20%;display: flex;justify-content: center;">
 
-        <div class="p-grid" [ngStyle]="setUrlImg()">
-            <div  *ngIf="this.innerWidth >= 1200" class="p-col-7" style="background: url(https://image.freepik.com/free-vector/winter-background-with-pastel-color-brushes-leaves_220290-42.jpg);background-repeat: no-repeat;background-size: 200%;">
-                
-                <div  style="margin-top: 20%;display: flex;justify-content: center;">
-
-                    <div class="p-col-fixed" style="width:40%;height: 40%;">
-                        <img style="border-radius: 50%;" src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/" 
-                        alt="Girl in a jacket" width="100%" height="100%" >
-                    </div>
-                    
-
+                <div class="p-col-fixed" style="width:40%;height: 40%;">
+                    <img style="border-radius: 50%;"
+                        src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
+                        alt="Girl in a jacket" width="100%" height="100%">
                 </div>
-                <div style="display: flex;justify-content: center;">
-                    <h1>ช่วยคุณเชื่อมต่อและแชร์</h1><br>
-                    <h1>กับผู้คนมากมาย</h1>
-                </div>
-
             </div>
-            <div [ngClass]="setMyClass()" >
-                
-                
-                <div class="p-grid">
-                    <div class="p-col-2" ></div>
-                    <div class="p-col-8" style="height: 100vh;" >
-                    
-                        <div [ngStyle]="setMyStyles()">
-                            <br><h2 style="text-align: center;">PINSTAGRAM</h2><br>
-<!-- fff -->
-                            <p-card >
-                                
-                                <br>
+            <div style="display: flex;justify-content: center;">
+                <h1>ช่วยคุณเชื่อมต่อและแชร์</h1><br>
+                <h1>กับผู้คนมากมาย</h1>
+            </div>
 
-                                <div class="p-fluid">
-                                    <div class="p-field">
-                                        <label  for="Username">Username</label>
-                                        <input  id="Username_login" type="text" pInputText  [(ngModel)]="username"> 
-                                    </div>
-                                    <div class="p-field">
-                                        <label for="Password">Password</label>
-                                        <input  id="Password_login" type="password" pInputText  [(ngModel)]="password"> 
-                                    </div>
+        </div>
+        <div [ngClass]="setMyClass()">
 
-                                    <div class="p-formgroup-inline" style="align-items: center;justify-content: center;">
-                                        <div class="p-field">
-                                                <button (click)="login()" pButton pRipple type="button" label="Log In" class="p-button-rounded p-button-success"></button>    
-                                        </div>
-                                        <div class="p-field">
-                                                <button (click)="visibleSidebar2 = true"  pButton pRipple type="button" label="Sign In" class="p-button-rounded p-button-danger"></button>
-                                        </div>
-                                       
-                                    </div>
-                                    
+            <div class="p-grid">
+                <div class="p-col-2"></div>
+                <div class="p-col-8" style="height: 100vh;">
+
+                    <div [ngStyle]="setMyStyles()">
+                        <br>
+                        <h2 style="text-align: center;">PINSTAGRAM</h2><br>
+                        <!-- fff -->
+                        <p-card>
+
+                            <br>
+
+                            <div class="p-fluid">
+                                <div class="p-field">
+                                    <label for="Username">Username</label>
+                                    <input id="Username_login" type="text" pInputText [(ngModel)]="username">
+                                </div>
+                                <div class="p-field">
+                                    <label for="Password">Password</label>
+                                    <input id="Password_login" type="password" pInputText [(ngModel)]="password">
                                 </div>
 
-                                <br>
-                            </p-card>
+                                <div class="p-formgroup-inline" style="align-items: center;justify-content: center;">
+                                    <div class="p-field">
+                                        <button (click)="login()" pButton pRipple type="button" label="Log In"
+                                            class="p-button-rounded p-button-success"></button>
+                                    </div>
+                                    <div class="p-field">
+                                        <button (click)="visibleSidebar2 = true" pButton pRipple type="button"
+                                            label="Sign In" class="p-button-rounded p-button-danger"></button>
+                                    </div>
 
-                        </div>
-                    
-                    
+                                </div>
+
+                            </div>
+
+                            <br>
+                        </p-card>
+
                     </div>
-                    <div class="p-col-2"></div>
+
+
                 </div>
-        
-        
+                <div class="p-col-2"></div>
             </div>
         </div>
+    </div>
+</body>
 
-    </body>
 </html>
-
-
-
-

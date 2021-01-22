@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from '../token.service';
 import * as bcrypt from 'bcryptjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -27,16 +28,16 @@ export class LoginComponent implements OnInit {
 
   //รหัส
   salt: any;
-
-
-
+  verifyCaptcha: any;
 
   visibleSidebar2: any;
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService) {
+  siteKey: string;
+  dis = false;
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService,private formBuilder: FormBuilder) {
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
     this.salt = bcrypt.genSaltSync(10);
-
+    this.siteKey ="6LemRTcaAAAAAICg9BYjszAhjHqjXRv1B4pMlx3i";
     //ตรวจจับความกว้างยาวของหน้าจอ //ตลอดเวลา//
     window.onresize = () => {
       this.ngZone.run(() => {
@@ -48,11 +49,17 @@ export class LoginComponent implements OnInit {
   }
   
 
-
-  ngOnInit(): void {
+  handleSuccess($event: any){
+    this.dis = true;
   }
 
+  ngOnInit(): void {
   
+  }
+
+  getResponceCapcha(captchaResponse: string) {
+    this.verifyCaptcha(captchaResponse);
+ }
 
   login() {
 
