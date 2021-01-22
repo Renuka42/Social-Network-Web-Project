@@ -2,6 +2,8 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from '../token.service';
+import * as bcrypt from 'bcryptjs';
+
 
 @Component({
   selector: 'app-login',
@@ -17,15 +19,26 @@ export class LoginComponent implements OnInit {
   innerHeight: any;
   innerWidth: any;
 
-  visibleSidebar2: any;
+  //สำหรับสมัคร
+  usernameSignin: any;
+  passwordSignin: any;
+  name_idSignin: any;
+  nameSignin: any;
 
+  //รหัส
+  salt: any;
+
+
+
+
+  visibleSidebar2: any;
   constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService) {
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
-  
+    this.salt = bcrypt.genSaltSync(10);
 
     //ตรวจจับความกว้างยาวของหน้าจอ //ตลอดเวลา//
-    window.onresize = (e: any) => {
+    window.onresize = () => {
       this.ngZone.run(() => {
         this.innerHeight = window.innerHeight;
         this.innerWidth = window.innerWidth;
@@ -33,34 +46,45 @@ export class LoginComponent implements OnInit {
       });
     };
   }
+  
 
 
   ngOnInit(): void {
   }
 
+  
+
   login() {
 
-    console.log(this.todayNumber);
-    console.log(this.todayDate);
-    this.username = "oza1238";
-    this.password = "123";
-    let json = { username: this.username, password: this.password };
+    let json = {username: this.username};
     this.http.post("http://203.154.83.62:1238/user/login", JSON.stringify(json)).subscribe(response => {
 
       var array = Object.values(response);
       this.tokens.token = array[0]["token"];
       this.tokens.user_id = array[0]["user_id"];
-
-      if (array[0]["check"] == "True") {
+      var hash = bcrypt.compareSync(this.password, array[0]["password"]);
+      console.log(hash);
+      if (hash) {
         localStorage.setItem("user_id",array[0]["user_id"]);
         localStorage.setItem("token",array[0]["token"]);
         this.router.navigateByUrl("/home");
       }
-    }, error => {
+    }, () => {
       console.log("fail");
     });
-
   }
+   Signin(){
+    
+    var hash = bcrypt.hashSync(this.passwordSignin, this.salt);
+    let json = { username: this.usernameSignin, password: hash,name_id: this.name_idSignin,name: this.nameSignin};
+    console.log(json);
+    this.http.post("http://203.154.83.62:1238/user/register", JSON.stringify(json)).subscribe(response => {
+
+    }, () => {
+      console.log("fail");
+    });
+  }
+
 
   setMyClass() {
     let Class;

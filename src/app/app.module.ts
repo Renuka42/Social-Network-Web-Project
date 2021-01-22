@@ -22,7 +22,6 @@ import {SidebarModule} from 'primeng/sidebar';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
 
-
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
   { path: 'home',component: HomeComponent},
