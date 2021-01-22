@@ -4,65 +4,7 @@
     </ng-template>
 </p-overlayPanel>
 <html>
-    <style>
-        .grid-container {
-          display: grid;
-          grid-gap: 50px 10px;
-          grid-template-columns: auto 250px 500px auto;
-          /* background-color: #2196F3; */
-          /* text-align: center; */
-          padding: 10px;
-        }
-        
-        .grid-item {
-          /* background-color: rgba(255, 255, 255, 0.8); */
-          /* border: 1px solid rgba(0, 0, 0, 0.8); */
-          padding: 10px;
-          font-size: 20px;
-          text-align: center;
-        }
-        .item1 {
-            /* grid-row-start: 1;
-            grid-row-end: 3; */
-            /* grid-template-columns: auto auto auto;
-            border: 1px solid rgba(0, 0, 0, 0.8); */
-            grid-column: 2 / span 2;
-            grid-row: 2;
-        }
-
-        /* The grid container */
-        .grid-container1 {
-            display: grid;
-            grid-template-areas: 
-                'header header header header header header' 
-                'left middle middle middle middle right' 
-                'footer footer footer footer footer footer';
-            /* grid-column-gap: 10px; - if you want gap between the columns */
-        } 
-
-        /* Style the left column */
-        .left {
-            grid-area: left;
-        }
-
-        /* Style the middle column */
-        .middle {
-            grid-area: middle;
-        }
-
-        /* Style the right column */
-        .right {
-            grid-area: right;
-        }
-
-        /* Style the footer */
-        .footer {
-            grid-area: footer;
-            /* background-color: #f1f1f1; */
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
+    
     <body>
         <!-- <p-menubar >
             <ng-template pTemplate="start">
@@ -72,36 +14,25 @@
                 <input type="text" pInputText placeholder="Search">
             </ng-template>
         </p-menubar> -->
-        <div class="p-grid,demo-container p-p-0" style="text-align: center;display: flex;justify-content: center;">
-            <div class="p-col-2" ></div>
-            <div class="p-col-7" >
-
-                
-                    <div class="p-grid"  >
-                         
-                            <div class="p-col-3" style="text-align: left;"> 
-                                <h4>PINSTAGRAME</h4>
-
-                            </div>
-                            <div class="p-col-6" > 
-
-                                <span class="p-input-icon-left">
-                                    <i class="pi pi-search"></i>
-                                    <input  class="p-inputtext-sm" type="text" pInputText placeholder="Search"  />
-                                </span>
-
-                            </div>
-                            <div class="p-col-3" >
-                                <div class="p-grid" style="float: right;">
-                                    <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-secondary p-button-sm"></button>  </div>
-                                    <div class="p-col-4"><button (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                                    <div class="p-col-4"><button  pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-secondary p-button-sm"></button></div>
-                                </div>                         
-                            </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+            <div class="container" [ngStyle]="setMyStyles()">
+                <h4>FacesArt</h4>
+    
+                <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
+                    style="border-radius: 10px;width: 20%;" />
+    
+                <div class="p-grid" style="float: right;">
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                            class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                    <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
+                            type="button" icon="pi pi-bell"
+                            class="p-button-rounded p-button-secondary p-button-sm"></button>
                     </div>
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
+                            class="p-button-rounded p-button-secondary p-button-sm"></button></div>
+                </div>
             </div>
-            <div class="p-col-2" ></div>
-        </div>
+        </nav>
 
         <!-- <div class="p-col-10" > -->
             <div class="grid-container">

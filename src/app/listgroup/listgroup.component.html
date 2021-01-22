@@ -21,39 +21,46 @@
           border: 1px solid rgba(0, 0, 0, 0.8);
           padding: 10px;
           font-size: 20px;
-          text-align: center;
+          /* text-align: center; */
+          display: inline;
+        }
+        #div1 {
+            float:left;
+            /* width:100px;
+            height:100px;
+            border:solid 2px red; */
+            text-align:center;
+        }
+        #div2 {
+            float:right;
+            /* width:100px;
+            height:100px;
+            border:solid 2px green;
+            text-align:center; */
         }
     </style>
     <body>
-
-        <div class="p-grid,demo-container p-p-0" style="text-align: center;display: flex;justify-content: center;">
-            <div class="p-col-2" ></div>
-            <div class="p-col-7" >
-                <div class="p-grid"  >
-                         
-                    <div class="p-col-3" style="text-align: left;"> 
-                        <h4>PINSTAGRAME</h4>
-
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+            <div class="container" [ngStyle]="setMyStyles()">
+                <h4>FacesArt</h4>
+    
+                <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
+                    style="border-radius: 10px;width: 20%;" />
+    
+                <div class="p-grid" style="float: right;">
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                            class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                    <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
+                            type="button" icon="pi pi-bell"
+                            class="p-button-rounded p-button-secondary p-button-sm"></button>
                     </div>
-                    <div class="p-col-6" > 
-
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input  class="p-inputtext-sm" type="text" pInputText placeholder="Search"  />
-                        </span>
-
-                    </div>
-                    <div class="p-col-3" >
-                        <div class="p-grid" style="float: right;">
-                            <div class="p-col-4"><button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-secondary p-button-sm"></button>  </div>
-                            <div class="p-col-4"><button (click)="op.toggle($event)" pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                            <div class="p-col-4"><button  pButton pRipple type="button" icon="pi pi-heart" class="p-button-rounded p-button-secondary p-button-sm"></button></div>
-                        </div>                         
-                    </div>
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
+                            class="p-button-rounded p-button-secondary p-button-sm"></button></div>
                 </div>
             </div>
-            <div class="p-col-2" ></div>
-        </div>
+        </nav>
+        
+
         <div class="grid-container">
             <!-- <div style="text-align: center;"> -->
                 <div class="grid-item"></div>
@@ -64,12 +71,47 @@
                 
             <!-- </div> -->         
         </div>
-        <div class="grid-container">
-            <!-- <div style="text-align: center;"> -->
+        <!-- <div class="grid-container">
+
                 <div class="grid-item"></div>
                 <div class="grid-item"  style="width: 5px;" style="text-align: left;" >
                     <img style="border-radius: 50%;" src="../assets/por.jpg" width="100px">
                 </div>            
+                <div class="grid-item"></div>
+                        
+        </div><br> -->
+        <div class="grid-container">
+            <!-- <div style="text-align: center;"> -->
+                <div class="grid-item"></div>
+                <div class="grid-item"  style="text-align: right;" style="float: right;">
+                    <img style="border-radius: 50%;" src="../assets/por.jpg" width="100px">
+
+                    <div class="grid-item" style="text-align: left;" style="float: right;">
+                     
+                            <h2 >
+                                GroupNAME 
+                                <!-- <button pButton type="button" icon="pi pi-pencil" iconPos="left"></button> -->
+                                <button pButton type="button" icon="pi pi-pencil" class="p-button-text"></button>
+                            </h2>
+                        
+                        <!-- <p style="text-align: left;">1 post</p> -->
+                        <span ><font size="4"> 🔒 กลุ่มลับ ▪</font></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span ><font size="4">สมาชิก 20 คน</font></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                <!-- <div class="grid-item" >
+                    <h1 >
+                        NAME 
+                        <button pButton type="button" icon="pi pi-pencil" iconPos="left"></button>
+                        <button pButton type="button" icon="pi pi-pencil" class="p-button-text"></button>
+                    </h1>
+                    
+                    <p style="text-align: left;">1 post</p>
+                    <span >6 post</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span >1 follower</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>1 following</span><br>
+                    <p >my infomationnnnnnnnnnnnnnnnnnnnnnnnnnn</p>
+                </div> -->
                 <div class="grid-item"></div>
                 
             <!-- </div> -->         
