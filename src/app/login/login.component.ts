@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
     let json = { username: this.usernameSignin, password: hash,name_id: this.name_idSignin,name: this.nameSignin};
     console.log(json);
     this.http.post("http://203.154.83.62:1238/user/register", JSON.stringify(json)).subscribe(response => {
-
+    
     }, () => {
       console.log("fail");
     });
