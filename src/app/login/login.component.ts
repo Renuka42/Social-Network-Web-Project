@@ -30,10 +30,13 @@ export class LoginComponent implements OnInit {
   salt: any;
   verifyCaptcha: any;
 
+  siteKey: any;
+  dis= false;
   visibleSidebar2: any;
-  siteKey: string;
-  dis = false;
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService,private formBuilder: FormBuilder) {
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService) {
+    if(localStorage.getItem("user_id") != null && localStorage.getItem("token") != null){
+      this.router.navigateByUrl("/home");
+    }
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
     this.salt = bcrypt.genSaltSync(10);
@@ -63,10 +66,12 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-    let json = {username: this.username};
+    var hash = bcrypt.hashSync(this.password, this.salt);
+    let json = {username: this.username,password: hash};
     this.http.post("http://203.154.83.62:1238/user/login", JSON.stringify(json)).subscribe(response => {
 
       var array = Object.values(response);
+      console.log(array);
       this.tokens.token = array[0]["token"];
       this.tokens.user_id = array[0]["user_id"];
       var hash = bcrypt.compareSync(this.password, array[0]["password"]);
@@ -86,10 +91,14 @@ export class LoginComponent implements OnInit {
     let json = { username: this.usernameSignin, password: hash,name_id: this.name_idSignin,name: this.nameSignin};
     console.log(json);
     this.http.post("http://203.154.83.62:1238/user/register", JSON.stringify(json)).subscribe(response => {
-    
+      location.reload();
     }, () => {
       console.log("fail");
     });
+  }
+
+  showResponse(event:any) {
+    
   }
 
 

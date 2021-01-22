@@ -142,7 +142,7 @@
 
 <p-overlayPanel #op>
     <ng-template pTemplate>
-
+        <button (click)="UserLogOut()" >Logout</button>
     </ng-template>
 </p-overlayPanel>
 
@@ -262,6 +262,8 @@
 
 
 
+                                              
+
                                                 <div class="p-grid" *ngFor="let groups of this.group"
                                                     style="margin-top: 5px;">
 
@@ -336,9 +338,10 @@
 
                                                 <button style="width: 50%;" pButton type="button" label="โพสเลย"
                                                     class="p-button-outlined" (click)="inputPoseUser()"></button>
-                                                <button style="width: 50%;" pButton type="button" label="รูปภาพ/วีดิโอ"
+                                                <button style="width: 50%;"  pButton type="button" label="รูปภาพ/วีดิโอ"
                                                     class="p-button-outlined p-button-success"
                                                     icon="pi pi-image"></button>
+                                                    
 
                                             </div>
 
@@ -484,7 +487,6 @@
                                                             style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;"
                                                             pButton pRipple type="submit" icon="pi pi-check"
                                                             class="p-button-rounded p-button-outlined"
-                                                            (click)="selectMorePose()"
                                                             ></button>
                                                             <h1>กดโหลดโพตส์เพิ่มเติม</h1>
                                                             

@@ -44,7 +44,9 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone) {
-    
+    if(localStorage.getItem("user_id") == null && localStorage.getItem("token") == null){
+      this.router.navigateByUrl("");
+    }
     this.user_id = localStorage.getItem("user_id")?.toString();
     this.token = this.tokenUser(localStorage.getItem("token"));
 
@@ -178,7 +180,10 @@ export class HomeComponent implements OnInit {
         console.log("re" + JSON.stringify(err));
       });
   }
-
+  UserLogOut(){
+    window.localStorage.clear();
+    this.router.navigateByUrl("");
+  }
   //สำหรับ Input ข้อมูล
   but_like(pose_id: string, index: any) {
     let json = { u_id: this.user_id, pose_id: pose_id };
@@ -237,13 +242,14 @@ export class HomeComponent implements OnInit {
     }
 
   }
-  selectMorePose(){
-    this.working = 1;
-    this.pose_max = this.pose_all[this.pose_all.length-1].pose_id;
-    this.pose_all_re = this.pose_all;
-    this.selectPose();
+  inputPoto(){
+
   }
-  
+
+
+  csvInputChange(fileInputEvent: any) {
+    console.log(fileInputEvent.target.files[0]);
+  }
   //สำหรับตั้งค่า Temp
   setTempComment(index: any) {
     this.pose_temp = index;
