@@ -26,12 +26,13 @@
                 <label for="Name">Name</label><br>
                 <input id="NameSignin" type="Name" pInputText [(ngModel)]="nameSignin" [style]="{width:'20em'}"> <br>
             </div>
-            <!-- <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" ></ngx-recaptcha2> -->
+            
             <div>
                 <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" (success)="handleSuccess($event)"
                     [useGlobalDomain]="false" formControlName="recaptcha">
                 </ngx-recaptcha2>
             </div>
+                
 
             <div class="p-formgroup-inline; p-col-12" style="display: flex;justify-content: center;">
                 <div class="p-field" *ngIf="dis == true">

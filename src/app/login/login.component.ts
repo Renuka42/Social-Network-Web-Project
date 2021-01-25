@@ -2,8 +2,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from '../token.service';
-import * as bcrypt from 'bcryptjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -39,7 +37,6 @@ export class LoginComponent implements OnInit {
     }
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
-    this.salt = bcrypt.genSaltSync(10);
     this.siteKey ="6LemRTcaAAAAAICg9BYjszAhjHqjXRv1B4pMlx3i";
     //ตรวจจับความกว้างยาวของหน้าจอ //ตลอดเวลา//
     window.onresize = () => {
@@ -66,29 +63,26 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-    var hash = bcrypt.hashSync(this.password, this.salt);
-    let json = {username: this.username,password: hash};
+    let json = {username: this.username,password: this.password};
     this.http.post("http://203.154.83.62:1238/user/login", JSON.stringify(json)).subscribe(response => {
-
-      var array = Object.values(response);
-      console.log(array);
+    var array = Object.values(response);
+    if(array != null){
       this.tokens.token = array[0]["token"];
-      this.tokens.user_id = array[0]["user_id"];
-      var hash = bcrypt.compareSync(this.password, array[0]["password"]);
-      console.log(hash);
-      if (hash) {
-        localStorage.setItem("user_id",array[0]["user_id"]);
-        localStorage.setItem("token",array[0]["token"]);
-        this.router.navigateByUrl("/home");
-      }
+      var tokenUserID = this.tokens.token.split("."); 
+      let strToJSONUserid = JSON.parse(atob(tokenUserID[1]));
+      let superId = Object.values(strToJSONUserid)[0];
+      localStorage.setItem("user_id",superId+"");
+      localStorage.setItem("token",this.tokens.token);
+      this.router.navigateByUrl("/home");
+    }
     }, () => {
       console.log("fail");
     });
   }
    Signin(){
     
-    var hash = bcrypt.hashSync(this.passwordSignin, this.salt);
-    let json = { username: this.usernameSignin, password: hash,name_id: this.name_idSignin,name: this.nameSignin};
+    
+    let json = { username: this.usernameSignin, password: this.passwordSignin,name_id: this.name_idSignin,name: this.nameSignin};
     console.log(json);
     this.http.post("http://203.154.83.62:1238/user/register", JSON.stringify(json)).subscribe(response => {
       location.reload();

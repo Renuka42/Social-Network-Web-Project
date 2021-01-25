@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import {FileUploadModule} from 'primeng/fileupload';
 
 
 @Component({
@@ -242,9 +243,12 @@ export class HomeComponent implements OnInit {
     }
 
   }
-  inputPoto(){
-
-  }
+  uploadedFiles: any[] = [];
+  onUpload(event: any) {
+    for(let file of event.files) {
+        this.uploadedFiles.push(file);
+    }
+}
 
 
   csvInputChange(fileInputEvent: any) {
