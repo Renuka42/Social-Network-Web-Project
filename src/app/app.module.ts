@@ -25,6 +25,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import {FileUploadModule} from 'primeng/fileupload';
+import { CookieService } from 'ngx-cookie-service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
@@ -43,7 +45,6 @@ const appRoutes: Routes = [
     SigninComponent
   ],
   imports: [
-   
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -64,7 +65,7 @@ const appRoutes: Routes = [
     MatSliderModule,
     FileUploadModule
   ],
-  providers: [],
+  providers: [CookieService ,{provide: LocationStrategy, useClass: HashLocationStrategy} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

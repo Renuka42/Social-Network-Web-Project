@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from '../token.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -31,8 +32,8 @@ export class LoginComponent implements OnInit {
   siteKey: any;
   dis= false;
   visibleSidebar2: any;
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService) {
-    if(localStorage.getItem("user_id") != null && localStorage.getItem("token") != null){
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService,private cookieService: CookieService) {
+    if(cookieService.check('user_id') == true || cookieService.check('token') == true){
       this.router.navigateByUrl("/home");
     }
     this.innerHeight = window.innerHeight;
@@ -72,8 +73,13 @@ export class LoginComponent implements OnInit {
       let strToJSONUserid = JSON.parse(atob(tokenUserID[1]));
       let superId = Object.values(strToJSONUserid)[0];
       console.log(superId);
-      localStorage.setItem("user_id",superId+"");
-      localStorage.setItem("token",this.tokens.token);
+
+
+      this.cookieService.set( 'user_id', superId+"" );
+      this.cookieService.set( "token",this.tokens.token );
+      
+      // localStorage.setItem("user_id",superId+"");
+      // localStorage.setItem("token",this.tokens.token);
       this.router.navigateByUrl("/home");
     }
     }, () => {

@@ -10,16 +10,25 @@ export class TokenService {
   //แสดงข้อมูล
   user_id: any;
   token: any;
-  public pose_all: any;
-  comment_simple: any;
-
-
+  pose_all: any;
 
   constructor(private http: HttpClient ,private router: Router, private route: ActivatedRoute,) { }
 
-  async selectPose(){
+  setTokenAndUserId(user_id:any,token:any){
+    this.token = token;
+    this.user_id = user_id;
+  }
+
+  async selectPose(mode:any){
+
+    let modeSelect = "";
+    if(mode == "yourself"){
+      modeSelect = "profile/yourself";
+    }else if(mode == "all"){
+      modeSelect = "profile/yourself";
+    }
     let json = { user_id: this.user_id};
-     this.http.post("http://203.154.83.62:1238/select/profile/yourself", JSON.stringify(json),this.token).subscribe(async response => {
+     this.http.post("http://203.154.83.62:1238/select/"+modeSelect, JSON.stringify(json),this.token).subscribe(async response => {
        var array = Object.values(response);
        array.forEach((value, index) => {
         //like
@@ -68,15 +77,14 @@ export class TokenService {
 
       });
        this.pose_all = array;
-       console.log(this.pose_all);
     }, error => {
       console.log(error);
     });
   
   }
 
-  print(){
-    console.log(this.pose_all);
+  getdata(){
+    return this.pose_all;
   }
 
 }

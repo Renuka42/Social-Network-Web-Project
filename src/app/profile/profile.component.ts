@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { TokenService } from '../token.service';
 
 
@@ -37,14 +38,25 @@ export class ProfileComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private router: Router, private MetforFacesArt: TokenService) {
-    if(localStorage.getItem("user_id") == null && localStorage.getItem("token") == null){
+  constructor(private http: HttpClient, private router: Router, private MetforFacesArt: TokenService,cookieService: CookieService) {
+    // if(localStorage.getItem("user_id") == null && localStorage.getItem("token") == null){
+    //   this.router.navigateByUrl("");
+    // }
+    // this.user_id = localStorage.getItem("user_id")?.toString();
+    // this.token = this.tokenUser(localStorage.getItem("token"));
+
+
+    if(cookieService.check('user_id') == false || cookieService.check('token') == false){
       this.router.navigateByUrl("");
     }
-    this.user_id = localStorage.getItem("user_id")?.toString();
-    this.token = this.tokenUser(localStorage.getItem("token"));
-    this.MetforFacesArt.token = this.token;
-    this.MetforFacesArt.user_id = this.user_id;
+    // this.user_id = localStorage.getItem("user_id")?.toString();
+    // this.token = this.tokenUser(localStorage.getItem("token"));
+
+    this.user_id = cookieService.get('user_id');
+    this.token = this.tokenUser(cookieService.get('token'));
+    console.log(this.user_id);
+    console.log(this.token);
+
    }
   ngOnInit(): void {
     this.selectProfileYourself();
@@ -55,22 +67,14 @@ export class ProfileComponent implements OnInit {
 
 
 
-  selectProfileYourself() {
-    this.MetforFacesArt.selectPose();
-    this.MetforFacesArt.print();
-    console.log(this.MetforFacesArt.pose_all);
-
-
-    let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/profile/yourself" ,  JSON.stringify(json),this.token).subscribe( response =>  {
-      this.poseYourSelf =  response;
-    }, error => {
-      console.log("fail");
-    });
+  async selectProfileYourself() {
+    this.MetforFacesArt.setTokenAndUserId(this.user_id,this.token);
+    await this.MetforFacesArt.selectPose("yourself");
+    this.poseYourSelf = await this.MetforFacesArt.getdata();
   }
   selectProfileDetall(){
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/profile" ,  JSON.stringify(json),this.token).subscribe( response =>  {
+    this.http.post("http://203.154.83.62:1238/select/profile" , JSON.stringify(json),this.token ).subscribe( response =>  {
       this.detallYourSelf =  response;
     }, error => {
       console.log("fail");
@@ -137,11 +141,12 @@ export class ProfileComponent implements OnInit {
 
   //สำหรับเชื่อม token webApi
   tokenUser(token:any){
+
     const headerDict = {
       'TOKEN': token
     }
     const requestOptions = {
-      headers: new HttpHeaders(headerDict), 
+      headers: new HttpHeaders(headerDict)
     };
     return requestOptions;
   }

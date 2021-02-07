@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -51,12 +52,25 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone) {
-    if(localStorage.getItem("user_id") == null && localStorage.getItem("token") == null){
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone,private cookieService: CookieService) {
+    // if(localStorage.getItem("user_id") == null && localStorage.getItem("token") == null){
+    //   this.router.navigateByUrl("");
+    // }
+
+    if(cookieService.check('user_id') == false || cookieService.check('token') == false){
       this.router.navigateByUrl("");
     }
-    this.user_id = localStorage.getItem("user_id")?.toString();
-    this.token = this.tokenUser(localStorage.getItem("token"));
+
+    
+
+    // this.user_id = localStorage.getItem("user_id")?.toString();
+    // this.token = this.tokenUser(localStorage.getItem("token"));
+
+    this.user_id = cookieService.get('user_id');
+    this.token = this.tokenUser(cookieService.get('token'));
+
+    console.log(this.user_id);
+    console.log(this.token);
 
     //ทำให้เว็บรู้จักหน้าจอเริ่มต้นของอุปกรณ์ 
     this.innerHeight = window.innerHeight;
@@ -196,7 +210,7 @@ export class HomeComponent implements OnInit {
 
   search_text = "";
   search_start = 0;
-  search_end = 2;
+  search_end = 100;
   selectFriendSearch(event:any) {
     let json = { user_id: this.user_id ,text: this.search_text,start: this.search_start,end: this.search_end};
     this.http.post("http://203.154.83.62:1238/select/search", JSON.stringify(json),this.token).subscribe(response => {
@@ -304,11 +318,11 @@ export class HomeComponent implements OnInit {
     
   }
   UserLogOut(){
-    window.localStorage.clear();
+    this.cookieService.deleteAll();
     this.router.navigateByUrl("");
   }
   uploadedFiles: any[] = [];
-  myUploader(event:any) {
+  myUploader(event:any) { 
     
     for(let files of event.files) {
       this.uploadedFiles.push(files);
