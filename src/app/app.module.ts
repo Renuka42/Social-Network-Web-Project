@@ -23,6 +23,8 @@ import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider';
+import {FileUploadModule} from 'primeng/fileupload';
 
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
@@ -58,7 +60,9 @@ const appRoutes: Routes = [
     CalendarModule,
     DialogModule,
     NgxCaptchaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSliderModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
       var tokenUserID = this.tokens.token.split("."); 
       let strToJSONUserid = JSON.parse(atob(tokenUserID[1]));
       let superId = Object.values(strToJSONUserid)[0];
+      console.log(superId);
       localStorage.setItem("user_id",superId+"");
       localStorage.setItem("token",this.tokens.token);
       this.router.navigateByUrl("/home");

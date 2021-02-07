@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import {FileUploadModule} from 'primeng/fileupload';
+
 
 
 @Component({
@@ -24,23 +24,30 @@ export class HomeComponent implements OnInit {
   comment_simple: any;
 
   friend_all: any;
+  search_all: any;
   profile: any;
   group: any;
   comment_all: any;
 
   //ข้อมูลชั่วคราว
-  pose_temp = 0;
+  pose_index_temp = 0;
+  pose_id_temp = 0;
   pose_max = 0;
   working = 0;
  
-
   //input ข้อมูลชั่วคราว
   comment_text: any;
   getTextPose_Temp:any;
-  upload_img = null;
+  upload_img:string = "";
   upload_video = null;
   lv_pose: any;
   group_id = null;
+  fileNameForGetUrl: any;
+
+  //สำหรับตั้งค่า HTML
+  setButTrue: boolean = true;
+  setButFalse: boolean = false;
+  setUploadShowAndDrop: boolean = false;
 
 
 
@@ -66,7 +73,9 @@ export class HomeComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
+    // this.visibleSidebar3 = true;
 
 
 
@@ -133,11 +142,11 @@ export class HomeComponent implements OnInit {
       });
       this.pose_all = array;
       this.pose_all_re = array;
+      console.log(this.pose_all);
       // if(this.working == 1){
         
       // }
       
-
 
     }, error => {
       console.log("fail");
@@ -152,10 +161,13 @@ export class HomeComponent implements OnInit {
     });
     this.comment_text = "";
   }
+
   selectFriend() {
     let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json),this.token).subscribe(response => {
-      this.friend_all = response;
+    var array = Object.values(response);
+    this.friend_all = array;
+    console.log(this.friend_all);
     }, error => {
       console.log("fail");
     });
@@ -181,10 +193,36 @@ export class HomeComponent implements OnInit {
         console.log("re" + JSON.stringify(err));
       });
   }
-  UserLogOut(){
-    window.localStorage.clear();
-    this.router.navigateByUrl("");
+
+  search_text = "";
+  search_start = 0;
+  search_end = 2;
+  selectFriendSearch(event:any) {
+    let json = { user_id: this.user_id ,text: this.search_text,start: this.search_start,end: this.search_end};
+    this.http.post("http://203.154.83.62:1238/select/search", JSON.stringify(json),this.token).subscribe(response => {
+      this.search_all = response;
+      
+    }, error => {
+      console.log("fail");
+    });
+    this.comment_text = "";
   }
+
+  isFriend(user_id:any,setmet:any){
+    console.log( this.friend_all);
+    let number = this.friend_all.find((element:any) => element.u_id == user_id);
+    if(number != undefined){
+      var d = this.friend_all[this.friend_all.indexOf(number)];
+      if(setmet == "add"){
+        if(d.infa == 0 || d.infa == 1){
+          this.friend_all[this.friend_all.indexOf(number)] = 3;
+        }
+      }
+      return d.infa;
+    }
+    return 3; 
+  }
+
   //สำหรับ Input ข้อมูล
   but_like(pose_id: string, index: any) {
     let json = { u_id: this.user_id, pose_id: pose_id };
@@ -202,18 +240,25 @@ export class HomeComponent implements OnInit {
     });
   }
   comment(pose_id: any) {
+    
     let json = { Text: this.comment_text, u_id: this.user_id, pose_id: pose_id };
+    console.log(json);
     this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json),this.token).subscribe(response => {
       console.log(response);
+      this.selectComment(pose_id);
+      this.selectPose();
     }, error => {
       console.log("fail");
     });
     this.comment_text = "";
   }
   inputPoseUser(){
+    if(this.getTextPose_Temp != ""){
+      console.log(this.getTextPose_Temp == "");
+    }
     
-    if(this.upload_img != null){
-      console.log(this.upload_img == null);
+    if(this.upload_img != ""){
+      console.log(this.upload_img == "");
     }
 
     if(this.upload_video != null){
@@ -233,6 +278,7 @@ export class HomeComponent implements OnInit {
             lv_pose: "0",//ยังไม่มีฟังก์ชัน
             group_id: this.group_id 
           };
+      console.log(json);
       this.http.post("http://203.154.83.62:1238/pose/text", JSON.stringify(json),this.token).subscribe(response => {
         console.log(response);
         this.selectPose();
@@ -243,20 +289,66 @@ export class HomeComponent implements OnInit {
     }
 
   }
-  uploadedFiles: any[] = [];
-  onUpload(event: any) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
-    }
-}
 
+  userAddFriend(useradd:any){
 
-  csvInputChange(fileInputEvent: any) {
-    console.log(fileInputEvent.target.files[0]);
+    let json = { user_id: this.user_id, user_add: useradd};
+    this.http.post("http://203.154.83.62:1238/add/friend", JSON.stringify(json),this.token).subscribe(response => {
+
+      this.isFriend(useradd,"add");
+      this.selectFriend();
+
+    }, error => {
+      console.log("fail");
+    });
+    
   }
+  UserLogOut(){
+    window.localStorage.clear();
+    this.router.navigateByUrl("");
+  }
+  uploadedFiles: any[] = [];
+  myUploader(event:any) {
+    
+    for(let files of event.files) {
+      this.uploadedFiles.push(files);
+    }
+    const file = this.uploadedFiles[0];
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('userid',this.user_id);
+    formData.append('folder','');
+    this.http.post("http://203.154.83.62:1238/del/kuy/small/file", formData)
+    .subscribe(response => {
+      this.uploadedFiles=[];
+      this.upload_img = (response).toString();
+    }, err => {
+      //handle error
+    });
+
+  }
+  cen(event:any){
+    console.log(event);
+  }
+
+    
+  
+
+
+
   //สำหรับตั้งค่า Temp
-  setTempComment(index: any) {
-    this.pose_temp = index;
+  setTempComment(index: any,pose_id:any) {
+    //ตั้งค่าโพสต์ปัจจุบันที่กดด้วย index ของ Array
+    this.comment_text = "";
+    this.pose_index_temp = index;
+    this.pose_id_temp = pose_id;
+  }
+  setUploadShowAndDropMet(){
+    if(this.setUploadShowAndDrop == false){
+      this.setUploadShowAndDrop = true;
+    }else{
+      this.setUploadShowAndDrop = false;
+    }
   }
 
   //สำหรับแสดงผลทุกหน้าจอ
@@ -380,23 +472,10 @@ export class HomeComponent implements OnInit {
     }
     return styles;
   }
-  setTextPoseheight() {
-    let styles;
-    if(this.getTextPose_Temp == "" || this.getTextPose_Temp == null){
-      this.getTextPose_Temp = "";
-       styles =  {
-        'height': 100 + 'px',
-      }
-    }else{
-       styles =  {
-        'height': 250 + 'px',
-      }
-    }
-    return styles;
-  }
-  
+
   //สำหรับเรียก pop up
   display: boolean = false;
+  visibleSidebar3: any;
   showDialog() {
     this.display = true;
   }
