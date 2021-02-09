@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   //แสดงข้อมูล
   user_id: any;
   poseYourSelf: any;
+  poseYourSelfText: any;
   detallYourSelf: any;
   friend_all: any;
   token: any;
@@ -39,38 +40,83 @@ export class ProfileComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private router: Router, private MetforFacesArt: TokenService,cookieService: CookieService) {
-    // if(localStorage.getItem("user_id") == null && localStorage.getItem("token") == null){
-    //   this.router.navigateByUrl("");
-    // }
-    // this.user_id = localStorage.getItem("user_id")?.toString();
-    // this.token = this.tokenUser(localStorage.getItem("token"));
-
-
     if(cookieService.check('user_id') == false || cookieService.check('token') == false){
       this.router.navigateByUrl("");
     }
-    // this.user_id = localStorage.getItem("user_id")?.toString();
-    // this.token = this.tokenUser(localStorage.getItem("token"));
-
     this.user_id = cookieService.get('user_id');
     this.token = this.tokenUser(cookieService.get('token'));
-    console.log(this.user_id);
-    console.log(this.token);
+    this.selectProfileYourself("photo");
 
    }
   ngOnInit(): void {
-    this.selectProfileYourself();
     this.selectProfileDetall();
-
+    this.selectProfileYourself("photo");
+    
   }
 
+  async selectProfileYourself(mode:any) {
 
+    let json = { user_id: this.user_id,working: 0,mode:mode};
+    this.http.post("http://203.154.83.62:1238/select/profile/yourself", JSON.stringify(json),this.token).subscribe(async response => {
+      var array = Object.values(response);
+      array.forEach((value, index) => {
+       //like
+        this.http.get("http://203.154.83.62:1238/select/like/" + value["pose_id"], this.token)
+         .subscribe( re =>  {
+           var liker =  Object.values(re);
+           array[index].liked_but = false;
+           liker.forEach(element => {
+             if (element["user_id_like"] == this.user_id) {
+               array[index].liked_but = true;
+             }
+           });
+           array[index].like = liker.length;
+         }, err => {
+           console.log("re" + JSON.stringify(err));
+         });
 
+       //comment
+       this.http.get("http://203.154.83.62:1238/select/comment_all/" + value["pose_id"],this.token)
+         .subscribe(async re => {
+           var comment = Object.values(re);
+           var array0index = await comment[comment.length-1];
+           
+             if(array0index == null)
+             {
+               array[index].comment_Text = null;
+               array[index].comment_c_id = null;
+               array[index].comment_comment_length = null;
+               array[index].comment_name = null;
+               array[index].comment_pose_id_fk = null;
+               array[index].comment_user_comment_fk = null;
+             }
+             else
+             {
+               array[index].comment_Text = array0index.Text;
+               array[index].comment_c_id = array0index.c_id;
+               array[index].comment_comment_length = comment.length;
+               array[index].comment_name = array0index.name;
+               array[index].comment_pose_id_fk = array0index.pose_id_fk;
+               array[index].comment_user_comment_fk = array0index.user_comment_fk;
+             }
 
-  async selectProfileYourself() {
-    this.MetforFacesArt.setTokenAndUserId(this.user_id,this.token);
-    await this.MetforFacesArt.selectPose("yourself");
-    this.poseYourSelf = await this.MetforFacesArt.getdata();
+         }, err => {
+           console.log("re" + JSON.stringify(err));
+         });
+
+     });
+      
+      
+    if(mode == "photo"){
+      this.poseYourSelf = array;
+    }else if(mode == "text"){
+      this.poseYourSelfText = array;
+    }
+
+   }, error => {
+     console.log(error);
+   });
+
   }
   selectProfileDetall(){
     let json = { user_id: this.user_id };

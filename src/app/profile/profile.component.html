@@ -48,8 +48,9 @@
                                     <div class="ZWxlbWVudA"  >
                                         
                                         <div  style="border-radius: 50%;width: 230px;height: 230px;overflow: hidden;background-color: rgb(255, 255, 255);" >
-                                            <img class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
-                                            
+                                            <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
+                                            <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+
                                         </div> 
                                         
                                         
@@ -139,7 +140,7 @@
                                 <hr>
                                 <div style="text-align: center;">
                                     <button pButton pRipple type="button" label="รูปภาพ" (click)="mode_pose = false" class="p-button-secondary p-button-text" ></button>
-                                    <button pButton pRipple type="button" label="โพสต์" (click)="mode_pose = true" class="p-button-secondary p-button-text"></button>
+                                    <button pButton pRipple type="button" label="โพสต์" (click)="mode_pose = true;this.selectProfileYourself('text')" class="p-button-secondary p-button-text"></button>
                                     <br><br>
                                 </div>
 
@@ -182,7 +183,7 @@
 
                                 <div class="p-grid" *ngIf="mode_pose == true">
                                    
-                                    <ng-container *ngFor="let item of this.poseYourSelf">
+                                    <ng-container *ngFor="let item of this.poseYourSelfText">
                                          <div class="p-col-4" style="display: flex;" *ngIf="item.user_upload_img == null">
                                              <a href="">
                                                  <div class="ZmFjZV9pbWdfcmVzaXpl Y2VudGVy"  >

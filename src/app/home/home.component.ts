@@ -29,10 +29,12 @@ export class HomeComponent implements OnInit {
   profile: any;
   group: any;
   comment_all: any;
+  comment_allMapIndex:any = new Map();
 
   //ข้อมูลชั่วคราว
   pose_index_temp = 0;
   pose_id_temp = 0;
+  comment_r = 0;
   pose_max = 0;
   working = 0;
  
@@ -53,18 +55,10 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone,private cookieService: CookieService) {
-    // if(localStorage.getItem("user_id") == null && localStorage.getItem("token") == null){
-    //   this.router.navigateByUrl("");
-    // }
 
     if(cookieService.check('user_id') == false || cookieService.check('token') == false){
       this.router.navigateByUrl("");
     }
-
-    
-
-    // this.user_id = localStorage.getItem("user_id")?.toString();
-    // this.token = this.tokenUser(localStorage.getItem("token"));
 
     this.user_id = cookieService.get('user_id');
     this.token = this.tokenUser(cookieService.get('token'));
@@ -125,38 +119,24 @@ export class HomeComponent implements OnInit {
           });
 
         //comment
-        this.http.get("http://203.154.83.62:1238/select/comment_all/" + value["pose_id"],this.token)
+        this.http.get("http://203.154.83.62:1238/select/commentCount/" + value["pose_id"],this.token)
           .subscribe(async re => {
             var comment = Object.values(re);
-            var array0index = await comment[comment.length-1];
-            
-              if(array0index == null)
-              {
-                array[index].comment_Text = null;
-                array[index].comment_c_id = null;
-                array[index].comment_comment_length = null;
-                array[index].comment_name = null;
-                array[index].comment_pose_id_fk = null;
-                array[index].comment_user_comment_fk = null;
-              }
-              else
-              {
-                array[index].comment_Text = array0index.Text;
-                array[index].comment_c_id = array0index.c_id;
-                array[index].comment_comment_length = comment.length;
-                array[index].comment_name = array0index.name;
-                array[index].comment_pose_id_fk = array0index.pose_id_fk;
-                array[index].comment_user_comment_fk = array0index.user_comment_fk;
-              }
-
+            array[index].comment_comment_length = comment[0]["count"];
+            this.selectComment(value["pose_id"],"new");
           }, err => {
             console.log("re" + JSON.stringify(err));
           });
+
+          
 
       });
       this.pose_all = array;
       this.pose_all_re = array;
       console.log(this.pose_all);
+      
+
+
       // if(this.working == 1){
         
       // }
@@ -197,15 +177,38 @@ export class HomeComponent implements OnInit {
     });
     this.comment_text = "";
   }
-  selectComment(pose_id:any) {
-    this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id,this.token)
-      .subscribe(re => {
-        this.comment_all = re;
-        console.log("ffffffffff");
-        console.log(re);
-      }, err => {
-        console.log("re" + JSON.stringify(err));
-      });
+
+  
+
+  selectComment(pose_id:any,mode:any) {
+    
+    if(mode == "new"){
+        this.http.get("http://203.154.83.62:1238/select/comment_all/"+pose_id+"/"+0,this.token)
+        .subscribe(re => {
+          var array = Object.values(re);
+          this.comment_allMapIndex.set(pose_id, array);
+        }, err => {
+          console.log("re" + JSON.stringify(err));
+        });
+    
+    }else if(mode == "add"){
+      var tempData  =  this.comment_allMapIndex.get(pose_id);
+      
+      this.http.get("http://203.154.83.62:1238/select/comment_all/"+pose_id+"/"+tempData.length,this.token)
+        .subscribe(re => {
+          var array = Object.values(re);
+          var array2 = Object.values(tempData);
+          array2.forEach((element,index) => {
+            array.push(element); 
+          });
+          this.comment_allMapIndex.set(pose_id, array);
+
+          
+        }, err => {
+          console.log("re" + JSON.stringify(err));
+        });
+    }
+
   }
 
   search_text = "";
@@ -237,11 +240,20 @@ export class HomeComponent implements OnInit {
     return 3; 
   }
 
+  commentWithPoseid(pose_id:any){
+
+    console.log(this.comment_allMapIndex.get(pose_id).length);
+    
+    
+  }
+  getcommetSizeOfArray(pose_id:any){
+    return this.comment_allMapIndex.get(pose_id).length;
+  }
+
   //สำหรับ Input ข้อมูล
   but_like(pose_id: string, index: any) {
     let json = { u_id: this.user_id, pose_id: pose_id };
     this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json),this.token).subscribe(response => {
-      var pose = Object.values(this.pose_all[index]);
       if (this.pose_all[index]["liked_but"]) {
         this.pose_all[index]["liked_but"] = false;
         this.pose_all[index]["like"]--;
@@ -252,19 +264,21 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.log("fail");
     });
+
   }
   comment(pose_id: any) {
     
     let json = { Text: this.comment_text, u_id: this.user_id, pose_id: pose_id };
     console.log(json);
     this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json),this.token).subscribe(response => {
+      this.comment_text = "";
       console.log(response);
-      this.selectComment(pose_id);
-      this.selectPose();
+      this.selectComment(pose_id,"new");
+
     }, error => {
       console.log("fail");
     });
-    this.comment_text = "";
+    
   }
   inputPoseUser(){
     if(this.getTextPose_Temp != ""){
@@ -363,6 +377,9 @@ export class HomeComponent implements OnInit {
     }else{
       this.setUploadShowAndDrop = false;
     }
+  }
+  setoptionConmentsetting(comment_id:any){
+    console.log(comment_id);
   }
 
   //สำหรับแสดงผลทุกหน้าจอ
