@@ -58,5 +58,110 @@ export class ListgroupComponent implements OnInit {
     }
     return styles;
   }
+  setMyClass() {
+    let Class;
+    if (this.innerWidth >= 1250) {
+      Class = "p-col-6"
+    }
+    else if (this.innerWidth >= 900) {
+      Class = "p-col-7"
+    } else if (this.innerWidth >= 600) {
+      Class = "p-col-10"
+    } else {
+      Class = "p-col-12"
+    }
+    return Class;
+  }
+  setMyClassRow() {
+    let Class;
+    if (this.innerWidth >= 1250) {
+      Class = "p-col"
+    }
+    else if (this.innerWidth >= 900) {
+      Class = "p-col-4"
+    } else {
+      Class = "p-col-5"
+    }
+    return Class;
+  }
+  setDivPoseStyles() {
+    let styles={};
+    if (this.innerWidth < 600) {
+      styles = {
+        'margin-top': 0 + 'px'
+      }
+    } 
+    
+    return styles;
+  }
+  setCommentPoseStyles() {
+    let styles={};
+    if (this.innerWidth > 1400) {
+      styles = {
+        'width': 5 + '%'
+      }
+    }else if (this.innerWidth > 600) {
+      styles = {
+        'width': 10 + '%'
+      }
+    } else{
+      styles = {
+        'width': 6 + '%'
+      }
+    }
+    
+    return styles;
+  }
+  setHeightDivauto() {
+    let styles;
+    styles = {
+      'height': this.innerHeight + 'px'
+    }
+    return styles;
+  }
+  setDialog() {
+    let styles;
+    if (this.innerWidth >= 1800) {
+      styles = {
+        'width': 100 + '%',
 
+      }
+    } else {
+      styles = {
+        'width': 100 + '%'
+      }
+    }
+    return styles;
+  }
+  setDialogRow() {
+    let Class;
+    if (this.innerWidth >= 1800 || this.innerWidth >= 1400) {
+      Class = "p-col-4"
+    } else {
+      Class = "p-col-12"
+    }
+    return Class;
+  }
+  setDialogWidth() {
+    let styles;
+    if (this.innerWidth >= 1800) {
+      styles = {
+        'width': 65 + '%',
+
+      }
+    } else {
+      styles = {
+        'width': 95 + '%',
+
+      }
+    }
+    return styles;
+  }
+
+  //สำหรับเรียก pop up
+  display: boolean = false;
+  visibleSidebar3: any;
+  showDialog() {
+    this.display = true;
+  }
 }

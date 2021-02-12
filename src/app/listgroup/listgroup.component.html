@@ -5,120 +5,140 @@
     </ng-template>
 </p-overlayPanel>
 
-<html>
-    <style>
-        .grid-container {
-          display: grid;
-          grid-gap: 50px 10px;
-          grid-template-columns: auto 900px auto;
-          /* background-color: #2196F3; */
-          /* text-align: center; */
-          /* padding: 10px; */ 
-        }
-        
-        .grid-item {
-          /* background-color: rgba(255, 255, 255, 0.8); */
-          border: 1px solid rgba(0, 0, 0, 0.8);
-          padding: 10px;
-          font-size: 20px;
-          /* text-align: center; */
-          display: inline;
-        }
-        #div1 {
-            float:left;
-            /* width:100px;
-            height:100px;
-            border:solid 2px red; */
-            text-align:center;
-        }
-        #div2 {
-            float:right;
-            /* width:100px;
-            height:100px;
-            border:solid 2px green;
-            text-align:center; */
-        }
-    </style>
+<!doctype html>
+<html lang="en">
+    
+    <!-- <head>
+        <meta charset="UTF-8">
+        <title>Twitter Card</title>
+        <link rel="stylesheet" href="css/estilos.css">
+        <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+    </head> -->
+
     <body>
+        
         <nav class="navbar navbar-expand-lg navbar-light bg-light" >
             <div class="container" [ngStyle]="setMyStyles()">
-                <h4>FacesArt</h4>
+                <h1  style="font-size: 40px;">FacesArt</h1>
     
-                <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
+                <input (click)="visibleSidebar3 = true" class="p-inputtext-sm" type="text" pInputText placeholder="Search"
                     style="border-radius: 10px;width: 20%;" />
     
-                <div class="p-grid" style="float: right;">
-                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                            class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                    <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
-                            type="button" icon="pi pi-bell"
-                            class="p-button-rounded p-button-secondary p-button-sm"></button>
+                    <div class="p-grid" style="float: right;">
+                    
+                        <a routerLink="/profile">
+                            <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                                class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                        </a>
+                        
+                        <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
+                                type="button" icon="pi pi-bell"
+                                class="p-button-rounded p-button-secondary p-button-sm"></button>
+                        </div>
+                        <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
+                                class="p-button-rounded p-button-secondary p-button-sm"></button></div>
                     </div>
-                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
-                            class="p-button-rounded p-button-secondary p-button-sm"></button></div>
-                </div>
             </div>
         </nav>
         
+ 
+        <!-- <hr>
+        <div style="text-align: center;">
+            <button pButton pRipple type="button" label="รูปภาพ"  ></button>
+            <button pButton pRipple type="button" label="โพสต์"></button>
+            <br><br>
+        </div> -->
 
-        <div class="grid-container">
-            <!-- <div style="text-align: center;"> -->
-                <div class="grid-item"></div>
-                <div class="grid-item" style="width: 10px;" style="text-align: center;" >
-                    <img src="https://i.pinimg.com/originals/b3/a6/f3/b3a6f345fbd6b74dc897a92799c5ec4a.jpg" width="50%" >
-                </div>             
-                <div class="grid-item"></div>
-                
-            <!-- </div> -->         
-        </div>
-        <!-- <div class="grid-container">
+        <div class="p-grid" style="background-color:rgb(243, 243, 243);">
+            <div class="p-col-12">
+                <div class="box">
+                    <div class="p-grid">
+                        <div class="p-col"></div>
+                        <div class="p-col-fixed" style="width: 1000px;">
+                        <!-- --------------------------------------------- -->
+                            <header>
+                                <div class="bioo">
+                                <img src="https://www.naewna.com/uploads/news/source/490917.jpg" alt="background" class="bg" style="text-align: center;">
+                                    <!-- <div class="desc">
+                                        <h3>@carlf</h3>
+                                        <p>Carl Fredricksen is the protagonist in Up. He also appeared in Dug's Special Mission as a minor character.</p>
+                                    </div> -->
+                                </div>
+                                
+                                <div class="avatarcontainer">
+                                    <img src="https://cdn.pixabay.com/photo/2020/01/14/10/55/cartoon-4764726_960_720.png" alt="avatar" class="avatar">
+                                    <div class="hover"></div>
+                                </div>
+                    
+                    
+                            </header>
+                    
+                            <div class="content">
+                                <div class="data">
+                                    <span>GroupName</span>
+                                    <ul>
+                                        <li>🔒 กลุ่มลับ </li>
+                                        <li>สมาชิก 10 คน</li>
+                                    </ul>
+                                </div>
+                    
+                                <!-- <div class="follow"> <div class="icon-twitter"></div> Follow</div> -->
+                            </div>
+                        <!-- --------------------------------------------- -->
+                            <hr>
+                            <!-- <div style="text-align: center;">
+                                <button pButton pRipple type="button" label="รูปภาพ"  class="p-button-secondary p-button-text"></button>
+                                <button pButton pRipple type="button" label="โพสต์" class="p-button-secondary p-button-text"></button>
+                                <br><br>
+                            </div> -->
+                            
+                            <p-card>
+                                <div class="p-grid">
+                                    <div class="p-col-fixed " style="width:70px;" >
+                                        <div  style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;" >
+                                            <img class="Y2VudGVy" src="https://i.pinimg.com/736x/09/a9/2c/09a92c1cbe440f31d1818e4fe0bcf23a.jpg">
+                                            <!-- <img class="Y2VudGVy" src="https://image.freepik.com/free-vector/hen-with-chick-cartoon-illustration_138676-2054.jpg"> -->
 
-                <div class="grid-item"></div>
-                <div class="grid-item"  style="width: 5px;" style="text-align: left;" >
-                    <img style="border-radius: 50%;" src="../assets/por.jpg" width="100px">
-                </div>            
-                <div class="grid-item"></div>
-                        
-        </div><br> -->
-        <div class="grid-container">
-            <!-- <div style="text-align: center;"> -->
-                <div class="grid-item"></div>
-                <div class="grid-item"  style="text-align: right;" style="float: right;">
-                    <img style="border-radius: 50%;" src="../assets/por.jpg" width="100px">
+                                        </div> 
+                                    </div>
+                                    <div class="p-col" >
+                                        <div style="line-height: 0px;">
+                                            <h3 class="md-display-3">name</h3>
+                                            <p>โพสอะไรหน่อยสิ</p>
+                                        </div>
 
-                    <div class="grid-item" style="text-align: left;" style="float: right;">
-                     
-                            <h2 >
-                                GroupNAME 
-                                <!-- <button pButton type="button" icon="pi pi-pencil" iconPos="left"></button> -->
-                                <button pButton type="button" icon="pi pi-pencil" class="p-button-text"></button>
-                            </h2>
-                        
-                        <!-- <p style="text-align: left;">1 post</p> -->
-                        <span ><font size="4"> 🔒 กลุ่มลับ ▪</font></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span ><font size="4">สมาชิก 20 คน</font></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                                
+                                <div style="text-align: left;">
+                                    <textarea style="width: 100%"   pInputTextarea></textarea>
+                                </div>
+
+                                <div style="text-align: left;">
+
+                                    <button style="width: 50%;" pButton type="button" label="โพสเลย"
+                                        class="p-button-outlined" ></button>
+                                        
+                                    <button  style="width: 50%;" pButton type="button" label="รูปภาพ/วีดิโอ"
+                                        class="p-button-outlined p-button-success"
+                                        icon="pi pi-image"></button>
+                                        
+
+                                </div>
+                            </p-card>
+
+                        </div>
+                        <div class="p-col" >
+
+                        </div>
                     </div>
                 </div>
-                <!-- <div class="grid-item" >
-                    <h1 >
-                        NAME 
-                        <button pButton type="button" icon="pi pi-pencil" iconPos="left"></button>
-                        <button pButton type="button" icon="pi pi-pencil" class="p-button-text"></button>
-                    </h1>
-                    
-                    <p style="text-align: left;">1 post</p>
-                    <span >6 post</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span >1 follower</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span>1 following</span><br>
-                    <p >my infomationnnnnnnnnnnnnnnnnnnnnnnnnnn</p>
-                </div> -->
-                <div class="grid-item"></div>
-                
-            <!-- </div> -->         
-        </div><br>
-        
-      
-
-
+            </div>
+        </div>
+ 
+    
+    
     </body>
 </html>
