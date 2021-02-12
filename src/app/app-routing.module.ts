@@ -5,7 +5,7 @@ import { ListgroupComponent } from './listgroup/listgroup.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path: '', component: ListgroupComponent},
+  {path: '', component: LoginComponent},
   {path: 'home', component: HomeComponent},
  
 ];

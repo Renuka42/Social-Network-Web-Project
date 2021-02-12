@@ -1,0 +1,12 @@
+.font{
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    padding: 10px;
+}
+.fontNormal{
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+}
