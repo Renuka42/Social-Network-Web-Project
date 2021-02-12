@@ -49,7 +49,7 @@
 }
 
 html { height:100%; }
-body { top:0; bottom:0; right:0; left:0;}
+body { top:0; bottom:0; right:0; left:0;font-family: 'Roboto', sans-serif;}
 
 button{
   border-radius: 20px;
@@ -58,3 +58,23 @@ button{
   color: rgb(60, 60, 60);
   cursor: pointer;
 }
+h3{
+  font-family: 'Roboto', sans-serif;
+}
+
+.Y2VudGVy {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%,0);
+  width: auto;
+  height: 100%;
+}
+
+
+.ZmFjZV9pbWdfcmVzaXpl{
+  margin-top: -13px;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+}
+

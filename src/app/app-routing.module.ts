@@ -1,10 +1,11 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ListgroupComponent } from './listgroup/listgroup.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', component: ListgroupComponent},
   {path: 'home', component: HomeComponent},
  
 ];

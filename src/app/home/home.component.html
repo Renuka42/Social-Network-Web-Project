@@ -1,3 +1,86 @@
+
+
+<p-sidebar [(visible)]="visibleSidebar3" position="top" [baseZIndex]="10000" [style]="{height:'50em'}" >
+    <div style="text-align: center;">
+        <input  class="p-inputtext-sm" type="text" pInputText placeholder="ค้นหาเพื่อน" [(ngModel)]="this.search_text" (keydown)="selectFriendSearch($event)"
+        style="border-radius: 10px;width: 20%;" />
+
+        <div class="p-grid">
+            
+            <div class="p-col" ></div>
+            
+            <div class="p-col-fixed" style="width: 1000px;" >
+                <div style="text-align: left;">
+                    <h1>ค้นหาผู้คน</h1>
+                </div>
+                <div style="height: 59vh;overflow: scroll;">
+                    <div *ngFor="let friend of this.search_all">
+                        
+                        <div class="p-grid"  >
+
+                            <div class="p-col-10" >
+                                    <div class="p-grid" >
+                                        <div class="p-col-fixed ZWxlbWVudA " style="width:70px;">
+                        
+                                            <div  style="border-radius: 50%;width: 60px;height: 60px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;" >
+                                                <img *ngIf="friend.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{friend.u_id}}/profile/{{friend.img_profile_base64_temp}}">
+                                                <img *ngIf="friend.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+
+                                            </div> 
+                                        </div>
+                                     
+                        
+                                        <div class="p-col" style="text-align: left;">
+                                            <div class="element">
+                                                <h2>{{friend.name}}</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div>
+
+                            
+                            
+                            <ng-container [ngSwitch]="isFriend(friend.u_id,'')" >
+                                <ng-container *ngSwitchCase="1">
+                                    <button style="margin-top: 20px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="เลิกเป็นเพื่อน" icon="pi pi-user" class="p-button-rounded p-button-danger "></button>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="0">
+                                    <button style="margin-top: 20px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="ส่งคำขอแล้ว" icon="pi pi-user" class="p-button-rounded p-button-Primary "></button>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="3">
+                                        <button style="margin-top: 20px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="เพิ่มเพื่อน" icon="pi pi-user" class="p-button-rounded p-button-secondary "></button>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="4">
+                                    <button style="margin-top: 20px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="ตอบรับคำขอ" icon="pi pi-user" class="p-button-rounded p-button-success "></button>
+                                </ng-container>
+                            </ng-container>
+
+                            
+
+                        </div>
+                        
+                        
+                    </div>
+                    <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col"></div>
+        </div>
+            
+
+        <!-- <h1 style="font-weight:normal">Top Sidebar</h1>
+        <p-button type="button" (click)="visibleSidebar3 = false" label="Save" styleClass="p-button-success"></p-button>
+        <p-button type="button" (click)="visibleSidebar3 = false" label="Cancel" styleClass="p-button-secondary"></p-button> -->
+    </div>
+    
+    
+   
+</p-sidebar>
+<!-- 
+
 <p-dialog header="แสดงความคิดเห็น" [(visible)]="display" [modal]="true" [style]="setDialogWidth()" >
     <div class="p-grid">
         <div  class="p-col-12"></div>
@@ -11,19 +94,19 @@
                             <p-card >
                                
                                 <div *ngFor="let item of this.pose_all; index as i" >
-                                    <div *ngIf="i == this.pose_temp">
+                                    <div *ngIf="i == this.pose_index_temp">
                                         
-                                        <div style="text-align: left;">
+                                        <div style="text-align: left;" >
                                             <div class="p-grid">
                                                 <div class="p-col-fixed " style="width:70px;">
                                                     <img class="element"
                                                         style="border-radius: 50%;width: 50px;height: 50px;"
-                                                        src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
-                                                        alt="Girl in a jacket">
+                                                        src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/">
                                                 </div>
+                                                
                                                 <div class="p-col">
                                                     <div class="element">
-                                                        <h5> <a class="fake-link">{{item.name}}</a></h5>
+                                                        <h3> <a class="fake-link">{{item.name}}</a></h3>
                                                         <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
                                                     </div>
 
@@ -33,7 +116,11 @@
                                         <div style="text-align: left;">
                                             <br>
                                             {{item.Text}} <br>
-                                      
+                                            <div class="p-col-fixed ">
+                                                <img 
+                                                style="width: 50%;height: 100%;"
+                                                    src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/{{item.user_upload_img}}">
+                                            </div>
 
                                         </div>
                                         <div style="text-align: left;">
@@ -43,8 +130,7 @@
                                                     <a class="fake-link">{{item.like}} ถูกใจ</a>
                                                 </div>
                                                 <div *ngIf="item.comment != 0" class="p-col">
-                                                    <a (click)="showDialog();setTempComment(i);"
-                                                        class="fake-link">{{item.comment}} แสดงความคิดเห็น</a>
+                                                    {{item.comment}} แสดงความคิดเห็น
                                                 </div>
                                             </div>
 
@@ -59,7 +145,7 @@
                                             <button *ngIf="item.liked_but == true" (click)="but_like(item.pose_id,i)"
                                                 style="width: 50%;" pButton type="button" label="ถูกใจ"
                                                 class="p-button-raised" icon="pi pi-thumbs-up"></button>
-                                            <button disabled (click)="showDialog();setTempComment(i)"
+                                            <button disabled (click)="showDialog();setTempComment(i,item.pose_id)"
                                                 style="width: 50%;" pButton type="button" label="แสดงความคิดเห็น"
                                                 class="p-button-text" icon="pi pi-comments"></button>
 
@@ -83,7 +169,7 @@
 
                     <div
                         style="width: 100%; height: 60vh; overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
-                        <!-- คอมเม้น -->
+                       
                         <div class="p-grid"   *ngFor="let comment of this.comment_all" >
                             <div class="p-col"></div>
                             <div class="p-col-fixed " style="width: 50px;">
@@ -95,15 +181,16 @@
                             </div>
                             <div class="p-col-9">
                                 <div class="card"
-                                    style="border-radius: 10px 10px 10px 10px;background-color: rgb(231, 231, 231);border: none;">
+                                style="border-radius: 10px 10px 10px 10px;background-color: rgb(245, 245, 245);border: none;">
 
                                     <div class="demo-container p-p-2">
                                         <div>
-                                            <h6><b>{{comment.name}}</b> </h6>
+                                            <h3> <b>{{comment.name}}</b> </h3>
                                             
                                         </div>
-                                        <div style="margin-top: -2px;">
-                                            {{comment.Text}} </div>
+                                        <div style="margin-top: -20px;">
+                                            {{comment.Text}} 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -112,13 +199,18 @@
 
                         </div>
 
-                        <!-- แสดงความคิดเห็น -->
+                    
                         <div class="p-grid">
 
                             <div class="p-col-fixed" [ngStyle]="setCommentPoseStyles()"></div>
                             <div class="p-col-fixed " style="width: 80%;">
-                                <textarea [rows]="1" style="border-radius: 10px 10px 10px 10px;width: 100%;"
-                                    pInputTextarea placeholder="แสดงความคิดเห็น"></textarea>
+                                
+                                <textarea [(ngModel)]="comment_text"
+                                (keydown.enter)="comment(this.pose_id_temp)" [rows]="1"
+                                style="border-radius: 10px 10px 10px 10px;width: 100%;"
+                                pInputTextarea 
+                                placeholder="แสดงความคิดเห็น"  [autoResize]="this.setButTrue"></textarea>
+                                    
                             </div>
                             <div class="p-col-1 " >
                                 <button class="element" style="border-radius: 10px 10px 10px 10px;" pButton pRipple
@@ -138,7 +230,7 @@
         <div class="p-col-12" ></div>
     </div>
 </p-dialog>
-
+ -->
 
 <p-overlayPanel #op>
     <ng-template pTemplate>
@@ -151,20 +243,26 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body >
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="this.innerWidth >= 900">
         <div class="container" [ngStyle]="setMyStyles()">
-            <h4>FacesArt</h4>
+            <h1  style="font-size: 40px;">FacesArt</h1>
 
-            <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
+            <input (click)="visibleSidebar3 = true" class="p-inputtext-sm" type="text" pInputText placeholder="Search"
                 style="border-radius: 10px;width: 20%;" />
 
             <div class="p-grid" style="float: right;">
-                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                
+                <a routerLink="/profile">
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
                         class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                </a>
+                
                 <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
                         type="button" icon="pi pi-bell"
                         class="p-button-rounded p-button-secondary p-button-sm"></button>
@@ -181,12 +279,18 @@
             <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
                 style="border-radius: 10px;width: 30%;" />
             <div class="p-grid" style="float: right;">
-                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
-                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
-                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
+                <a routerLink="/profile">
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                </a>&nbsp;&nbsp;
+                <a routerLink="/profile">
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                </a>&nbsp;&nbsp;
+                <a routerLink="/profile">
+                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
+                </a>&nbsp;&nbsp;
                 <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-bell"
                     class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
                 <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
@@ -207,8 +311,8 @@
                             <div class="p-col" *ngIf="this.innerWidth <= 900 && this.innerWidth > 500" ></div>
                             <div class="p-col" *ngIf="this.innerWidth <= 1250"></div>
 
-                            <div [ngClass]="setMyClassRow()" class="p-col" *ngIf="this.innerWidth > 900">
-                                <div class="box">
+                            <div [ngClass]="setMyClassRow()" class="p-col" *ngIf="this.innerWidth > 900" > 
+                                <div class="box" >
                                     <div class="p-grid">
                                         <div class="p-col-12 "></div>
                                         <div class="p-col-12">
@@ -222,14 +326,14 @@
 
                                                     <div class="p-grid">
                                                         <div class="p-col-fixed " style="width:70px;">
-                                                            <img class="element"
+                                                            <img  class="element"
                                                                 style="border-radius: 50%;width: 50px;height: 50px;"
                                                                 src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
                                                                 alt="Girl in a jacket">
                                                         </div>
                                                         <div class="p-col">
-                                                            <div class="element">
-                                                                <h5>สร้างกลุ่ม</h5>
+                                                            <div style="margin-top: 15px;">
+                                                                <h1>สร้างกลุ่ม</h1>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,10 +358,10 @@
 
                                                 <div class="p-grid">
                                                     <div class="p-col-6">
-                                                        <h6>กลุ่ม</h6>
+                                                        <h3>กลุ่ม</h3>
                                                     </div>
                                                     <div class="p-col-6" style="text-align: right;">
-                                                        <h6>ดูทั้งหมด</h6>
+                                                        <h3>ดูทั้งหมด</h3>
                                                     </div>
                                                 </div>
 
@@ -266,19 +370,19 @@
                                               
 
                                                 <div class="p-grid" *ngFor="let groups of this.group"
-                                                    style="margin-top: 5px;">
+                                                    style="margin-top: 0px;">
 
 
                                                     <div class="p-col-fixed " style="width:70px;">
                                                         <img class="element"
-                                                            style="border-radius: 50%;width: 30px;height: 30px;"
+                                                            style="border-radius: 50%;width: 40px;height: 40px;"
                                                             src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
                                                             alt="Girl in a jacket">
                                                     </div>
 
                                                     <div class="p-col">
                                                         <div class="element">
-                                                            <h6>{{groups.name}}</h6>
+                                                            <h3>{{groups.name}}</h3>
                                                         </div>
                                                     </div>
 
@@ -302,23 +406,21 @@
                             <div [ngClass]="setMyClass()" >
 
 
-                                <div [ngStyle]="setHeightDivauto()"
-                                    style="height: 500px;overflow-y: scroll; scrollbar-arrow-color:blue; scrollbar-face-color: #e7e7e7; scrollbar-3dlight-color: #a0a0a0; scrollbar-darkshadow-color:#888888">
+                                <div [ngStyle]="setHeightDivauto()" style="height: 500px;overflow-y: scroll;overflow-x: hidden;" >
                                     <div class="box">
                                         <p-card>
-
-
-
+                                    
                                             <div class="p-grid">
-                                                <div class="p-col-fixed " style="width:70px;">
-                                                    <img class="element"
-                                                        style="border-radius: 50%;width: 50px;height: 50px;"
-                                                        src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M"
-                                                        alt="Girl in a jacket">
+                                                <div class="p-col-fixed " style="width:70px;" *ngFor="let item of this.profile">
+                                                    <div  style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;" >
+                                                        <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
+                                                        <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+
+                                                    </div> 
                                                 </div>
-                                                <div class="p-col">
-                                                    <div class="element" *ngFor="let profiles of this.profile">
-                                                        <h5>{{profiles.name}}</h5>
+                                                <div class="p-col" >
+                                                    <div  *ngFor="let profiles of this.profile" style="line-height: 0px;">
+                                                        <h3 class="md-display-3">{{profiles.name}}</h3>
                                                         <p>โพสอะไรหน่อยสิ</p>
                                                     </div>
 
@@ -326,20 +428,28 @@
                                             </div>
 
 
-
+                                                <p-fileUpload 
+                                                    *ngIf="this.setUploadShowAndDrop == true"
+                                                    (onSelect) = "myUploader($event)"
+                                                    (onRemove) = "cen($event)"
+                                                    [customUpload]="this.setButTrue" 
+                                                    [showCancelButton] = "this.setButFalse"
+                                                    [showUploadButton] = "this.setButFalse"
+                                                    accept="image/*" 
+                                                    [previewWidth] = "100"
+                                                ></p-fileUpload>  
+                                                
 
                                             <div style="text-align: left;">
-
-
-                                                <textarea style="width: 100%;height: 100px;" [(ngModel)]="getTextPose_Temp" [ngStyle]="setTextPoseheight()"  pInputTextarea></textarea>
-
+                                                <textarea style="width: 100%" [rows]="4" [autoResize]="this.setButTrue" [(ngModel)]="getTextPose_Temp"  pInputTextarea></textarea>
                                             </div>
 
                                             <div style="text-align: left;">
 
                                                 <button style="width: 50%;" pButton type="button" label="โพสเลย"
-                                                    class="p-button-outlined" (click)="inputPoseUser()"></button>
-                                                <button style="width: 50%;"  pButton type="button" label="รูปภาพ/วีดิโอ"
+                                                    class="p-button-outlined" (click)="inputPoseUser();this.setUploadShowAndDrop = false"></button>
+                                                    
+                                                <button (click)="this.setUploadShowAndDropMet()" style="width: 50%;" pButton type="button" label="รูปภาพ/วีดิโอ"
                                                     class="p-button-outlined p-button-success"
                                                     icon="pi pi-image"></button>
                                                     
@@ -351,18 +461,19 @@
                                         <br>
                                         <div *ngFor="let item of this.pose_all_re ; index as i " class="box">
 
-                                            <p-card>
+                                            <p-card >
                                                 <div style="text-align: left;">
                                                     <div class="p-grid">
                                                         <div class="p-col-fixed " style="width:70px;">
-                                                            <img class="element"
-                                                                style="border-radius: 50%;width: 50px;height: 50px;"
-                                                                src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
-                                                                alt="Girl in a jacket">
+                                                            <div  style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;" >
+                                                                <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/profile/{{item.img_profile_base64_temp}}">
+                                                                <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+
+                                                            </div> 
                                                         </div>
                                                         <div class="p-col">
-                                                            <div class="element">
-                                                                <h5> <a class="fake-link">{{item.name}}</a></h5>
+                                                            <div style="line-height: 0px;">
+                                                                <h3> <a class="fake-link">{{item.name}}</a></h3>
                                                                 <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
                                                             </div>
 
@@ -370,20 +481,24 @@
                                                     </div>
                                                 </div>
 
-
-                                                <div style="text-align: left;">
-                                                    <br>
-                                                    {{item.Text}}
-
+                                                <br>
+                                                <div style="text-align: left;" *ngIf="item.Text.length != 0">
+                                                    <h3 style="word-wrap: break-word">{{item.Text}}</h3>
                                                 </div>
+
+                                                <div  *ngIf="item.user_upload_img != null">
+                                                    <img style="width: 110%;height: 110%;margin-left: -25px;"
+                                                    src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/{{item.user_upload_img}}">
+                                                </div>
+
                                                 <div style="text-align: left;">
-                                                    <hr *ngIf="item.like != 0 || item.comment_comment_length != null">
+                                                    <hr *ngIf="item.like != 0 || item.comment_comment_length != 0">
                                                     <div class="p-grid">
                                                         <div *ngIf="item.like != 0" class="p-col-fixed">
                                                             <a class="fake-link">{{item.like}} ถูกใจ</a>
                                                         </div>
-                                                        <div *ngIf="item.comment_comment_length != null" class="p-col">
-                                                            <a (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"
+                                                        <div *ngIf="item.comment_comment_length != 0" class="p-col">
+                                                            <a (click)="showDialog();setTempComment(i,item.pose_id);this.selectComment(item.pose_id,'new')"
                                                                 class="fake-link">{{item.comment_comment_length}} แสดงความคิดเห็น</a>
                                                         </div>
                                                     </div>
@@ -400,76 +515,75 @@
                                                         (click)="but_like(item.pose_id,i)" style="width: 50%;" pButton
                                                         type="button" label="ถูกใจ" class="p-button-raised"
                                                         icon="pi pi-thumbs-up"></button>
-                                                    <button (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)" style="width: 50%;"
+                                                    <button (click)="showDialog();setTempComment(i,item.pose_id)" style="width: 50%;"
                                                         pButton type="button" label="แสดงความคิดเห็น"
                                                         class="p-button-text" icon="pi pi-comments"></button>
 
                                                 </div>
                                                 <hr>
-                                                
+                                                <div style="text-align: left;" *ngIf="comment_allMapIndex.get(item.pose_id)?.length < item.comment_comment_length">
+                                                    <a (click)="showDialog();setTempComment(i,item.pose_id);this.selectComment(item.pose_id,'add')"
+                                                        class="fake-link"><h3>ดูความคิดเห็นทั้งหมด</h3></a>
+                                          
+
+                                                </div>
                                                 <!-- คอมเม้น -->
-                                                <div class="p-grid" *ngIf="item.comment_comment_length != null">
-                                                    <div class="p-col-fixed " style="width: 70px;">
-                                                        
-                                                        <img style="border-radius: 50%;width: 50px;height: 50px;"
-                                                            src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M"
-                                                            alt="Girl in a jacket">
-
+                                                <div class="p-grid" *ngIf="item.comment_comment_length != 0">
+                                                    <ng-container *ngFor="let ins of this.comment_allMapIndex.get(item.pose_id)">
+                                                    
+                                                    <div class="p-col-1"*ngFor="let item of this.profile">
+                                                        <div  style="border-radius: 50%;width: 40px;height: 40px;overflow: hidden;background-color: rgb(255, 255, 255);" >
+                                                            <img *ngIf="ins.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{ins.user_comment_fk}}/profile/{{ins.img_profile_base64_temp}}">
+                                                            <img *ngIf="ins.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+    
+                                                        </div> 
                                                     </div>
-                                                    <div class="p-col-10">
-                                                        <div class="card"
-                                                            style="border-radius: 10px 10px 10px 10px;background-color: rgb(245, 245, 245);border: none;">
+                                                    <div class="p-col-11" >  
+                                                       
 
-                                                            <div class="demo-container p-p-2">
-                                                                <div>
-                                                                    <h6><b> <a
-                                                                                class="fake-link">{{item.comment_name}}</a></b>
-                                                                    </h6>
+                                                        
+                                                            <div class="demo-container p-p-1" style="border-radius: 25px;background-color: rgb(242, 242, 242);">
+                                                                <div class="p-grid"style="text-align: left;margin-top: -2px;margin-left: 3px;" >
+                                                                    <div class="p-col-fixed" style="width: auto;">
+                                                                        <h3 ><b>{{ins.name}}</b> </h3>
+                                                                    </div>
+                                                                    <div class="p-col" style="color: darkgrey;margin-top: 3px;">
+                                                                        <i  class="pi pi-angle-down fake-link" (click)="setoptionConmentsetting(item.c_id)"></i>
+                                                                    </div>
                                                                 </div>
-                                                                <div style="margin-top: -2px;">
-                                                                    {{item.comment_Text}} </div>
+                                                                <h3 style="word-wrap: break-word;margin-top: -25px;width: auto;margin-left: 10px;">{{ins.Text}}</h3>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="p-col">
-                                                    </div>
+                                                   
 
+                                                    </ng-container> 
                                                 </div>
-                                                <div *ngIf="item.comment_simple != null && item.comment > 1"
-                                                    style="text-align: center;">
-                                                    <a (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"
-                                                        class="fake-link">ดูความคิดเห็นทั้งหมด</a>
-
-                                                </div>
+                                                
+                                                
+                                                
                                                 <!-- แสดงความคิดเห็น -->
                                                 <div class="p-grid">
-                                                    <div class="p-col-fixed " style="width: 9%;">
-
-                                                        <img style="border-radius: 50%;width: 30px;height: 30px;margin-top: 5px;"
-                                                            src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb013533-7c6b-4c02-8ef9-03de099fbdd5/dd14mzb-973ddfd6-4444-4010-b84f-11522e5a4c5c.png/v1/fill/w_894,h_894,q_70,strp/ricardo_milos_by_allansmejia_dd14mzb-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDI0IiwicGF0aCI6IlwvZlwvYmIwMTM1MzMtN2M2Yi00YzAyLThlZjktMDNkZTA5OWZiZGQ1XC9kZDE0bXpiLTk3M2RkZmQ2LTQ0NDQtNDAxMC1iODRmLTExNTIyZTVhNGM1Yy5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7KF-DByWr6gYhlFnpdbEAkdbXuVZrRO6WHm0hqVe9-M"
-                                                            alt="Girl in a jacket">
-
+                                                    <div class="p-col-fixed " style="width:50px;" *ngFor="let item of this.profile">
+                                                        <div  style="border-radius: 50%;width: 40px;height: 40px;overflow: hidden;background-color: rgb(255, 255, 255);" >
+                                                            <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
+                                                            <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+    
+                                                        </div> 
                                                     </div>
-                                                    <div class="p-col-fixed " style="width: 80%;">
-                                                        <!-- <div placeholder="click" (keydown.enter)="comment(item.pose_id)" class="editableDiv1 demo-container p-p-2" contenteditable="true"style="border-radius: 20px 20px 20px 20px;background-color: rgb(231, 231, 231);" >
-                                                                    
-                                                                </div> -->
-
-
-
-                                                        <!-- <textarea (keydown.enter)="onKeyPress($event)" [rows]="1" style="width: 100%;" pInputTextarea placeholder="แสดงความคิดเห็น" [(ngModel)]="comment_text" ></textarea> -->
-                                                        <textarea (click)="setTempComment(i);this.selectComment(item.pose_id)"
+                                                    <div class="p-col-fixed " style="width: 83%;">
+                                                        
+                                                        <textarea [(ngModel)]="comment_text"
                                                             (keydown.enter)="comment(item.pose_id)" [rows]="1"
                                                             style="border-radius: 10px 10px 10px 10px;width: 100%;"
-                                                            pInputTextarea [(ngModel)]="comment_text"
-                                                            placeholder="แสดงความคิดเห็น"></textarea>
+                                                            pInputTextarea 
+                                                            placeholder="แสดงความคิดเห็น"  [autoResize]="this.setButTrue"></textarea>
                                                     </div>
-                                                    <div class="p-col-1 " >
+                                                    <div class="p-col-fixed " style="width: 8%;">
                                                         <button class="element"
-                                                            style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;"
-                                                            pButton pRipple type="submit" icon="pi pi-check"
-                                                            class="p-button-rounded p-button-outlined"
-                                                            (click)="showDialog();setTempComment(i);this.selectComment(item.pose_id)"></button>
+                                                            style="border-radius: 30px 30px 30px 30px;width: 40px;height: 40px;margin-left: -6px;"
+                                                            pButton pRipple type="submit" icon="pi pi-send"
+                                                            class="p-button-rounded p-button-text p-button-plain"
+                                                            (click)="comment(item.pose_id)"></button>
                                                     </div>
 
                                                 </div>
@@ -502,7 +616,7 @@
                             </div>
 
                             <div class="p-col" *ngIf="this.innerWidth >= 1250">
-                                <div class="box">
+                                <div class="box" style="position: fixed;">
                                     <div class="p-grid">
                                         <div class="p-col-12 "></div>
                                         <div class="p-col-12">
@@ -514,15 +628,17 @@
                                                 <div class="p-col-8">
 
                                                     <div class="p-grid">
-                                                        <div class="p-col-fixed " style="width:70px;">
-                                                            <img class="element"
-                                                                style="border-radius: 50%;width: 50px;height: 50px;"
-                                                                src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
-                                                                alt="Girl in a jacket">
+                                                        <div class="p-col-fixed ZWxlbWVudA" style="width:70px;" *ngFor="let item of this.profile">
+                                                            <div  style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;" >
+                                                                <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
+                                                                <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+
+                                                            </div> 
                                                         </div>
+                                                        
                                                         <div class="p-col">
-                                                            <div class="element" *ngFor="let profiles of this.profile">
-                                                                <h5>{{profiles.name}}</h5>
+                                                            <div *ngFor="let profiles of this.profile" style="line-height: 0px;">
+                                                                <h3>{{profiles.name}}</h3>
                                                                 <p>{{profiles.name_id}}</p>
                                                             </div>
                                                         </div>
@@ -533,7 +649,7 @@
                                                 <div class="p-col-4">
                                                     <div class="element" style="text-align: right;">
                                                         <a routerLink="/profile">
-                                                            <h6>โปรไฟล์</h6>
+                                                            <h3>โปรไฟล์</h3>
                                                         </a>
                                                     </div>
 
@@ -548,33 +664,36 @@
 
                                                 <div class="p-grid">
                                                     <div class="p-col-6">
-                                                        <h6>เพื่อน</h6>
+                                                        <h3>เพื่อน</h3>
                                                     </div>
                                                     <div class="p-col-6" style="text-align: right;">
-                                                        <h6>ดูทั้งหมด</h6>
+                                                        <h3>ดูทั้งหมด</h3>
                                                     </div>
                                                 </div>
 
 
 
-                                                <div class="p-grid" *ngFor="let friend of this.friend_all"
-                                                    style="margin-top: 5px;">
+                                                <div class="p-grid" *ngFor="let friend of this.friend_all" 
+                                                    style="margin-top: 0px;" >
 
+                                                    
 
-                                                    <div class="p-col-fixed " style="width:70px;">
-                                                        <img class="element"
-                                                            style="border-radius: 50%;width: 30px;height: 30px;"
-                                                            src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
-                                                            alt="Girl in a jacket">
-                                                    </div>
-
-                                                    <div class="p-col">
-                                                        <div class="element">
-                                                            <h6>{{friend.name}}</h6>
+                                                        <div class="p-col-fixed ZWxlbWVudA" *ngIf="friend.infa == 1" >
+                                            
+                                                            <div  style="border-radius: 50%;width: 40px;height: 40px;overflow: hidden;background-color: rgb(255, 255, 255);" >
+                                                                <img class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{friend.u_id}}/profile/{{friend.img_profile_base64_temp}}">
+                                                                
+                                                            </div> 
                                                         </div>
-                                                    </div>
+
+                                                        <div class="p-col" *ngIf="friend.infa == 1">
+                                                            <div class="element">
+                                                                <h3>{{friend.name}}</h3>
+                                                            </div>
+                                                        </div>
 
 
+                                                    
                                                 </div>
                                             </div>
 

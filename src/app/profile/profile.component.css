@@ -1,57 +1,86 @@
-.grid-container {
-    display: grid;
-    grid-gap: 50px 10px;
-    grid-template-columns: auto 250px 500px auto;
-    /* background-color: #2196F3; */
-    /* text-align: center; */
-    padding: 10px;
+
+  .Y2VudGVy {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: auto;
+    height: 100%;
+  }
+
+  .ZmFjZV9pbWdfcmVzaXpl{
+    margin-top: -13px;
+    width: 330px;
+    height: 330px;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .ZWxlbWVudA {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    float: right;
+  }
+
+  .textcenter {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.cut-text-multi{
+  display: -webkit-box;
+  width: 250px;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   }
   
-  .grid-item {
-    /* background-color: rgba(255, 255, 255, 0.8); */
-    /* border: 1px solid rgba(0, 0, 0, 0.8); */
-    padding: 10px;
+  .overlay-image {
+    position: relative;
+  }
+
+
+  
+  .overlay-image .text {
+    color: #fff;
     font-size: 20px;
+    line-height: 1.5em;
+    text-shadow: 2px 2px 2px #000;
     text-align: center;
-  }
-  .item1 {
-      /* grid-row-start: 1;
-      grid-row-end: 3; */
-      /* grid-template-columns: auto auto auto;
-      border: 1px solid rgba(0, 0, 0, 0.8); */
-      grid-column: 2 / span 2;
-      grid-row: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
   }
 
-  /* The grid container */
-  .grid-container1 {
-      display: grid;
-      grid-template-areas: 
-          'header header header header header header' 
-          'left middle middle middle middle right' 
-          'footer footer footer footer footer footer';
-      /* grid-column-gap: 10px; - if you want gap between the columns */
-  } 
+.overlay-image .hover {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .2s ease;
+}
 
-  /* Style the left column */
-  .left {
-      grid-area: left;
-  }
+.overlay-image:hover .hover {
+  opacity: 1;
+}
 
-  /* Style the middle column */
-  .middle {
-      grid-area: middle;
+.overlay-image .hover {
+  background-color: rgba(0,0,0,0.5);
+}
+  
+  html{
+      height: fit-content;
   }
+  body { top:0; bottom:0; right:0; left:0;font-family: 'Roboto', sans-serif; background-color: rgb(243, 243, 243);}
 
-  /* Style the right column */
-  .right {
-      grid-area: right;
-  }
-
-  /* Style the footer */
-  .footer {
-      grid-area: footer;
-      /* background-color: #f1f1f1; */
-      padding: 10px;
-      text-align: center;
-  }
+  
