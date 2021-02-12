@@ -211,34 +211,9 @@ export class HomeComponent implements OnInit {
 
   }
 
-  search_text = "";
-  search_start = 0;
-  search_end = 100;
-  selectFriendSearch(event:any) {
-    let json = { user_id: this.user_id ,text: this.search_text,start: this.search_start,end: this.search_end};
-    this.http.post("http://203.154.83.62:1238/select/search", JSON.stringify(json),this.token).subscribe(response => {
-      this.search_all = response;
-      
-    }, error => {
-      console.log("fail");
-    });
-    this.comment_text = "";
-  }
 
-  isFriend(user_id:any,setmet:any){
-    console.log( this.friend_all);
-    let number = this.friend_all.find((element:any) => element.u_id == user_id);
-    if(number != undefined){
-      var d = this.friend_all[this.friend_all.indexOf(number)];
-      if(setmet == "add"){
-        if(d.infa == 0 || d.infa == 1){
-          this.friend_all[this.friend_all.indexOf(number)] = 3;
-        }
-      }
-      return d.infa;
-    }
-    return 3; 
-  }
+
+  
 
   commentWithPoseid(pose_id:any){
 
@@ -318,19 +293,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  userAddFriend(useradd:any){
 
-    let json = { user_id: this.user_id, user_add: useradd};
-    this.http.post("http://203.154.83.62:1238/add/friend", JSON.stringify(json),this.token).subscribe(response => {
-
-      this.isFriend(useradd,"add");
-      this.selectFriend();
-
-    }, error => {
-      console.log("fail");
-    });
-    
-  }
   UserLogOut(){
     this.cookieService.deleteAll();
     this.router.navigateByUrl("");

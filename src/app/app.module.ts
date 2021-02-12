@@ -27,6 +27,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import {FileUploadModule} from 'primeng/fileupload';
 import { CookieService } from 'ngx-cookie-service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
+import {CheckboxModule} from 'primeng/checkbox';
 
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
@@ -34,6 +36,7 @@ const appRoutes: Routes = [
   { path: 'profile',component: ProfileComponent},
   { path: 'signin',component: SigninComponent},
   { path: 'listgroup',component: ListgroupComponent},
+  { path: 'nav',component: NavbarComponent},
 ];
 @NgModule({
   declarations: [
@@ -42,9 +45,11 @@ const appRoutes: Routes = [
     HomeComponent,
     ProfileComponent,
     ListgroupComponent,
-    SigninComponent
+    SigninComponent,
+    NavbarComponent
   ],
   imports: [
+    CheckboxModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

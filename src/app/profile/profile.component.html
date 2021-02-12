@@ -13,25 +13,7 @@
     </head>
     
     <body >
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-            <div class="container" [ngStyle]="setMyStyles()">
-                <h4>FacesArt</h4>
-    
-                <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
-                    style="border-radius: 10px;width: 20%;" />
-    
-                <div class="p-grid" style="float: right;">
-                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                            class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                    <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
-                            type="button" icon="pi pi-bell"
-                            class="p-button-rounded p-button-secondary p-button-sm"></button>
-                    </div>
-                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
-                            class="p-button-rounded p-button-secondary p-button-sm"></button></div>
-                </div>
-            </div>
-        </nav>
+        <app-navbar ></app-navbar>
 
 
         <div class="p-grid" >
