@@ -34,7 +34,7 @@
             </div>
 
             <div class="p-formgroup-inline; p-col-12" style="display: flex;justify-content: center;">
-                <div class="p-field" *ngIf="dis == true">
+                <div class="p-field" *ngIf="dis == true && usernameSignin != null && passwordSignin != null && name_idSignin != null && nameSignin != null ">
                     <button pButton pRipple type="button" label="Sign Up" (click)="Signin()"
                         class="p-button-rounded p-button-success"></button>
                 </div>&nbsp;&nbsp;
