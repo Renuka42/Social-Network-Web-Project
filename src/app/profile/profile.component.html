@@ -1,197 +1,204 @@
 <p-overlayPanel #op>
     <ng-template pTemplate>
-        
+
     </ng-template>
 </p-overlayPanel>
-<html >
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    
-    </head>
-    
-    <body >
-        <app-navbar ></app-navbar>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <app-navbar></app-navbar>
 
 
-        <div class="p-grid" >
-            <div class="p-col-12">
-                <div class="box">
-                    <div class="p-grid">
-                        <div class="p-col"></div>
-                        <div class="p-col-fixed" style="width: 800px;">
-                            <div style="height: 50px;"></div>
+    <div class="p-grid">
+        <div class="p-col-12">
+            <div class="box">
+                <div class="p-grid">
+                    <div class="p-col"></div>
+                    <div class="p-col-fixed" style="width: 800px;">
+                        <div style="height: 50px;"></div>
 
-                            <div class="p-grid" *ngFor="let item of this.detallYourSelf">
-                                <div class="p-col-4">
+                        <div class="p-grid" *ngFor="let item of this.detallYourSelf">
+                            <div class="p-col-4">
 
-                                    <div class="ZWxlbWVudA"  >
-                                        
-                                        <div  style="border-radius: 50%;width: 230px;height: 230px;overflow: hidden;background-color: rgb(255, 255, 255);" >
-                                            <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
-                                            <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
+                                <div class="ZWxlbWVudA">
 
-                                        </div> 
-                                        
-                                        
-                                        <!-- <button style="margin-top: -55px;font-size: 30px;display: flex;"  pButton pRipple type="button"  icon="pi pi-plus" class="p-button-rounded p-button-Primary "></button> -->
-                                        <!-- <button style="margin-top: -55px;font-size: 30px;display: flex;"  pButton pRipple type="button" label="+" icon="pi pi-user" class="p-button-rounded p-button-Primary "></button> -->
-                                        <div style="margin-top: -50px;">
-                                            <p-fileUpload 
-                                                [style]="setMyStylestest()" 
-                                                mode="basic"  
-                                                [auto]="setButTrue" 
-                                                chooseLabel=" "  
-                                                [customUpload]="setButTrue" 
-                                                accept="image/*"  
-                                                (uploadHandler)="myUploader($event)">
-                                            </p-fileUpload>
-                                        </div>
-                                    </div>
-
-
-                                        
- 
-                                </div>
-                                <div class="p-col-1"></div>
-                                <div class="p-col-7">
-                                    <br>
-                                    <div class="p-grid" >
-                                        <div class="p-col-12" >
-                                            
-                                            <form class="form-inline "  >
-                                                    <h1 style="font-size: 40px;" >{{item.name_id}}</h1>&#160;&#160;&#160;&#160;&#160;
-                                                    <button style="margin-top: -10px;font-size: 13px;"  pButton pRipple type="button" label="แก้ไขโปรไฟล์" class="p-button-rounded p-button-secondary "></button>
-                                               </form>
-                                        </div>
-                                        <div class="p-col-12" >
-
-                                            <div class="p-grid">
-                                                
-
-                                                <div class="p-col-4">
-                                                    <h3>12 โพสต์</h3>
-                                                </div>
-                                                <div class="p-col-4">
-                                                    <h3>172 รูปภาพ</h3>
-                                                </div>
-                                                <div class="p-col-4">
-                                                    <h3>เพื่อน 152 คน</h3>
-                                                </div>
-                                            </div>
-                                                
-                                            <div >
-                                                <h3><b>{{item.name}}</b></h3>
-                                                <p style="margin-top: -20px;">
-                                                    แอบอยู่ห่าง ๆ อย่างห่วง ๆ
-                                                </p>
-                                            </div>
-                                            
-
-                                        </div>
-                                        
+                                    <div
+                                        style="border-radius: 50%;width: 230px;height: 230px;overflow: hidden;background-color: rgb(255, 255, 255);">
+                                        <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy"
+                                            src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
+                                        <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy"
+                                            src="http://203.154.83.62:1238/photo/temp/user">
 
                                     </div>
-                                    
-                                    
 
+
+                                    <!-- <button style="margin-top: -55px;font-size: 30px;display: flex;"  pButton pRipple type="button"  icon="pi pi-plus" class="p-button-rounded p-button-Primary "></button> -->
+                                    <!-- <button style="margin-top: -55px;font-size: 30px;display: flex;"  pButton pRipple type="button" label="+" icon="pi pi-user" class="p-button-rounded p-button-Primary "></button> -->
+                                    <div style="margin-top: -50px;">
+                                        <p-fileUpload [style]="setMyStylestest()" mode="basic" [auto]="setButTrue"
+                                            chooseLabel=" " [customUpload]="setButTrue" accept="image/*"
+                                            (uploadHandler)="myUploader($event)">
+                                        </p-fileUpload>
+                                    </div>
                                 </div>
+
+
+
+
                             </div>
+                            <div class="p-col-1"></div>
+                            <div class="p-col-7">
+                                <br>
+                                <div class="p-grid">
+                                    <div class="p-col-12">
 
-                            <div style="height: 30px;"></div>
+                                        <form class="form-inline ">
+                                            <h1 style="font-size: 40px;">{{item.name_id}}</h1>
+                                            &#160;&#160;&#160;&#160;&#160;
+                                            <button style="margin-top: -10px;font-size: 13px;" pButton pRipple
+                                                type="button" label="แก้ไขโปรไฟล์"
+                                                class="p-button-rounded p-button-secondary "></button>
+                                        </form>
+                                    </div>
+                                    <div class="p-col-12">
 
+                                        <div class="p-grid">
+
+
+                                            <div class="p-col-4">
+                                                <h3>12 โพสต์</h3>
+                                            </div>
+                                            <div class="p-col-4">
+                                                <h3>172 รูปภาพ</h3>
+                                            </div>
+                                            <div class="p-col-4">
+                                                <h3>เพื่อน 152 คน</h3>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h3><b>{{item.name}}</b></h3>
+                                            <p style="margin-top: -20px;">
+                                                แอบอยู่ห่าง ๆ อย่างห่วง ๆ
+                                            </p>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
                         </div>
-                        <div class="p-col" >
-                            
-                        </div>
+
+                        <div style="height: 30px;"></div>
+
+                    </div>
+                    <div class="p-col">
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        
 
-            <div class="p-grid" >
-                <div class="p-col-12">
-                    <div class="box">
-                        <div class="p-grid">
-                            <div class="p-col"></div>
-                            <div class="p-col-fixed" style="width: 1000px;">
-                                <hr>
-                                <div style="text-align: center;">
-                                    <button pButton pRipple type="button" label="รูปภาพ" (click)="mode_pose = false" class="p-button-secondary p-button-text" ></button>
-                                    <button pButton pRipple type="button" label="โพสต์" (click)="mode_pose = true;this.selectProfileYourself('text')" class="p-button-secondary p-button-text"></button>
-                                    <br><br>
-                                </div>
 
-                              
-                                
-                                 
-                                <div class="p-grid" *ngIf="mode_pose == false">
-                                   
-                                   <ng-container *ngFor="let item of this.poseYourSelf">
-                                        <div class="p-col-4 " style="display: flex;" *ngIf="item.user_upload_img != null">
-                                            
-                                            
-                                            <a href="" > 
-                                                
-                                                <div class="ZmFjZV9pbWdfcmVzaXpl overlay-image">
-
-                                                    <img class="Y2VudGVy "
-                                                    src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/{{item.user_upload_img}}">
-
-                                                    <div class="hover">
-                                                        <div class="text">
-                                                            <i class="pi pi-thumbs-up" style="font-size: 15"></i>
-                                                            {{item.like}}
-                                                            &nbsp;
-                                                            <i class="pi pi-comments" style="font-size: 15"></i>
-                                                            {{item.comment_comment_length}}
-                                                        </div>
-                                                      </div>
-                                                    
-                                                </div> 
-                                                
-                                               
-                                            </a>
-
-                                            
-                                        </div>
-                                    </ng-container>
-
-                                </div>
-
-                                <div class="p-grid" *ngIf="mode_pose == true">
-                                   
-                                    <ng-container *ngFor="let item of this.poseYourSelfText">
-                                         <div class="p-col-4" style="display: flex;" *ngIf="item.user_upload_img == null">
-                                             <a href="">
-                                                 <div class="ZmFjZV9pbWdfcmVzaXpl Y2VudGVy"  >
-                                                    <div class="textcenter cut-text-multi">
-                                                        <h1 >{{item.Text}}</h1>
-                                                    </div>
-                                                 </div> 
-                                             </a>
-                                         </div>
-                                     </ng-container>
- 
-                                 </div>
-                                
-                                
-
-                            </div>
-                            <div class="p-col" >
-
-                            </div>
+    <div  class="p-grid" >
+        <div class="p-col-12">
+            <div class="box">
+                <div class="p-grid">
+                    <div class="p-col"></div>
+                    <div class="p-col-fixed" style="width: 1000px;">
+                        <hr>
+                        <div style="text-align: center;">
+                            <button pButton pRipple type="button" label="รูปภาพ" (click)="mode_pose = false"
+                                class="p-button-secondary p-button-text"></button>
+                            <button pButton pRipple type="button" label="โพสต์"
+                                (click)="mode_pose = true;this.selectProfileYourself('text')"
+                                class="p-button-secondary p-button-text"></button>
+                            <br><br>
                         </div>
+
+
+
+
+                        <div class="p-grid" *ngIf="mode_pose == false" >
+
+                            <ng-container *ngFor="let item of this.poseYourSelf">
+                                <div class="p-col-4 " style="display: flex;" *ngIf="item.user_upload_img != null">
+
+
+                                    <a href="">
+
+                                        <div class="ZmFjZV9pbWdfcmVzaXpl overlay-image">
+
+                                            <img class="Y2VudGVy "
+                                                src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/{{item.user_upload_img}}">
+
+                                            <div class="hover">
+                                                <div class="text">
+                                                    <i class="pi pi-thumbs-up" style="font-size: 15"></i>
+                                                    {{item.like}}
+                                                    &nbsp;
+                                                    <i class="pi pi-comments" style="font-size: 15"></i>
+                                                    {{item.comment_comment_length}}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </a>
+
+
+                                </div>
+                            </ng-container>
+
+                            <div *ngIf="showDivLoading == false">กำลังโหลด</div>
+
+                        </div>
+
+                        <div class="p-grid" *ngIf="mode_pose == true">
+
+                            <ng-container *ngFor="let item of this.poseYourSelfText">
+                                <div class="p-col-4" style="display: flex;" *ngIf="item.user_upload_img == null">
+                                    <a href="">
+                                        <div class="ZmFjZV9pbWdfcmVzaXpl Y2VudGVy">
+                                            <div class="textcenter cut-text-multi">
+                                                <h1>{{item.Text}}</h1>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </ng-container>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="p-col">
+
                     </div>
                 </div>
             </div>
-                
+        </div>
+    </div>
 
-        
-    </body>
+
+
+</body>
+
 </html>
-

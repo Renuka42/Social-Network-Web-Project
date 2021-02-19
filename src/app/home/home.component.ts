@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   profile: any;
   group: any;
   comment_all: any;
-  comment_allMapIndex:any = new Map();
+  comment_allMapIndex: any = new Map();
 
   //ข้อมูลชั่วคราว
   pose_index_temp = 0;
@@ -37,11 +37,11 @@ export class HomeComponent implements OnInit {
   comment_r = 0;
   pose_max = 0;
   working = 0;
- 
+
   //input ข้อมูลชั่วคราว
   comment_text: any;
-  getTextPose_Temp:any;
-  upload_img:string = "";
+  getTextPose_Temp: any;
+  upload_img: string = "";
   upload_video = null;
   lv_pose: any;
   group_id = null;
@@ -54,9 +54,9 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone,private cookieService: CookieService) {
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone, private cookieService: CookieService) {
 
-    if(cookieService.check('user_id') == false || cookieService.check('token') == false){
+    if (cookieService.check('user_id') == false || cookieService.check('token') == false) {
       this.router.navigateByUrl("");
     }
 
@@ -92,21 +92,21 @@ export class HomeComponent implements OnInit {
     this.selectFriend();
     this.selectProfile();
     this.selectgroup();
-  
+
   }
 
   //สำหรับ select ข้อมูล
-  async selectPose(){
+  async selectPose() {
     //สำหรับ select โพสต์โดยเริ่มต้น
-    let json = { user_id: this.user_id ,pose_id: this.pose_max, working:this.working};
-    this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json),this.token).subscribe(async response => {
+    let json = { user_id: this.user_id, pose_id: this.pose_max, working: this.working };
+    this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json), this.token).subscribe(async response => {
       var array = Object.values(response);
 
-       array.forEach((value, index) => {
+      array.forEach((value, index) => {
         //like
-        this.http.get("http://203.154.83.62:1238/select/like/" + value["pose_id"],this.token)
+        this.http.get("http://203.154.83.62:1238/select/like/" + value["pose_id"], this.token)
           .subscribe(re => {
-            var liker =  Object.values(re);
+            var liker = Object.values(re);
             array[index].liked_but = false;
             liker.forEach(element => {
               if (element["user_id_like"] == this.user_id) {
@@ -119,28 +119,25 @@ export class HomeComponent implements OnInit {
           });
 
         //comment
-        this.http.get("http://203.154.83.62:1238/select/commentCount/" + value["pose_id"],this.token)
+        this.http.get("http://203.154.83.62:1238/select/commentCount/" + value["pose_id"], this.token)
           .subscribe(async re => {
             var comment = Object.values(re);
             array[index].comment_comment_length = comment[0]["count"];
-            this.selectComment(value["pose_id"],"new");
+            this.selectComment(value["pose_id"], "new");
           }, err => {
             console.log("re" + JSON.stringify(err));
           });
-
-          
 
       });
       this.pose_all = array;
       this.pose_all_re = array;
       console.log(this.pose_all);
-      
 
 
       // if(this.working == 1){
-        
+
       // }
-      
+
 
     }, error => {
       console.log("fail");
@@ -148,7 +145,7 @@ export class HomeComponent implements OnInit {
   }
   selectgroup() {
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/group", JSON.stringify(json),this.token).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/select/group", JSON.stringify(json), this.token).subscribe(response => {
       this.group = response;
     }, error => {
       console.log("fail");
@@ -158,10 +155,10 @@ export class HomeComponent implements OnInit {
 
   selectFriend() {
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json),this.token).subscribe(response => {
-    var array = Object.values(response);
-    this.friend_all = array;
-    console.log(this.friend_all);
+    this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json), this.token).subscribe(response => {
+      var array = Object.values(response);
+      this.friend_all = array;
+      console.log(this.friend_all);
     }, error => {
       console.log("fail");
     });
@@ -169,7 +166,7 @@ export class HomeComponent implements OnInit {
   }
   selectProfile() {
     let json = { user_id: this.user_id };
-    this.http.post("http://203.154.83.62:1238/select/profile", JSON.stringify(json),this.token).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/select/profile", JSON.stringify(json), this.token).subscribe(response => {
       var array = Object.values(response);
       this.profile = array;
     }, error => {
@@ -178,32 +175,32 @@ export class HomeComponent implements OnInit {
     this.comment_text = "";
   }
 
-  
 
-  selectComment(pose_id:any,mode:any) {
-    
-    if(mode == "new"){
-        this.http.get("http://203.154.83.62:1238/select/comment_all/"+pose_id+"/"+0,this.token)
+
+  selectComment(pose_id: any, mode: any) {
+
+    if (mode == "new") {
+      this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id + "/" + 0, this.token)
         .subscribe(re => {
           var array = Object.values(re);
           this.comment_allMapIndex.set(pose_id, array);
         }, err => {
           console.log("re" + JSON.stringify(err));
         });
-    
-    }else if(mode == "add"){
-      var tempData  =  this.comment_allMapIndex.get(pose_id);
-      
-      this.http.get("http://203.154.83.62:1238/select/comment_all/"+pose_id+"/"+tempData.length,this.token)
+
+    } else if (mode == "add") {
+      var tempData = this.comment_allMapIndex.get(pose_id);
+
+      this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id + "/" + tempData.length, this.token)
         .subscribe(re => {
           var array = Object.values(re);
           var array2 = Object.values(tempData);
-          array2.forEach((element,index) => {
-            array.push(element); 
+          array2.forEach((element, index) => {
+            array.push(element);
           });
           this.comment_allMapIndex.set(pose_id, array);
 
-          
+
         }, err => {
           console.log("re" + JSON.stringify(err));
         });
@@ -213,22 +210,22 @@ export class HomeComponent implements OnInit {
 
 
 
-  
 
-  commentWithPoseid(pose_id:any){
+
+  commentWithPoseid(pose_id: any) {
 
     console.log(this.comment_allMapIndex.get(pose_id).length);
-    
-    
+
+
   }
-  getcommetSizeOfArray(pose_id:any){
+  getcommetSizeOfArray(pose_id: any) {
     return this.comment_allMapIndex.get(pose_id).length;
   }
 
   //สำหรับ Input ข้อมูล
   but_like(pose_id: string, index: any) {
     let json = { u_id: this.user_id, pose_id: pose_id };
-    this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json),this.token).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json), this.token).subscribe(response => {
       if (this.pose_all[index]["liked_but"]) {
         this.pose_all[index]["liked_but"] = false;
         this.pose_all[index]["like"]--;
@@ -242,47 +239,47 @@ export class HomeComponent implements OnInit {
 
   }
   comment(pose_id: any) {
-    
+
     let json = { Text: this.comment_text, u_id: this.user_id, pose_id: pose_id };
     console.log(json);
-    this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json),this.token).subscribe(response => {
+    this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json), this.token).subscribe(response => {
       this.comment_text = "";
       console.log(response);
-      this.selectComment(pose_id,"new");
+      this.selectComment(pose_id, "new");
 
     }, error => {
       console.log("fail");
     });
-    
+
   }
-  inputPoseUser(){
-    if(this.getTextPose_Temp != ""){
+  inputPoseUser() {
+    if (this.getTextPose_Temp != "") {
       console.log(this.getTextPose_Temp == "");
     }
-    
-    if(this.upload_img != ""){
+
+    if (this.upload_img != "") {
       console.log(this.upload_img == "");
     }
 
-    if(this.upload_video != null){
+    if (this.upload_video != null) {
       console.log(this.upload_video == null);
     }
 
-    if(this.group != null){
+    if (this.group != null) {
       console.log(this.group == null);
     }
 
-    if(this.getTextPose_Temp != null || this.getTextPose_Temp != "" || this.getTextPose_Temp != " "){
-      let json = { 
-            text: this.getTextPose_Temp,
-            u_id: this.user_id,
-            user_upload_img: this.upload_img,
-            user_upload_video: this.upload_video,
-            lv_pose: "0",//ยังไม่มีฟังก์ชัน
-            group_id: this.group_id 
-          };
+    if (this.getTextPose_Temp != null || this.getTextPose_Temp != "" || this.getTextPose_Temp != " ") {
+      let json = {
+        text: this.getTextPose_Temp,
+        u_id: this.user_id,
+        user_upload_img: this.upload_img,
+        user_upload_video: this.upload_video,
+        lv_pose: "0",//ยังไม่มีฟังก์ชัน
+        group_id: this.group_id
+      };
       console.log(json);
-      this.http.post("http://203.154.83.62:1238/pose/text", JSON.stringify(json),this.token).subscribe(response => {
+      this.http.post("http://203.154.83.62:1238/pose/text", JSON.stringify(json), this.token).subscribe(response => {
         console.log(response);
         this.selectPose();
       }, error => {
@@ -294,54 +291,54 @@ export class HomeComponent implements OnInit {
   }
 
 
-  UserLogOut(){
+  UserLogOut() {
     this.cookieService.deleteAll();
     this.router.navigateByUrl("");
   }
   uploadedFiles: any[] = [];
-  myUploader(event:any) { 
-    
-    for(let files of event.files) {
+  myUploader(event: any) {
+
+    for (let files of event.files) {
       this.uploadedFiles.push(files);
     }
     const file = this.uploadedFiles[0];
     const formData = new FormData();
     formData.append('file', file, file.name);
-    formData.append('userid',this.user_id);
-    formData.append('folder','');
+    formData.append('userid', this.user_id);
+    formData.append('folder', '');
     this.http.post("http://203.154.83.62:1238/del/kuy/small/file", formData)
-    .subscribe(response => {
-      this.uploadedFiles=[];
-      this.upload_img = (response).toString();
-    }, err => {
-      //handle error
-    });
+      .subscribe(response => {
+        this.uploadedFiles = [];
+        this.upload_img = (response).toString();
+      }, err => {
+        //handle error
+      });
 
   }
-  cen(event:any){
+  cen(event: any) {
     console.log(event);
   }
 
-    
-  
+
+
 
 
 
   //สำหรับตั้งค่า Temp
-  setTempComment(index: any,pose_id:any) {
+  setTempComment(index: any, pose_id: any) {
     //ตั้งค่าโพสต์ปัจจุบันที่กดด้วย index ของ Array
     this.comment_text = "";
     this.pose_index_temp = index;
     this.pose_id_temp = pose_id;
   }
-  setUploadShowAndDropMet(){
-    if(this.setUploadShowAndDrop == false){
+  setUploadShowAndDropMet() {
+    if (this.setUploadShowAndDrop == false) {
       this.setUploadShowAndDrop = true;
-    }else{
+    } else {
       this.setUploadShowAndDrop = false;
     }
   }
-  setoptionConmentsetting(comment_id:any){
+  setoptionConmentsetting(comment_id: any) {
     console.log(comment_id);
   }
 
@@ -394,31 +391,31 @@ export class HomeComponent implements OnInit {
     return Class;
   }
   setDivPoseStyles() {
-    let styles={};
+    let styles = {};
     if (this.innerWidth < 600) {
       styles = {
         'margin-top': 0 + 'px'
       }
-    } 
-    
+    }
+
     return styles;
   }
   setCommentPoseStyles() {
-    let styles={};
+    let styles = {};
     if (this.innerWidth > 1400) {
       styles = {
         'width': 5 + '%'
       }
-    }else if (this.innerWidth > 600) {
+    } else if (this.innerWidth > 600) {
       styles = {
         'width': 10 + '%'
       }
-    } else{
+    } else {
       styles = {
         'width': 6 + '%'
       }
     }
-    
+
     return styles;
   }
   setHeightDivauto() {
@@ -475,12 +472,12 @@ export class HomeComponent implements OnInit {
   }
 
   //สำหรับเชื่อม token webApi
-  tokenUser(token:any){
+  tokenUser(token: any) {
     const headerDict = {
       'TOKEN': token
     }
     const requestOptions = {
-      headers: new HttpHeaders(headerDict), 
+      headers: new HttpHeaders(headerDict),
     };
     return requestOptions;
   }
