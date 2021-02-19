@@ -63,12 +63,13 @@ export class ProfileComponent implements OnInit {
     window.removeEventListener('scroll', this.scroll, true);
   }
   showDivLoading = true;
+  stopLoading = false;
   scroll = (event:any): void => {
     if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-80) && this.showDivLoading == true) {
       console.log("end");
       this.showDivLoading = false;
-      // this.poseLoadAddData = this.poseLoadAddData + 9;
-      // this.selectProfileYourself('photo');
+      this.poseLoadAddData = this.poseLoadAddData + 9;
+      this.selectProfileYourself('photo');
     }
   };
   
@@ -103,19 +104,24 @@ export class ProfileComponent implements OnInit {
 
       });
 
-      
+       
       if(this.poseLoadAddData > 1){
         var poseNow = Object.values(this.poseYourSelf);
+        let index = poseNow.length;
         array.forEach(element => {
           poseNow.push(element);
         });
+          if(index == poseNow.length){
+            this.showDivLoading = false;
+            this.stopLoading = true;
+          }else{
+            this.showDivLoading = true;
+          }
         this.poseYourSelf = poseNow;
-
       }else{
         this.poseYourSelf = array;
-
       }
-      this.showDivLoading = true;
+      
     }, error => {
       console.log("fail");
     });

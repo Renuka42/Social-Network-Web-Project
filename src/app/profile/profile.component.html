@@ -40,8 +40,6 @@
                                     </div>
 
 
-                                    <!-- <button style="margin-top: -55px;font-size: 30px;display: flex;"  pButton pRipple type="button"  icon="pi pi-plus" class="p-button-rounded p-button-Primary "></button> -->
-                                    <!-- <button style="margin-top: -55px;font-size: 30px;display: flex;"  pButton pRipple type="button" label="+" icon="pi pi-user" class="p-button-rounded p-button-Primary "></button> -->
                                     <div style="margin-top: -50px;">
                                         <p-fileUpload [style]="setMyStylestest()" mode="basic" [auto]="setButTrue"
                                             chooseLabel=" " [customUpload]="setButTrue" accept="image/*"
@@ -115,7 +113,7 @@
 
 
 
-    <div  class="p-grid" >
+    <div class="p-grid">
         <div class="p-col-12">
             <div class="box">
                 <div class="p-grid">
@@ -134,7 +132,7 @@
 
 
 
-                        <div class="p-grid" *ngIf="mode_pose == false" >
+                        <div class="p-grid" *ngIf="mode_pose == false">
 
                             <ng-container *ngFor="let item of this.poseYourSelf">
                                 <div class="p-col-4 " style="display: flex;" *ngIf="item.user_upload_img != null">
@@ -164,10 +162,17 @@
 
 
                                 </div>
+
+
                             </ng-container>
 
-                            <div *ngIf="showDivLoading == false">กำลังโหลด</div>
 
+
+                        </div>
+
+                        <div *ngIf="showDivLoading == false && this.stopLoading == false" style="text-align: center;">
+                            กำลังโหลด
+                            <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
                         </div>
 
                         <div class="p-grid" *ngIf="mode_pose == true">

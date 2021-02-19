@@ -29,6 +29,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ProgressBarModule} from 'primeng/progressbar';
 
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     NavbarComponent
   ],
   imports: [
+    ProgressBarModule,
     CheckboxModule,
     BrowserModule,
     AppRoutingModule,
