@@ -19,30 +19,7 @@
 
     <body>
         
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-            <div class="container" [ngStyle]="setMyStyles()">
-                <h1  style="font-size: 40px;">FacesArt</h1>
-    
-                <input (click)="visibleSidebar3 = true" class="p-inputtext-sm" type="text" pInputText placeholder="Search"
-                    style="border-radius: 10px;width: 20%;" />
-    
-                    <div class="p-grid" style="float: right;">
-                    
-                        <a routerLink="/profile">
-                            <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                                class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                        </a>
-                        
-                        <div class="p-col-4"><button style="margin-top: 5px;" (click)="op.toggle($event)" pButton pRipple
-                                type="button" icon="pi pi-bell"
-                                class="p-button-rounded p-button-secondary p-button-sm"></button>
-                        </div>
-                        <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
-                                class="p-button-rounded p-button-secondary p-button-sm"></button></div>
-                    </div>
-            </div>
-        </nav>
-        
+        <app-navbar></app-navbar>
  
         <!-- <hr>
         <div style="text-align: center;">
