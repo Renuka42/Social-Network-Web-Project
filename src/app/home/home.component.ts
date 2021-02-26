@@ -61,6 +61,8 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl("");
     }
 
+
+
     this.user_id = cookieService.get('user_id');
     this.token = this.tokenUser(cookieService.get('token'));
 
@@ -305,8 +307,8 @@ export class HomeComponent implements OnInit {
 
 
   UserLogOut() {
-    this.cookieService.deleteAll();
-    this.router.navigateByUrl("");
+    // this.cookieService.deleteAll();
+    // this.router.navigateByUrl("");
   }
   uploadedFiles: any[] = [];
   myUploader(event: any) {
