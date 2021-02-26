@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   setUploadShowAndDrop: boolean = false;
 
 
+  items: any[] = [];
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone, private cookieService: CookieService) {
 
@@ -84,6 +85,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.visibleSidebar3 = true;
+
+    this.items = [
+      {label: 'Update', icon: 'pi pi-refresh', command: () => {
+          // this.update();
+      }},
+      {label: 'Delete', icon: 'pi pi-times', command: () => {
+          // this.delete();
+      }},
+      {label: 'Angular.io', icon: 'pi pi-info', url: 'http://angular.io'},
+      {separator: true},
+      {label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup']}
+  ];
 
 
 

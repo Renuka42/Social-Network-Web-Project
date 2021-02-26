@@ -332,6 +332,8 @@
                                     <div class="box">
                                         <p-card>
 
+
+
                                             <div class="p-grid">
                                                 <div class="p-col-fixed " style="width:70px;"
                                                     *ngFor="let item of this.profile">
@@ -389,9 +391,9 @@
                                         <div *ngFor="let item of this.pose_all_re ; index as i " class="box">
 
                                             <p-card>
-                                                <div style="text-align: left;">
+                                                <div style="text-align: left;" >
                                                     <div class="p-grid">
-                                                        <div class="p-col-fixed " style="width:70px;">
+                                                        <div class="p-col-fixed " style="width:70px;" >
                                                             <div
                                                                 style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;">
                                                                 <img *ngIf="item.img_profile_base64_temp != null"
@@ -403,15 +405,31 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="p-col">
+
+
+                                                        <div class="p-col" >
                                                             <div style="line-height: 0px;">
                                                                 <h3> <a class="fake-link">{{item.name}}</a></h3>
                                                                 <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
                                                             </div>
 
                                                         </div>
+
+                                                        <div style="text-align: right;margin-top: 15px;">
+
+
+
+                                                            <p-splitButton  icon="pi pi-check"
+                                                                [model]="items"></p-splitButton>
+                                                            <!-- <p-slideMenu #menu [model]="items" [popup]="this.setButTrue" ></p-slideMenu> -->
+
+
+                                                        </div>
+
                                                     </div>
                                                 </div>
+
+
 
                                                 <br>
                                                 <div style="text-align: left;" *ngIf="item.Text.length != 0">

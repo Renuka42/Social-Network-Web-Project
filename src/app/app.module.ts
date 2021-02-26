@@ -30,6 +30,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ProgressBarModule} from 'primeng/progressbar';
+import {SplitButtonModule} from 'primeng/splitbutton';
+
 
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
@@ -50,6 +52,7 @@ const appRoutes: Routes = [
     NavbarComponent
   ],
   imports: [
+    SplitButtonModule,
     ProgressBarModule,
     CheckboxModule,
     BrowserModule,

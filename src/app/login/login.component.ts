@@ -12,6 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
+  
+
   username: any;
   password: any;
   todayNumber: number = Date.now();
@@ -55,6 +57,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
   
   }
 
