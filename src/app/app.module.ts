@@ -31,6 +31,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import { TapBarFriendComponent } from './tap-bar-friend/tap-bar-friend.component';
+import { PoseComponent } from './pose/pose.component';
+import { GroupComponent } from './group/group.component';
 
 
 const appRoutes: Routes = [
@@ -40,6 +43,7 @@ const appRoutes: Routes = [
   { path: 'signin',component: SigninComponent},
   { path: 'listgroup',component: ListgroupComponent},
   { path: 'nav',component: NavbarComponent},
+  { path: 'test',component: TapBarFriendComponent},
 ];
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ const appRoutes: Routes = [
     ProfileComponent,
     ListgroupComponent,
     SigninComponent,
-    NavbarComponent
+    NavbarComponent,
+    TapBarFriendComponent,
+    PoseComponent,
+    GroupComponent
   ],
   imports: [
     SplitButtonModule,

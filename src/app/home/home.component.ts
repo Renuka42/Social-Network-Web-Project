@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class HomeComponent implements OnInit {
 
+  visibleSidebar4 = false;
   //หน้าจอ
   innerHeight: any;
   innerWidth: any;
