@@ -1,3 +1,53 @@
+<!-- 
+<p-dialog header="Title" [(visible)]="displayDelete">
+    <p-card >
+        <div style="text-align: left;">
+            <div class="p-grid" >
+                <div class="p-col-fixed " style="width:70px;" >
+                    <div
+                        style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;">
+                        <img *ngIf="item.img_profile_base64_temp != null"
+                            class="Y2VudGVy"
+                            src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/profile/{{item.img_profile_base64_temp}}">
+                        <img *ngIf="item.img_profile_base64_temp == null"
+                            class="Y2VudGVy"
+                            src="http://203.154.83.62:1238/photo/temp/user"> 
+
+                    </div>
+                </div>
+
+
+                <div class="p-col" >
+                    <div style="line-height: 0px;">
+                        <h3> <a class="fake-link">{{item.name}}</a></h3>
+                        <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
+                    </div>
+
+                </div>
+
+                <button pButton pRipple type="button"  (click)="menu.toggle($event)"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
+                <p-menu #menu [popup]="true" [model]="items"></p-menu>
+                
+            </div>
+        </div>
+
+
+
+        <br>
+        <div style="text-align: left;" *ngIf="item.Text.length != 0">
+            <h3 style="word-wrap: break-word">{{item.Text}}</h3>
+        </div>
+
+        <div *ngIf="item.user_upload_img != null"  style="overflow: hidden">
+            <img style="width: 100%;height: 100%;"
+                src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/{{item.user_upload_img}}">
+        </div>
+
+ 
+    </p-card>
+</p-dialog> -->
+
+
 <div class="box" >
     <p-card>
 
@@ -57,7 +107,7 @@
 
     </p-card>
     <br>
-    <div *ngFor="let item of this.pose_all_re ; index as i " class="box" >
+    <div *ngFor="let item of this.pose_all ; index as i " class="box" >
 
         <p-card >
             <div style="text-align: left;">
@@ -84,11 +134,9 @@
 
                     </div>
 
-                    <button pButton pRipple type="button"  (click)="visibleSidebar4 = true"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
+                    <button pButton pRipple type="button"  (click)="menu.toggle($event);"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
+                    <p-menu #menu [popup]="true" [model]="items"></p-menu>
                     
-
-                    
-
                 </div>
             </div>
 
@@ -233,7 +281,7 @@
 
     </div>
     <p-card>
-        <button class="element"
+        <button class="element" (click)="this.selectPose()"
             style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;"
             pButton pRipple type="submit" icon="pi pi-check"
             class="p-button-rounded p-button-outlined"></button>

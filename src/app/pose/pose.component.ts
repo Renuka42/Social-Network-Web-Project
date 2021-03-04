@@ -18,7 +18,7 @@ export class PoseComponent implements OnInit {
   user_id: any;
   token: any;
   pose_all: any;
-  pose_all_re: any;
+  pose_allMapIndex: any = new Map();
   comment_simple: any;
 
   friend_all: any;
@@ -48,7 +48,8 @@ export class PoseComponent implements OnInit {
   setButTrue: boolean = true;
   setButFalse: boolean = false;
   setUploadShowAndDrop: boolean = false;
-  uploadedFiles: any;
+  uploadedFiles: any = [];
+  items: any;
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone, private cookieService: CookieService) {
@@ -63,18 +64,48 @@ export class PoseComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    window.addEventListener('scroll', this.scroll, true);
+    this.items = [
+      {label: 'Update', icon: 'pi pi-refresh', command: () => {
+          
+      }},
+      {label: 'Delete', icon: 'pi pi-times', command: () => {
+         this.showDialogDelete();
+      }},
+      {label: 'Angular.io', icon: 'pi pi-info', url: 'http://angular.io'},
+      {separator: true},
+      {label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup']}
+  ];
     
     //สำหรับเรียกใช้การ select
     this.selectPose();
     this.selectProfile();
+    
+  }
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.scroll, true);
   }
 
+  stopend = true;
+  scroll = (event:any): void => {
+    if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-150) && this.stopend) {
+      console.log("end");
+      this.selectPose();
+      this.stopend = false;
+    }
+  };
+
+
   async selectPose() {
+
     //สำหรับ select โพสต์โดยเริ่มต้น
+
+    if(this.working == 1){
+      this.pose_max = this.pose_all[this.pose_all.length-1]["pose_id"]
+    }
     let json = { user_id: this.user_id, pose_id: this.pose_max, working: this.working };
     this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json), this.token).subscribe(async response => {
       var array = Object.values(response);
-
       array.forEach((value, index) => {
         //like
         this.http.get("http://203.154.83.62:1238/select/like/" + value["pose_id"], this.token)
@@ -101,17 +132,19 @@ export class PoseComponent implements OnInit {
             console.log("re" + JSON.stringify(err));
           });
 
+          this.pose_allMapIndex.set(value["pose_id"], array[index]);
+
       });
-      this.pose_all = array;
-      this.pose_all_re = array;
-      console.log(this.pose_all);
-
-
-      // if(this.working == 1){
-
-      // }
-
-
+      
+      if(this.working == 1){
+        array.forEach((value, index) => {
+          this.pose_all.push(value);
+        });
+      }else{
+        this.pose_all = array;
+        this.working = 1;
+      }
+      this.stopend = true;
     }, error => {
       console.log("fail");
     });
@@ -179,7 +212,6 @@ export class PoseComponent implements OnInit {
       };
       console.log(json);
       this.http.post("http://203.154.83.62:1238/pose/text", JSON.stringify(json), this.token).subscribe(response => {
-        console.log(response);
         this.selectPose();
       }, error => {
         console.log("fail");
@@ -217,7 +249,6 @@ export class PoseComponent implements OnInit {
           console.log("re" + JSON.stringify(err));
         });
     }
-
   }
 
   setUploadShowAndDropMet() {
@@ -248,17 +279,15 @@ export class PoseComponent implements OnInit {
   }
 
   setoptionConmentsetting(comment_id: any) {
-    console.log(comment_id);
+    
   }
 
 
   comment(pose_id: any) {
 
     let json = { Text: this.comment_text, u_id: this.user_id, pose_id: pose_id };
-    console.log(json);
     this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json), this.token).subscribe(response => {
       this.comment_text = "";
-      console.log(response);
       this.selectComment(pose_id, "new");
 
     }, error => {
@@ -273,6 +302,11 @@ export class PoseComponent implements OnInit {
   visibleSidebar3: any;
   showDialog() {
     this.display = true;
+  }
+
+  displayDelete: boolean = false;
+  showDialogDelete() {
+      this.displayDelete = true;
   }
 
   //สำหรับตั้งค่า Temp

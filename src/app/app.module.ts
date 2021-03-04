@@ -34,7 +34,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import { TapBarFriendComponent } from './tap-bar-friend/tap-bar-friend.component';
 import { PoseComponent } from './pose/pose.component';
 import { GroupComponent } from './group/group.component';
-
+import {MenuModule} from 'primeng/menu';
 
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
@@ -59,6 +59,7 @@ const appRoutes: Routes = [
     GroupComponent
   ],
   imports: [
+    MenuModule,
     SplitButtonModule,
     ProgressBarModule,
     CheckboxModule,
