@@ -35,9 +35,9 @@ export class LoginComponent implements OnInit {
   dis= false;
   visibleSidebar2: any;
   constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService,private cookieService: CookieService) {
-    if(cookieService.check('user_id') == true || cookieService.check('token') == true){
-      this.router.navigateByUrl("/home");
-    }
+    // if(cookieService.check('user_id') == true || cookieService.check('token') == true){
+    //   this.router.navigateByUrl("/home");
+    // }
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
     this.siteKey ="6LemRTcaAAAAAICg9BYjszAhjHqjXRv1B4pMlx3i";

@@ -1,57 +1,67 @@
-   
-
-<p-sidebar [(visible)]="visibleSidebar3" position="top" [baseZIndex]="10000" [style]="{height:'50em'}" >
+<p-sidebar [(visible)]="visibleSidebar3" position="top" [baseZIndex]="10000" [style]="{height:'50em'}">
     <div style="text-align: center;">
-        <input #myinput id="inputSe" class="p-inputtext-sm" type="text" pInputText placeholder="ค้นหาเพื่อน" [(ngModel)]="this.search_text" (keydown)="selectFriendSearch($event)"
-        style="border-radius: 10px;width: 20%;" />
+        <input #myinput id="inputSe" class="p-inputtext-sm" type="text" pInputText placeholder="ค้นหาเพื่อน"
+            [(ngModel)]="this.search_text" (keydown)="selectFriendSearch($event)"
+            style="border-radius: 10px;width: 20%;" />
 
         <div class="p-grid">
-            
-            <div class="p-col" ></div>
-            
-            <div class="p-col-fixed" style="width: 1000px;" >
+
+            <div class="p-col"></div>
+
+            <div class="p-col-fixed" style="width: 1000px;">
                 <div style="text-align:left;">
                     <br>
-                    <p-checkbox  [(ngModel)]="friendSelect"  [binary]="true"></p-checkbox> เพื่อน  &nbsp;
-                    <p-checkbox  [(ngModel)]="NotfriendSelect"  [binary]="true"></p-checkbox> ยังไม่เป็นเพื่อน &nbsp;
-                    <p-checkbox  [(ngModel)]="SendfriendSelect"  [binary]="true"></p-checkbox> ส่งคำขอแล้ว &nbsp;
-                    <p-checkbox  [(ngModel)]="GroupSelect"  [binary]="true"></p-checkbox> กลุ่ม &nbsp;
+                    <p-checkbox [(ngModel)]="friendSelect" [binary]="true"></p-checkbox> เพื่อน &nbsp;
+                    <p-checkbox [(ngModel)]="NotfriendSelect" [binary]="true"></p-checkbox> ยังไม่เป็นเพื่อน &nbsp;
+                    <p-checkbox [(ngModel)]="SendfriendSelect" [binary]="true"></p-checkbox> ส่งคำขอแล้ว &nbsp;
+                    <p-checkbox [(ngModel)]="GroupSelect" [binary]="true"></p-checkbox> กลุ่ม &nbsp;
                 </div>
                 <br>
                 <div style="height: 59vh;overflow: scroll;">
                     <div *ngFor="let friend of this.search_all">
-                            <div class="p-grid"  >
-                                <div class="p-col-10" >
-                                        <div class="p-grid" >
-                                            <div class="p-col-fixed ZWxlbWVudA " style="width:70px;">
-                                                <div  style="border-radius: 50%;width: 60px;height: 60px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 15px;" >
-                                                    <img *ngIf="friend.img_profile_base64_temp != null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{friend.u_id}}/profile/{{friend.img_profile_base64_temp}}">
-                                                    <img *ngIf="friend.img_profile_base64_temp == null" class="Y2VudGVy" src="http://203.154.83.62:1238/photo/temp/user">
-                                                </div> 
-                                            </div>
-                                            <div class="p-col" style="text-align: left;margin-top: 30px;margin-left: 8px;">
-                                            
-                                                    <h2>{{friend.name}}</h2>
-                                                
-                                            </div>
+                        <div class="p-grid">
+                            <div class="p-col-10">
+                                <div class="p-grid">
+                                    <div class="p-col-fixed ZWxlbWVudA " style="width:70px;">
+                                        <div
+                                            style="border-radius: 50%;width: 60px;height: 60px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 15px;">
+                                            <img *ngIf="friend.img_profile_base64_temp != null" class="Y2VudGVy"
+                                                src="http://203.154.83.62:1238/photo/{{friend.u_id}}/profile/{{friend.img_profile_base64_temp}}">
+                                            <img *ngIf="friend.img_profile_base64_temp == null" class="Y2VudGVy"
+                                                src="http://203.154.83.62:1238/photo/temp/user">
                                         </div>
+                                    </div>
+                                    <div class="p-col" style="text-align: left;margin-top: 30px;margin-left: 8px;">
+
+                                        <h2>{{friend.name}}</h2>
+
+                                    </div>
                                 </div>
-                                <div>
-                                    <ng-container [ngSwitch]="isFriend(friend.u_id,'')" >
-                                        <ng-container *ngSwitchCase="1">
-                                            <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="เลิกเป็นเพื่อน" icon="pi pi-user" class="p-button-rounded p-button-danger "></button>
-                                        </ng-container>
-                                        <ng-container *ngSwitchCase="0">
-                                            <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="ส่งคำขอแล้ว" icon="pi pi-user" class="p-button-rounded p-button-Primary "></button>
-                                        </ng-container>
-                                        <ng-container *ngSwitchCase="3">
-                                                <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="เพิ่มเพื่อน" icon="pi pi-user" class="p-button-rounded p-button-secondary "></button>
-                                        </ng-container>
-                                        <ng-container *ngSwitchCase="4">
-                                            <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"  pButton pRipple type="button" label="ตอบรับคำขอ" icon="pi pi-user" class="p-button-rounded p-button-success "></button>
-                                        </ng-container>
+                            </div>
+                            <div>
+                                <ng-container [ngSwitch]="isFriend(friend.u_id,'')">
+                                    <ng-container *ngSwitchCase="1">
+                                        <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"
+                                            pButton pRipple type="button" label="เลิกเป็นเพื่อน" icon="pi pi-user"
+                                            class="p-button-rounded p-button-danger "></button>
                                     </ng-container>
-                                </div>
+                                    <ng-container *ngSwitchCase="0">
+                                        <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"
+                                            pButton pRipple type="button" label="ส่งคำขอแล้ว" icon="pi pi-user"
+                                            class="p-button-rounded p-button-Primary "></button>
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="3">
+                                        <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"
+                                            pButton pRipple type="button" label="เพิ่มเพื่อน" icon="pi pi-user"
+                                            class="p-button-rounded p-button-secondary "></button>
+                                    </ng-container>
+                                    <ng-container *ngSwitchCase="4">
+                                        <button style="margin-top: 30px;" (click)="this.userAddFriend(friend.u_id)"
+                                            pButton pRipple type="button" label="ตอบรับคำขอ" icon="pi pi-user"
+                                            class="p-button-rounded p-button-success "></button>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
                         </div>
                         <hr>
                     </div>
@@ -60,17 +70,12 @@
             <div class="p-col"></div>
         </div>
     </div>
-    
-    
-   
-</p-sidebar>     
 
-   <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="this.innerWidth >= 900">
-        <div class="container" [ngStyle]="setMyStyles()">
-            <h1  style="font-size: 40px;">FacesArt</h1>
+</p-sidebar>
 
-            <input (click)="inputClike(true);myinput.focus()" class="p-inputtext-sm" type="text" pInputText placeholder="Search"
-                style="border-radius: 10px;width: 20%;" />
+<div class="navbar fixed-top" style="background-color: rgb(255, 255, 255);">
+    <div class="container" [ngStyle]="setMyStyles()">
+        <h1 style="font-size: 40px;">FacesArt</h1>
 
             <div class="p-grid" style="float: right;">
                 
@@ -96,29 +101,18 @@
         </div>
     </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="this.innerWidth < 900">
-        <div class="container" [ngStyle]="setMyStyles()">
+        <div class="p-grid" style="float: right;">
 
-            <input class="p-inputtext-sm" type="text" pInputText placeholder="Search"
-                style="border-radius: 10px;width: 30%;" />
-            <div class="p-grid" style="float: right;">
-                <a routerLink="/profile">
-                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
+            <a routerLink="/profile">
+                <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
                         class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                </a>&nbsp;&nbsp;
-                <a routerLink="/profile">
-                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                </a>&nbsp;&nbsp;
-                <a routerLink="/profile">
-                    <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-user"
-                        class="p-button-rounded p-button-secondary p-button-sm"></button> </div>
-                </a>&nbsp;&nbsp;
-                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-bell"
-                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
-                <button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
-                    class="p-button-rounded p-button-secondary p-button-sm"></button>&nbsp;&nbsp;
+            </a>
 
+            <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-bell"
+                    class="p-button-rounded p-button-secondary p-button-sm"></button>
             </div>
+            <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
+                    class="p-button-rounded p-button-secondary p-button-sm"></button></div>
         </div>
-    </nav>
+    </div>
+</div>
