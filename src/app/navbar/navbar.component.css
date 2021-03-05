@@ -13,6 +13,10 @@
     height: 300px;
     overflow: hidden;
   }
+  h1{
+    font-family: 'Anton', sans-serif;
+    color: white;
+  }
 /* -------------------------------------------------------------------------------------------- */
 /* :host ::ng-deep .p-button {
   margin: 0 .5rem 0 0;

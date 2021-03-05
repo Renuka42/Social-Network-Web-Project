@@ -1,0 +1,25 @@
+
+  .Y2VudGVy {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: auto;
+    height: 100%;
+  }
+
+  .ZmFjZV9pbWdfcmVzaXpl{
+    margin-top: -13px;
+    width: 330px;
+    height: 330px;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .ZWxlbWVudA {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    float: right;
+  }

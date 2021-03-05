@@ -1,0 +1,91 @@
+<html>
+    <body>
+        <app-navbar></app-navbar>
+    <br><br><br>
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <div class="box">
+                <div class="p-grid">
+                    <div class="p-col"></div>
+                    <div class="p-col-fixed" style="width: 800px;">
+                        <div style="height: 50px;"></div>
+
+                        <div class="p-grid" *ngFor="let item of this.detallYourSelf">
+                            <div class="p-col-4">
+
+                                <div class="ZWxlbWVudA">
+
+                                    <div
+                                        style="border-radius: 50%;width: 230px;height: 230px;overflow: hidden;background-color: rgb(255, 255, 255);">
+                                        <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy"
+                                            src="http://203.154.83.62:1238/photo/{{this.friend_id}}/profile/{{item.img_profile_base64_temp}}">
+                                        <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy"
+                                            src="http://203.154.83.62:1238/photo/temp/user">
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="p-col-1"></div>
+                            <div class="p-col-7">
+                                <br>
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+
+                                        <form class="form-inline ">
+                                            <h1 style="font-size: 40px;">{{item.name_id}}</h1>
+                                            &#160;&#160;&#160;&#160;&#160;
+                                            <button style="margin-top: -10px;font-size: 13px;" pButton pRipple
+                                                type="button" label="แก้ไขโปรไฟล์"
+                                                class="p-button-rounded p-button-secondary "></button>
+                                        </form>
+                                    </div>
+                                    <div class="p-col-12">
+
+                                        <div class="p-grid">
+
+
+                                            <div class="p-col-4">
+                                                <h3>12 โพสต์</h3>
+                                            </div>
+                                            <div class="p-col-4">
+                                                <h3>172 รูปภาพ</h3>
+                                            </div>
+                                            <div class="p-col-4">
+                                                <h3>เพื่อน 152 คน</h3>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h3><b>{{item.name}}</b></h3>
+                                            <p style="margin-top: -20px;">
+                                                แอบอยู่ห่าง ๆ อย่างห่วง ๆ
+                                            </p>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div style="height: 30px;"></div>
+
+                    </div>
+                    <div class="p-col">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

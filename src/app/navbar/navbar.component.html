@@ -1,3 +1,6 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
 <p-sidebar [(visible)]="visibleSidebar3" position="top" [baseZIndex]="10000" [style]="{height:'50em'}">
     <div style="text-align: center;">
         <input #myinput id="inputSe" class="p-inputtext-sm" type="text" pInputText placeholder="ค้นหาเพื่อน"
@@ -73,9 +76,9 @@
 
 </p-sidebar>
 
-<div class="navbar fixed-top" style="background-color: #FCAD8D;">
+<div class="navbar fixed-top" style="background-color: #334E70;">
     <div class="container" [ngStyle]="setMyStyles()">
-        <h1 style="font-size: 40px;">FacesArt</h1>
+        <h1 style="font-size: 35px; margin-top: 10px;">FACESART</h1>
 
         <input (click)="inputClike(true);myinput.focus()" class="p-inputtext-sm" type="text" pInputText
             placeholder="Search" style="border-radius: 10px;width: 20%;" />

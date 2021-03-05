@@ -47,7 +47,8 @@ selectFriend() {
   this.http.post("http://203.154.83.62:1238/select/friend", JSON.stringify(json), this.token).subscribe(response => {
     var array = Object.values(response);
     this.friend_all = array;
-    console.log(array);
+    console.log("fffffffff");
+    console.log(this.friend_all);
     
   }, error => {
     console.log("fail");
