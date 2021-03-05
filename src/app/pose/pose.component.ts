@@ -49,8 +49,8 @@ export class PoseComponent implements OnInit {
   setButFalse: boolean = false;
   setUploadShowAndDrop: boolean = false;
   uploadedFiles: any = [];
-  items: any;
-
+  itemsPose: any;
+  itemsComment: any;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone, private cookieService: CookieService) {
     if (cookieService.check('user_id') == false || cookieService.check('token') == false) {
@@ -61,37 +61,75 @@ export class PoseComponent implements OnInit {
 
     this.user_id = cookieService.get('user_id');
     this.token = this.tokenUser(cookieService.get('token'));
-   }
+  }
 
   ngOnInit(): void {
     window.addEventListener('scroll', this.scroll, true);
-    this.items = [
-      {label: 'Update', icon: 'pi pi-refresh', command: () => {
-          
-      }},
-      {label: 'Delete', icon: 'pi pi-times', command: () => {
-         this.showDialogDelete();
-      }},
-      {label: 'Angular.io', icon: 'pi pi-info', url: 'http://angular.io'},
-      {separator: true},
-      {label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup']}
-  ];
-    
+
+    //สร้างเมนู
+    //this.memuPose(-1);
     //สำหรับเรียกใช้การ select
     this.selectPose();
     this.selectProfile();
-    
+
   }
   ngOnDestroy() {
     window.removeEventListener('scroll', this.scroll, true);
   }
 
+  selectIndexComment : any;
+  memuCom(index:any) {
+    this.selectIndexComment = index;
+    this.selectIndexPose = null;
+    this.itemsComment = [
+      {
+        label: 'Update', icon: 'pi pi-refresh', command: () => {
+
+        }
+      },
+      {
+        label: 'Delete', icon: 'pi pi-times', command: () => {
+          this.showDialogDelete();
+        }
+      },
+    ];
+  }
+
+  selectIndexPose : any;
+  memuPose(index:any) {
+    this.selectIndexPose = index;
+    this.selectIndexComment = null;
+    this.itemsPose = [
+      {
+        label: 'Update', icon: 'pi pi-refresh', command: () => {
+
+        }
+      },
+      {
+        label: 'Delete', icon: 'pi pi-times', command: () => {
+          this.showDialogDelete();
+        }
+      },
+    ];
+  }
+
+  deletePose(){
+    let json = { user_id: this.user_id ,pose_id:this.selectIndexPose};
+    this.http.post("http://203.154.83.62:1238/delete/pose_delete", JSON.stringify(json), this.token).subscribe(response => {
+      window.location.reload();
+    }, error => {
+      console.log("fail");
+    });
+  }
+
+ 
+
   stopend = true;
-  scroll = (event:any): void => {
-    if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-150) && this.stopend) {
-      console.log("end");
-      this.selectPose();
+  test = true;
+  scroll = (event: any): void => {
+    if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight - 150) && this.stopend && this.test) {
       this.stopend = false;
+      this.selectPose();
     }
   };
 
@@ -100,8 +138,8 @@ export class PoseComponent implements OnInit {
 
     //สำหรับ select โพสต์โดยเริ่มต้น
 
-    if(this.working == 1){
-      this.pose_max = this.pose_all[this.pose_all.length-1]["pose_id"]
+    if (this.working == 1) {
+      this.pose_max = this.pose_all[this.pose_all.length - 1]["pose_id"]
     }
     let json = { user_id: this.user_id, pose_id: this.pose_max, working: this.working };
     this.http.post("http://203.154.83.62:1238/select/pose_all", JSON.stringify(json), this.token).subscribe(async response => {
@@ -132,22 +170,28 @@ export class PoseComponent implements OnInit {
             console.log("re" + JSON.stringify(err));
           });
 
-          this.pose_allMapIndex.set(value["pose_id"], array[index]);
-
       });
-      
-      if(this.working == 1){
+
+      if (this.working == 1) {
+        let indexNow = this.pose_all.length;
         array.forEach((value, index) => {
           this.pose_all.push(value);
+          this.pose_allMapIndex.set(value["pose_id"], index + indexNow);
         });
-      }else{
+        this.stopend = true;
+      } else {
         this.pose_all = array;
+        array.forEach((value, index) => {
+          this.pose_allMapIndex.set(value["pose_id"], index);
+        });
         this.working = 1;
+        this.stopend = true;
       }
-      this.stopend = true;
     }, error => {
       console.log("fail");
     });
+
+
   }
 
   selectProfile() {
@@ -212,7 +256,7 @@ export class PoseComponent implements OnInit {
       };
       console.log(json);
       this.http.post("http://203.154.83.62:1238/pose/text", JSON.stringify(json), this.token).subscribe(response => {
-        this.selectPose();
+        window.location.reload();
       }, error => {
         console.log("fail");
       });
@@ -249,6 +293,7 @@ export class PoseComponent implements OnInit {
           console.log("re" + JSON.stringify(err));
         });
     }
+
   }
 
   setUploadShowAndDropMet() {
@@ -263,6 +308,7 @@ export class PoseComponent implements OnInit {
 
   //สำหรับ Input ข้อมูล
   but_like(pose_id: string, index: any) {
+    console.log(this.comment_allMapIndex);
     let json = { u_id: this.user_id, pose_id: pose_id };
     this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json), this.token).subscribe(response => {
       if (this.pose_all[index]["liked_but"]) {
@@ -279,16 +325,17 @@ export class PoseComponent implements OnInit {
   }
 
   setoptionConmentsetting(comment_id: any) {
-    
+
   }
 
 
-  comment(pose_id: any) {
+  comment(pose_id: any, comment_text: any) {
 
-    let json = { Text: this.comment_text, u_id: this.user_id, pose_id: pose_id };
+    let json = { Text: comment_text.value, u_id: this.user_id, pose_id: pose_id };
+    comment_text.value = "";
     this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json), this.token).subscribe(response => {
-      this.comment_text = "";
       this.selectComment(pose_id, "new");
+      this.pose_all[this.pose_allMapIndex.get(pose_id)]["comment_comment_length"] = this.pose_all[this.pose_allMapIndex.get(pose_id)]["comment_comment_length"] + 1;
 
     }, error => {
       console.log("fail");
@@ -306,7 +353,7 @@ export class PoseComponent implements OnInit {
 
   displayDelete: boolean = false;
   showDialogDelete() {
-      this.displayDelete = true;
+    this.displayDelete = true;
   }
 
   //สำหรับตั้งค่า Temp
@@ -318,26 +365,17 @@ export class PoseComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-    //สำหรับเชื่อม token webApi
-    tokenUser(token: any) {
-      const headerDict = {
-        'TOKEN': token
-      }
-      const requestOptions = {
-        headers: new HttpHeaders(headerDict),
-      };
-      return requestOptions;
+  //สำหรับเชื่อม token webApi
+  tokenUser(token: any) {
+    const headerDict = {
+      'TOKEN': token
     }
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    return requestOptions;
+  }
 
-  
+
 
 }
