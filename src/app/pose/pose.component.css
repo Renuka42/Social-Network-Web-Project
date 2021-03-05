@@ -18,9 +18,10 @@
     border-radius: 20px;
   }
   .fake-link {
-    color: rgb(60, 60, 60);
+    color: rgb(255, 255, 255);
     cursor: pointer;
   }
   h3,p,button,h1{
     font-family: 'Kanit', sans-serif;
+    color: rgb(255, 255, 255);
   }

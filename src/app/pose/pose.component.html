@@ -21,13 +21,14 @@
     
 </p-dialog> 
 
-<div class="box" >
-    <p-card>
+<div  style="margin-top: 15px;">
+
+    <p-card [style]="{'background-color':'rgb(60, 60, 60)','border-radius':'15px 15px 15px 15px'}">
         <div class="p-grid">
             <div class="p-col-fixed " style="width:70px;"
                 *ngFor="let item of this.profile">
                 <div
-                    style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;">
+                    style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(123, 123, 123);margin-top: 3px;">
                     <img *ngIf="item.img_profile_base64_temp != null"
                         class="Y2VudGVy"
                         src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
@@ -47,7 +48,7 @@
         </div>
 
 
-        <p-fileUpload *ngIf="this.setUploadShowAndDrop == true"
+        <p-fileUpload *ngIf="this.setUploadShowAndDrop == true  "
             (onSelect)="myUploader($event)" (onRemove)="cen($event)"
             [customUpload]="this.setButTrue" [showCancelButton]="this.setButFalse"
             [showUploadButton]="this.setButFalse" accept="image/*"
@@ -55,20 +56,21 @@
 
 
         <div style="text-align: left;">
-            <textarea style="width: 100%" [rows]="4" [autoResize]="this.setButTrue"
+            <textarea style="width: 100%" [rows]="4" [autoResize]="this.setButTrue" [style]="{'background-color':'rgb(40, 40, 40)','border-color':'rgb(40, 40, 40)'}" 
                 [(ngModel)]="getTextPose_Temp" pInputTextarea></textarea>
         </div>
 
         <div style="text-align: left;">
 
-            <button style="width: 50%;" pButton type="button" label="โพสเลย"
-                class="p-button-outlined"
+            <button style="width: 50%;" pButton pRipple type="button" label="โพสเลย"
+                class="p-button-raised p-button-info"
                 (click)="inputPoseUser();this.setUploadShowAndDrop = false"></button>
 
             <button (click)="this.setUploadShowAndDropMet()" style="width: 50%;"
-                pButton type="button" label="รูปภาพ/วีดิโอ"
-                class="p-button-outlined p-button-success"
+                pButton pRipple type="button" label="รูปภาพ/วีดิโอ"
+                class="p-button-raised p-button-help"
                 icon="pi pi-image"></button>
+
 
 
         </div>
@@ -78,7 +80,7 @@
     <br>
     <div *ngFor="let item of this.pose_all ; index as i " class="box" >
 
-        <p-card >
+        <p-card [style]="{'background-color':'rgb(60, 60, 60)','border-radius':'15px 15px 15px 15px'}">
             <div style="text-align: left;">
                 <div class="p-grid" >
                     <div class="p-col-fixed " style="width:70px;" >
@@ -182,7 +184,7 @@
                     <div class="p-col-10">
 
                         <div class="demo-container p-p-1"
-                            style="border-radius: 25px;background-color: rgb(242, 242, 242);">
+                            style="border-radius: 25px;background-color: rgb(39, 39, 39);">
                             <div class="p-grid"
                                 style="text-align: left;margin-top: -2px;margin-left: 3px;">
                                 <div class="p-col-fixed" style="width: auto;">
@@ -226,7 +228,7 @@
                 </div>
                 <div class="p-col-fixed " style="width: 83%;">
 
-                    <textarea #titleInput
+                    <textarea #titleInput [style]="{'background-color':'rgb(40, 40, 40)','border-color':'rgb(40, 40, 40)'}"
                         (keydown.enter)="comment(item.pose_id,titleInput)" [rows]="1"
                         style="border-radius: 10px 10px 10px 10px;width: 100%;"
                         pInputTextarea placeholder="แสดงความคิดเห็น"
