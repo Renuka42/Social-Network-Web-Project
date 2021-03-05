@@ -36,6 +36,7 @@ import { PoseComponent } from './pose/pose.component';
 import { GroupComponent } from './group/group.component';
 import {MenuModule} from 'primeng/menu';
 
+
 const appRoutes: Routes = [
   { path: '*',component: LoginComponent},
   { path: 'home',component: HomeComponent},
