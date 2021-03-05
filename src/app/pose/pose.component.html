@@ -9,6 +9,15 @@
     
 </p-dialog> 
 
+<p-dialog header="ลบคอมเมนต์ของคุณใช่ไหม" [modal]="true" [(visible)]="displayCom">
+    <h3>รายการนี้จะไม่สามารถกู้คืนได้อีก คุณแน่ใจแล้วใช่ไหม</h3>
+    
+    <div style="float: right;">
+        <button pButton pRipple type="button" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
+        <button pButton pRipple type="button" (click)="deleteCom();this.displayCom = false;" icon="pi pi-check" label="ลบ" class="p-button-danger"></button>
+    </div>
+    
+</p-dialog> 
 
 <div class="box" >
     <p-card>
@@ -91,9 +100,10 @@
                         </div>
 
                     </div>
-
-                    <button pButton pRipple type="button"  (click)="menuPose.toggle($event);memuPose(item.pose_id)"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
-                    <p-menu #menuPose [popup]="true" [model]="itemsPose"></p-menu>
+                    <ng-container *ngIf="this.user_id == item.user_pose_fk">
+                        <button pButton pRipple type="button"  (click)="menuPose.toggle($event);memuPose(item.pose_id)"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
+                        <p-menu #menuPose [popup]="true" [model]="itemsPose"></p-menu>
+                    </ng-container>
                 </div>
             </div>
 
@@ -186,11 +196,11 @@
                         </div>
                     </div>
                     <div class="p-col-1">
-                        
-                        <button pButton pRipple type="button"  (click)="memuComment.toggle($event);this.memuCom(ins.c_id)"  icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain"></button>
-                        <p-menu #memuComment [popup]="true" [model]="itemsComment"></p-menu>
-                    </div>
-
+                        <ng-container *ngIf="this.user_id == ins.user_comment_fk">
+                            <button pButton pRipple type="button"  (click)="memuComment.toggle($event);this.memuCom(ins.c_id,item.pose_id)"  icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain"></button>
+                            <p-menu #memuComment [popup]="true" [model]="itemsComment"></p-menu>
+                        </ng-container>
+                </div>
 
                 </ng-container>
             </div>

@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
 
   handleSuccess($event: any){
     this.dis = true;
+ 
   }
 
   ngOnInit(): void {
@@ -89,8 +90,7 @@ export class LoginComponent implements OnInit {
       this.cookieService.set( 'user_id', superId+"" );
       this.cookieService.set( "token",this.tokens.token );
       
-      // localStorage.setItem("user_id",superId+"");
-      // localStorage.setItem("token",this.tokens.token);
+
       this.router.navigateByUrl("/home");
     }
     }, () => {

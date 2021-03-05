@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -78,9 +79,9 @@ export class PoseComponent implements OnInit {
   }
 
   selectIndexComment : any;
-  memuCom(index:any) {
+  memuCom(index:any,indexPose:any) {
     this.selectIndexComment = index;
-    this.selectIndexPose = null;
+    this.selectIndexPose = indexPose;
     this.itemsComment = [
       {
         label: 'Update', icon: 'pi pi-refresh', command: () => {
@@ -89,7 +90,7 @@ export class PoseComponent implements OnInit {
       },
       {
         label: 'Delete', icon: 'pi pi-times', command: () => {
-          this.showDialogDelete();
+          this.showDialogCom();
         }
       },
     ];
@@ -121,15 +122,23 @@ export class PoseComponent implements OnInit {
       console.log("fail");
     });
   }
+  deleteCom(){
+    let json = { user_id: this.user_id ,c_id:this.selectIndexComment};
+    this.http.post("http://203.154.83.62:1238/delete/com_delete", JSON.stringify(json), this.token).subscribe(response => {
+      this.selectComment(this.selectIndexPose,"new");
+      this.pose_all[this.pose_allMapIndex.get(this.selectIndexPose)]["comment_comment_length"] = this.pose_all[this.pose_allMapIndex.get(this.selectIndexPose)]["comment_comment_length"] - 1;
+    }, error => {
+      console.log("fail");
+    });
+  
+  }
+   
 
  
 
-  stopend = true;
-  test = true;
   scroll = (event: any): void => {
-    if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight - 150) && this.stopend && this.test) {
-      this.stopend = false;
-      this.selectPose();
+    if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight)) {
+      //this.selectPose();
     }
   };
 
@@ -178,14 +187,15 @@ export class PoseComponent implements OnInit {
           this.pose_all.push(value);
           this.pose_allMapIndex.set(value["pose_id"], index + indexNow);
         });
-        this.stopend = true;
+        
       } else {
         this.pose_all = array;
         array.forEach((value, index) => {
           this.pose_allMapIndex.set(value["pose_id"], index);
         });
         this.working = 1;
-        this.stopend = true;
+        console.log(this.pose_all);
+       
       }
     }, error => {
       console.log("fail");
@@ -354,6 +364,11 @@ export class PoseComponent implements OnInit {
   displayDelete: boolean = false;
   showDialogDelete() {
     this.displayDelete = true;
+  }
+
+  displayCom: boolean = false;
+  showDialogCom() {
+    this.displayCom = true;
   }
 
   //สำหรับตั้งค่า Temp
