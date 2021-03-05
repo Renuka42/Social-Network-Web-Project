@@ -21,3 +21,6 @@
     color: rgb(60, 60, 60);
     cursor: pointer;
   }
+  h3,p,button,h1{
+    font-family: 'Kanit', sans-serif;
+  }

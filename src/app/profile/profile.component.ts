@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
   setButTrue: boolean = true;
   setButFalse: boolean = false;
 
-
+  displayResponsive: boolean = false;
 
   constructor(private http: HttpClient, private router: Router, private MetforFacesArt: TokenService, cookieService: CookieService) {
     if (cookieService.check('user_id') == false || cookieService.check('token') == false) {
@@ -202,6 +202,10 @@ export class ProfileComponent implements OnInit {
       headers: new HttpHeaders(headerDict)
     };
     return requestOptions;
+  }
+
+  showResponsiveDialog() {
+    this.displayResponsive = true;
   }
 
 }

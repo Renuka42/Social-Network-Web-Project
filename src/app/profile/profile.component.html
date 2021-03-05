@@ -58,8 +58,16 @@
                                             <h1 style="font-size: 40px;">{{item.name_id}}</h1>
                                             &#160;&#160;&#160;&#160;&#160;
                                             <button style="margin-top: -10px;font-size: 13px;" pButton pRipple
-                                                type="button" label="แก้ไขโปรไฟล์"
-                                                class="p-button-rounded p-button-secondary "></button>
+                                                type="button" label="แก้ไขโปรไฟล์" 
+                                                class="p-button-rounded p-button-secondary " (click)="showResponsiveDialog()"></button> 
+                                                    <p-dialog header="แก้ไขโปรไฟล์" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '50vw'}" [baseZIndex]="10000" 
+                                                    [draggable]="false" [resizable]="false">
+                                                        <p>Lorem ipsum .</p>
+                                                            <ng-template pTemplate="footer">
+                                                            <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
+                                                            <p-button (click)="displayResponsive=false" label="Save" styleClass="p-button-text"></p-button>
+                                                            </ng-template>
+                                                    </p-dialog>
                                         </form>
                                     </div>
                                     <div class="p-col-12">
