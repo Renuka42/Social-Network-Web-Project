@@ -340,9 +340,8 @@ export class PoseComponent implements OnInit {
 
 
   comment(pose_id: any, comment_text: any) {
-
     let json = { Text: comment_text.value, u_id: this.user_id, pose_id: pose_id };
-    comment_text.value = "";
+    comment_text.value= '';
     this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json), this.token).subscribe(response => {
       this.selectComment(pose_id, "new");
       this.pose_all[this.pose_allMapIndex.get(pose_id)]["comment_comment_length"] = this.pose_all[this.pose_allMapIndex.get(pose_id)]["comment_comment_length"] + 1;

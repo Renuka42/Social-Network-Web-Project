@@ -1,3 +1,237 @@
+<p-dialog header="ลบโพสต์ของคุณใช่ไหม" [modal]="true" [(visible)]="displayDelete" [baseZIndex]="20000">
+    <h3>รายการนี้จะไม่สามารถกู้คืนได้อีก คุณแน่ใจแล้วใช่ไหม</h3>
+    
+    <div style="float: right;">
+        <button pButton pRipple type="button" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
+        <button pButton pRipple type="button" (click)="deletePose()" icon="pi pi-check" label="ลบ" class="p-button-danger"></button>
+    </div>
+    
+</p-dialog> 
+
+<p-dialog header="ลบคอมเมนต์ของคุณใช่ไหม" [modal]="true" [(visible)]="displayCom" [baseZIndex]="20000">
+    <h3>รายการนี้จะไม่สามารถกู้คืนได้อีก คุณแน่ใจแล้วใช่ไหม</h3>
+    
+    <div style="float: right;">
+        <button pButton pRipple type="button" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
+        <button pButton pRipple type="button" (click)="deleteCom();this.displayCom = false;" icon="pi pi-check" label="ลบ" class="p-button-danger"></button>
+    </div>
+    
+</p-dialog> 
+
+
+<p-dialog header="แก้ไขโปรไฟล์" [(visible)]="displayResponsive" [modal]="true" [style]="{width:'60vm',height:'40vm'}" 
+[baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+   
+        <div class="sizes" *ngFor="let item of this.detallYourSelf">
+  
+                <div>
+                    <label for="test">ขื่อ</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><input type="text" class="p-inputtext-sm" placeholder="{{item.name}}" pInputText /></span>
+                </div>
+                <br>
+                <div>
+                    <label for="test">Name ID</label> &nbsp;
+                    <span><input type="text" class="p-inputtext-sm" placeholder="{{item.name_id}}" pInputText /></span>
+                </div>
+        </div>
+        <br>
+        <div style="float: right;">
+
+            <button pButton pRipple type="button" (click)="displayResponsive=false" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
+            <button pButton pRipple type="button" (click)="displayResponsive=false" icon="pi pi-check" label="บันทึก" class="p-button-success"></button>
+        </div>
+
+</p-dialog>
+
+<p-dialog header="โพสต์ของคุณ" [(visible)]="PoseSelete" [modal]="true" [contentStyle]="setColorDigitPose()" [style]="{width:'900px'}"
+[baseZIndex]="10000" [draggable]="false" [resizable]="true">
+
+<ng-container *ngFor="let item of array">
+ <br>
+    <div class="p-grid" >
+        <div class="p-col-7">
+            <p-card [style]="{'background-color':'rgb(60, 60, 60)','border-radius':'15px 15px 15px 15px'}">
+                <div style="text-align: left;"  >
+                    <div class="p-grid" *ngFor="let profile of detallYourSelf">
+                        <div class="p-col-fixed " style="width:70px;" >
+                            <div 
+                                style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;">
+                                <img *ngIf="profile.img_profile_base64_temp != null"
+                                    class="Y2VudGVy"
+                                    src="http://203.154.83.62:1238/photo/{{user_id}}/profile/{{profile.img_profile_base64_temp}}">
+                                <img *ngIf="profile.img_profile_base64_temp == null"
+                                    class="Y2VudGVy"
+                                    src="http://203.154.83.62:1238/photo/temp/user"> 
+            
+                            </div>
+                        </div>
+            
+            
+                        <div class="p-col" >
+                            <div style="line-height: 0px;">
+                                <h3> <a class="fake-link">{{profile.name}}</a></h3>
+                                <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
+                            </div>
+            
+                        </div>
+                        <ng-container *ngIf="this.user_id == item.user_pose_fk">
+                            <button pButton pRipple type="button"  (click)="menuPose.toggle($event);memuPose(item.pose_id)"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
+                            <p-menu #menuPose [popup]="true" [model]="itemsPose" appendTo="p-dialog"></p-menu>
+                        </ng-container>
+                    </div>
+                </div>
+            
+            
+            
+                <br>
+                <div style="text-align: left;" *ngIf="item.Text.length != 0">
+                    <h3 style="word-wrap: break-word">{{item.Text}}</h3>
+                </div>
+            
+                <div *ngIf="item.user_upload_img != null"  style="overflow: hidden">
+                    <img style="width: 100%;height: 100%;"
+                        src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/{{item.user_upload_img}}">
+                </div>
+            
+                <div style="text-align: left;">
+                    <hr *ngIf="item.like != 0 || item.comment_comment_length != 0">
+                    <div class="p-grid">
+                        <div *ngIf="item.like != 0" class="p-col-fixed">
+                            <a class="fake-link">{{item.like}} ถูกใจ</a>
+                        </div>
+                        <div *ngIf="item.comment_comment_length != 0" class="p-col">
+                            <a (click)="setTempComment(item.pose_id);this.selectComment(item.pose_id,'new')"
+                                class="fake-link">{{item.comment_comment_length}}
+                                แสดงความคิดเห็น</a>
+                        </div>
+                    </div>
+            
+            
+                </div>
+                <div style="text-align: left;">
+                    <hr>
+                    <button *ngIf="item.liked_but == false"
+                        (click)="but_like(item.pose_id)" style="width: 50%;" pButton
+                        type="button" label="ถูกใจ" class="p-button-text"
+                        icon="pi pi-thumbs-up"></button>
+                    <button *ngIf="item.liked_but == true"
+                        (click)="but_like(item.pose_id)" style="width: 50%;" pButton
+                        type="button" label="ถูกใจ" class="p-button-raised"
+                        icon="pi pi-thumbs-up"></button>
+                    <button (click)="setTempComment(item.pose_id)"
+                        style="width: 50%;" pButton type="button"
+                        label="แสดงความคิดเห็น" class="p-button-text"
+                        icon="pi pi-comments"></button>
+            
+                </div>
+                <hr>
+                
+              
+            </p-card>
+        </div>
+        <div class="p-col-5"  >
+            <div >
+                <div style="text-align: left;"
+                    *ngIf="comment_allMapIndex.get(item.pose_id)?.length < item.comment_comment_length">
+                    <a (click)="setTempComment(item.pose_id);this.selectComment(item.pose_id,'add')"
+                        class="fake-link">
+                        <h3>ดูความคิดเห็นทั้งหมด</h3>
+                    </a>
+            
+            
+                </div>
+
+                <div class="p-grid" *ngIf="item.comment_comment_length != 0" >
+                    <ng-container
+                        *ngFor="let ins of this.comment_allMapIndex.get(item.pose_id)">
+            
+                        <div class="p-col-1" >
+                            <div
+                                style="border-radius: 50%;width: 40px;height: 40px;overflow: hidden;background-color: rgb(255, 255, 255);">
+                                <img *ngIf="ins.img_profile_base64_temp != null"
+                                    class="Y2VudGVy"
+                                    src="http://203.154.83.62:1238/photo/{{ins.user_comment_fk}}/profile/{{ins.img_profile_base64_temp}}">
+                                <img *ngIf="ins.img_profile_base64_temp == null"
+                                    class="Y2VudGVy"
+                                    src="http://203.154.83.62:1238/photo/temp/user">
+            
+                            </div>
+                        </div>
+                        <div class="p-col-10">
+            
+                            <div class="demo-container p-p-1" 
+                                style="border-radius: 25px;background-color: rgb(39, 39, 39);margin-left: 20px;">
+                                <div class="p-grid"
+                                    style="text-align: left;margin-top: -2px;margin-left: 3px;">
+                                    <div class="p-col-fixed" style="width: auto;">
+                                        <h3><b>{{ins.name}}</b> </h3>
+                                    </div>
+                                    <div class="p-col"
+                                        style="color: darkgrey;margin-top: 3px;">
+                                    </div>
+                                </div>
+                                <h3
+                                    style="word-wrap: break-word;margin-top: -25px;width: auto;margin-left: 10px;">
+                                    {{ins.Text}}</h3>
+                            </div>
+                        </div>
+                        <div class="p-col-1">
+                            <ng-container *ngIf="this.user_id == ins.user_comment_fk">
+                                <button pButton pRipple type="button"  (click)="memuComment.toggle($event);this.memuCom(ins.c_id,item.pose_id)"  icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain"></button>
+                                <p-menu #memuComment [popup]="true" [model]="itemsComment" appendTo="p-dialog" ></p-menu>
+                            </ng-container>
+                    </div>
+            
+                    </ng-container>
+                </div>
+            
+            
+            
+            
+                <div class="p-grid">
+                    <div class="p-col-fixed " style="width:50px;"
+                        *ngFor="let item of this.detallYourSelf">
+                        <div
+                            style="border-radius: 50%;width: 40px;height: 40px;overflow: hidden;background-color: rgb(255, 255, 255);">
+                            <img *ngIf="item.img_profile_base64_temp != null"
+                                class="Y2VudGVy"
+                                src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
+                            <img *ngIf="item.img_profile_base64_temp == null"
+                                class="Y2VudGVy"
+                                src="http://203.154.83.62:1238/photo/temp/user">
+            
+                        </div>
+                    </div>
+                    <div class="p-col-fixed " style="width: 78%;">
+            
+                        <textarea #titleInput [style]="{'background-color':'rgb(40, 40, 40)','border-color':'rgb(40, 40, 40)','color':'#FFFFFF'}"
+                            (keydown.enter)="comment(item.pose_id,titleInput)" [rows]="1"
+                            style="border-radius: 10px 10px 10px 10px;width: 100%;"
+                            pInputTextarea placeholder="แสดงความคิดเห็น"
+                            [autoResize]="this.setButTrue"></textarea>
+                    </div>
+                    <div class="p-col-fixed " style="width: 8%;">
+                        <button class="element"
+                            style="border-radius: 30px 30px 30px 30px;width: 40px;height: 40px;margin-left: -6px;"
+                            pButton pRipple type="submit" icon="pi pi-send"
+                            class="p-button-rounded p-button-text p-button-plain"
+                            (click)="comment(item.pose_id,titleInput.value)"></button>
+                    </div>
+            
+                </div> 
+            
+            </div>
+            
+        </div>
+    </div>
+
+
+
+</ng-container>
+
+</p-dialog>
+
 
 <html>
 
@@ -9,7 +243,7 @@
 
 </head>
 
-<body>
+<body style="background-color: rgb(30, 30, 30);">
     <app-navbar></app-navbar>
     <br><br><br>
 
@@ -60,14 +294,7 @@
                                             <button style="margin-top: -10px;font-size: 13px;" pButton pRipple
                                                 type="button" label="แก้ไขโปรไฟล์" 
                                                 class="p-button-rounded p-button-secondary " (click)="showResponsiveDialog()"></button> 
-                                                    <p-dialog header="แก้ไขโปรไฟล์" [(visible)]="displayResponsive"  [style]="{width: '50vw'}" [baseZIndex]="10000" 
-                                                    [draggable]="false" [resizable]="false">
-                                                        <p>Lorem ipsum .</p>
-                                                            <ng-template pTemplate="footer">
-                                                            <p-button (click)="displayResponsive=false" label="Cancel" styleClass="p-button-text"></p-button>
-                                                            <p-button (click)="displayResponsive=false" label="Save" styleClass="p-button-text"></p-button>
-                                                            </ng-template>
-                                                    </p-dialog>
+                                                    
                                         </form>
                                     </div>
                                     <div class="p-col-12">
@@ -123,7 +350,7 @@
                 <div class="p-grid">
                     <div class="p-col"></div>
                     <div class="p-col-fixed" style="width: 1000px;">
-                        <hr>
+                        <hr style="background-color: rgb(60, 60, 60);">
                         <div style="text-align: center;">
                             <button pButton pRipple type="button" label="รูปภาพ" (click)="mode_pose = false"
                                 class="p-button-secondary p-button-text"></button>
@@ -142,7 +369,7 @@
                                 <div class="p-col-4 " style="display: flex;" *ngIf="item.user_upload_img != null">
 
 
-                                    <a href="">
+                                    <a style="cursor: pointer;" (click)="showPoseSelete(item.pose_id)">
 
                                         <div class="ZmFjZV9pbWdfcmVzaXpl overlay-image">
 

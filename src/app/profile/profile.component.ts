@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -17,10 +18,11 @@ export class ProfileComponent implements OnInit {
   innerWidth: any;
 
   //แสดงข้อมูล
-  
+  pose_allMapIndex: any = new Map();
   user_id: any;
   poseYourSelf:any;
   poseYourSelfMapIndex: any = new Map();
+  comment_allMapIndex: any = new Map();
   poseYourSelfText: any;
   detallYourSelf: any;
   friend_all: any;
@@ -41,6 +43,9 @@ export class ProfileComponent implements OnInit {
   setButFalse: boolean = false;
 
   displayResponsive: boolean = false;
+  PoseSelete = false;
+  itemsComment: any;
+  itemsPose: any;
 
   constructor(private http: HttpClient, private router: Router, private MetforFacesArt: TokenService, cookieService: CookieService) {
     if (cookieService.check('user_id') == false || cookieService.check('token') == false) {
@@ -65,16 +70,79 @@ export class ProfileComponent implements OnInit {
   showDivLoading = true;
   stopLoading = false;
   scroll = (event:any): void => {
-    if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-80) && this.showDivLoading == true) {
-      console.log("end");
-      this.showDivLoading = false;
-      this.poseLoadAddData = this.poseLoadAddData + 9;
-      this.selectProfileYourself('photo');
-    }
+    // if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-80) && this.showDivLoading == true) {
+    //   console.log("end");
+    //   this.showDivLoading = false;
+    //   this.poseLoadAddData = this.poseLoadAddData + 9;
+    //   this.selectProfileYourself('photo');
+    // }
   };
   
-    
+  selectIndexComment : any;
+  memuCom(index:any,indexPose:any) {
+    this.selectIndexComment = index;
+    // this.selectIndexPose = indexPose;
+    this.itemsComment = [
+      {
+        label: 'Update', icon: 'pi pi-refresh', command: () => {
 
+        }
+      },
+      {
+        label: 'Delete', icon: 'pi pi-times', command: () => {
+          this.showDialogCom();
+        }
+      },
+    ];
+  }
+
+
+  selectIndexPose : any;
+  memuPose(index:any) {
+    // this.selectIndexPose = index;
+    this.selectIndexComment = null;
+    this.itemsPose = [
+      {
+        label: 'Update', icon: 'pi pi-refresh', command: () => {
+
+        }
+      },
+      {
+        label: 'Delete', icon: 'pi pi-times', command: () => {
+          this.showDialogDelete();
+        }
+      },
+    ];
+  }
+
+  displayDelete: boolean = false;
+  showDialogDelete() {
+    this.displayDelete = true;
+  }
+
+  displayCom: boolean = false;
+  showDialogCom() {
+    this.displayCom = true;
+  }
+  deletePose(){
+    let json = { user_id: this.user_id ,pose_id:this.selectIndexPose};
+    this.http.post("http://203.154.83.62:1238/delete/pose_delete", JSON.stringify(json), this.token).subscribe(response => {
+      window.location.reload();
+    }, error => {
+      console.log("fail");
+    });
+  }
+  deleteCom(){
+    let json = { user_id: this.user_id ,c_id:this.selectIndexComment};
+    this.http.post("http://203.154.83.62:1238/delete/com_delete", JSON.stringify(json), this.token).subscribe(response => {
+      this.selectComment(this.selectIndexPose,"new");
+      this.array[0]["comment_comment_length"] = this.array[0]["comment_comment_length"] - 1;
+    }, error => {
+      console.log("fail");
+    });
+  
+  }
+   
 
   //สำหรับ select ข้อมูล
   async selectProfileYourself(mode: any) {
@@ -121,16 +189,121 @@ export class ProfileComponent implements OnInit {
       }else{
         this.poseYourSelf = array;
       }
+      console.log(this.poseYourSelf);
       
     }, error => {
       console.log("fail");
     });
   }
+  array: any;
+  async selectPose() {
+
+      
+        //comment
+        this.http.get("http://203.154.83.62:1238/select/pose_all/" + this.selectIndexPose, this.token)
+        .subscribe(async re => { 
+          this.array = Object.values(re);
+
+        //like
+        this.http.get("http://203.154.83.62:1238/select/like/" + this.selectIndexPose, this.token)
+        .subscribe(re => {
+          var liker = Object.values(re);
+          this.array[0].liked_but = false;
+          liker.forEach(element => {
+            if (element["user_id_like"] == this.user_id) {
+              this.array[0].liked_but = true;
+            }
+          });
+          this.array[0].like = liker.length;
+        
+          //comment
+        this.http.get("http://203.154.83.62:1238/select/commentCount/" + this.selectIndexPose, this.token)
+        .subscribe(async re => {
+          var comment = Object.values(re);
+          this.array[0].comment_comment_length = comment[0]["count"];
+          this.selectComment(this.selectIndexPose,"new");
+          console.log(this.array);
+        }, err => {
+          console.log("re" + JSON.stringify(err));
+        });
+
+        }, err => {
+          console.log("re" + JSON.stringify(err));
+        });
+
+        }, err => {
+          console.log("re" + JSON.stringify(err));
+        });
+
+  }
+
+  comment(pose_id: any, comment_text: any) {
+    let json = { Text: comment_text.value, u_id: this.user_id, pose_id: pose_id };
+    comment_text.value= '';
+    this.http.post("http://203.154.83.62:1238/pose/comment", JSON.stringify(json), this.token).subscribe(response => {
+      this.selectComment(pose_id, "new");
+      this.array[0]["comment_comment_length"] = this.array[0]["comment_comment_length"] + 1;
+
+    }, error => {
+      console.log("fail");
+    });
+
+  }
+
+  selectComment(pose_id: any, mode: any) {
+
+    if (mode == "new") {
+      this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id + "/" + 0, this.token)
+        .subscribe(re => {
+          var array = Object.values(re);
+          this.comment_allMapIndex.set(pose_id, array);
+        }, err => {
+          console.log("re" + JSON.stringify(err));
+        });
+
+    } else if (mode == "add") {
+      var tempData = this.comment_allMapIndex.get(pose_id);
+
+      this.http.get("http://203.154.83.62:1238/select/comment_all/" + pose_id + "/" + tempData.length, this.token)
+        .subscribe(re => {
+          var array = Object.values(re);
+          var array2 = Object.values(tempData);
+          array2.forEach((element, index) => {
+            array.push(element);
+          });
+          this.comment_allMapIndex.set(pose_id, array);
+          console.log(this.comment_allMapIndex);
+
+        }, err => {
+          console.log("re" + JSON.stringify(err));
+        });
+    }
+
+  }
+
+    //สำหรับ Input ข้อมูล
+    but_like(pose_id: string) {
+      console.log(this.comment_allMapIndex);
+      let json = { u_id: this.user_id, pose_id: pose_id };
+      this.http.post("http://203.154.83.62:1238/pose/like", JSON.stringify(json), this.token).subscribe(response => {
+        if (this.array[0]["liked_but"]) {
+          this.array[0]["liked_but"] = false;
+          this.array[0]["like"]--;
+        } else {
+          this.array[0]["liked_but"] = true;
+          this.array[0]["like"]++;
+        }
+      }, error => {
+        console.log("fail");
+      });
+  
+    }
 
   selectProfileDetall() {
     let json = { user_id: this.user_id };
     this.http.post("http://203.154.83.62:1238/select/profile", JSON.stringify(json), this.token).subscribe(response => {
       this.detallYourSelf = response;
+      console.log(response);
     }, error => {
       console.log("fail");
     });
@@ -160,7 +333,16 @@ export class ProfileComponent implements OnInit {
     this.pose_temp = index;
   }
 
+
+
   //สำหรับแสดงผลทุกหน้าจอ
+  setColorDigitPose() {
+    let styles;
+    styles = {
+      'background-color': 'rgb(30, 30, 30)'
+    }
+    return styles;
+  }
   setMyStyles() {
     let styles;
     if (this.innerWidth >= 1250) {
@@ -191,6 +373,7 @@ export class ProfileComponent implements OnInit {
     }
     return styles;
   }
+  
 
   //สำหรับเชื่อม token webApi
   tokenUser(token: any) {
@@ -206,6 +389,12 @@ export class ProfileComponent implements OnInit {
 
   showResponsiveDialog() {
     this.displayResponsive = true;
+  }
+
+  showPoseSelete(indexPose : any) {
+    this.PoseSelete = true;
+    this.selectIndexPose = indexPose;
+    this.selectPose();
   }
 
 }

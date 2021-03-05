@@ -56,7 +56,8 @@
 
 
         <div style="text-align: left;">
-            <textarea style="width: 100%" [rows]="4" [autoResize]="this.setButTrue" [style]="{'background-color':'rgb(40, 40, 40)','border-color':'rgb(40, 40, 40)'}" 
+            <textarea style="width: 100%" [rows]="4" [autoResize]="this.setButTrue" [style]="{'background-color':'rgb(40, 40, 40)',
+            'border-color':'rgb(40, 40, 40)','border-radius':'15px 15px 15px 15px','color':'#FFFFFF'}" 
                 [(ngModel)]="getTextPose_Temp" pInputTextarea></textarea>
         </div>
 
@@ -228,7 +229,7 @@
                 </div>
                 <div class="p-col-fixed " style="width: 83%;">
 
-                    <textarea #titleInput [style]="{'background-color':'rgb(40, 40, 40)','border-color':'rgb(40, 40, 40)'}"
+                    <textarea #titleInput [style]="{'background-color':'rgb(40, 40, 40)','border-color':'rgb(40, 40, 40)','color':'#FFFFFF'}"
                         (keydown.enter)="comment(item.pose_id,titleInput)" [rows]="1"
                         style="border-radius: 10px 10px 10px 10px;width: 100%;"
                         pInputTextarea placeholder="แสดงความคิดเห็น"

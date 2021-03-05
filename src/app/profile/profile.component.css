@@ -83,4 +83,9 @@
   }
   body { top:0; bottom:0; right:0; left:0;font-family: 'Roboto', sans-serif; background-color: rgb(243, 243, 243);}
 
-  
+  h3,p,button,h1{
+    font-family: 'Kanit', sans-serif;
+    color: rgb(255, 255, 255);
+  }
+
+ 
