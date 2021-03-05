@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenService } from '../token.service';
 import { CookieService } from 'ngx-cookie-service';
-
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -34,10 +34,13 @@ export class LoginComponent implements OnInit {
   siteKey: any;
   dis= false;
   visibleSidebar2: any;
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService,private cookieService: CookieService) {
+
+  aFormGroup: any;
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService,private cookieService: CookieService,private formBuilder: FormBuilder) {
     // if(cookieService.check('user_id') == true || cookieService.check('token') == true){
     //   this.router.navigateByUrl("/home");
     // }
+    
     this.innerHeight = window.innerHeight;
     this.innerWidth = window.innerWidth;
     this.siteKey ="6LemRTcaAAAAAICg9BYjszAhjHqjXRv1B4pMlx3i";
@@ -49,6 +52,8 @@ export class LoginComponent implements OnInit {
         console.log(this.innerWidth);
       });
     };
+
+    
   }
   
 
@@ -58,7 +63,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+    this.aFormGroup = this.formBuilder.group({
+      recaptcha: ['', Validators.required]
+    });
   
   }
 
