@@ -19,6 +19,8 @@ export class NavbarComponent implements OnInit {
   NotfriendSelect: boolean = true;
   SendfriendSelect: boolean = true;
   GroupSelect: boolean = true;
+  displayModal: boolean = false;
+
   constructor(private ngZone: NgZone,private http: HttpClient,private cookieService: CookieService) {
 
     this.user_id = cookieService.get('user_id');
@@ -126,5 +128,11 @@ export class NavbarComponent implements OnInit {
     };
     return requestOptions;
   }
+  
+    showModalDialog() {
+      this.displayModal = true;
+  }
 
 }
+
+
