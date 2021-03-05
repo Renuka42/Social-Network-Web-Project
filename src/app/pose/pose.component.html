@@ -1,58 +1,17 @@
-<!-- 
-<p-dialog header="Title" [(visible)]="displayDelete">
-    <p-card >
-        <div style="text-align: left;">
-            <div class="p-grid" >
-                <div class="p-col-fixed " style="width:70px;" >
-                    <div
-                        style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;">
-                        <img *ngIf="item.img_profile_base64_temp != null"
-                            class="Y2VudGVy"
-                            src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/profile/{{item.img_profile_base64_temp}}">
-                        <img *ngIf="item.img_profile_base64_temp == null"
-                            class="Y2VudGVy"
-                            src="http://203.154.83.62:1238/photo/temp/user"> 
 
-                    </div>
-                </div>
-
-
-                <div class="p-col" >
-                    <div style="line-height: 0px;">
-                        <h3> <a class="fake-link">{{item.name}}</a></h3>
-                        <p style="color: darkgray;">1 ชัวโมงที่แล้ว</p>
-                    </div>
-
-                </div>
-
-                <button pButton pRipple type="button"  (click)="menu.toggle($event)"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
-                <p-menu #menu [popup]="true" [model]="items"></p-menu>
-                
-            </div>
-        </div>
-
-
-
-        <br>
-        <div style="text-align: left;" *ngIf="item.Text.length != 0">
-            <h3 style="word-wrap: break-word">{{item.Text}}</h3>
-        </div>
-
-        <div *ngIf="item.user_upload_img != null"  style="overflow: hidden">
-            <img style="width: 100%;height: 100%;"
-                src="http://203.154.83.62:1238/photo/{{item.user_pose_fk}}/{{item.user_upload_img}}">
-        </div>
-
- 
-    </p-card>
-</p-dialog> -->
+<p-dialog header="ลบโพสต์ของคุณใช่ไหม" [modal]="true" [(visible)]="displayDelete">
+    <h3>รายการนี้จะไม่สามารถกู้คืนได้อีก คุณแน่ใจแล้วใช่ไหม</h3>
+    
+    <div style="float: right;">
+        <button pButton pRipple type="button" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
+        <button pButton pRipple type="button" (click)="deletePose()" icon="pi pi-check" label="ลบ" class="p-button-danger"></button>
+    </div>
+    
+</p-dialog> 
 
 
 <div class="box" >
     <p-card>
-
-
-
         <div class="p-grid">
             <div class="p-col-fixed " style="width:70px;"
                 *ngFor="let item of this.profile">
@@ -64,7 +23,6 @@
                     <img *ngIf="item.img_profile_base64_temp == null"
                         class="Y2VudGVy"
                         src="http://203.154.83.62:1238/photo/temp/user">
-
                 </div>
             </div>
             <div class="p-col">
@@ -134,9 +92,8 @@
 
                     </div>
 
-                    <button pButton pRipple type="button"  (click)="menu.toggle($event);"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
-                    <p-menu #menu [popup]="true" [model]="items"></p-menu>
-                    
+                    <button pButton pRipple type="button"  (click)="menuPose.toggle($event);memuPose(item.pose_id)"  icon="pi pi-ellipsis-h" class="p-button-rounded p-button-text p-button-plain"></button>
+                    <p-menu #menuPose [popup]="true" [model]="itemsPose"></p-menu>
                 </div>
             </div>
 
@@ -221,8 +178,6 @@
                                 </div>
                                 <div class="p-col"
                                     style="color: darkgrey;margin-top: 3px;">
-                                    <i class="pi pi-angle-down fake-link"
-                                        (click)="setoptionConmentsetting(item.c_id)"></i>
                                 </div>
                             </div>
                             <h3
@@ -230,7 +185,11 @@
                                 {{ins.Text}}</h3>
                         </div>
                     </div>
-                    <div class="p-col-1"></div>
+                    <div class="p-col-1">
+                        
+                        <button pButton pRipple type="button"  (click)="memuComment.toggle($event);this.memuCom(ins.c_id)"  icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text p-button-plain"></button>
+                        <p-menu #memuComment [popup]="true" [model]="itemsComment"></p-menu>
+                    </div>
 
 
                 </ng-container>
@@ -255,8 +214,8 @@
                 </div>
                 <div class="p-col-fixed " style="width: 83%;">
 
-                    <textarea [(ngModel)]="comment_text"
-                        (keydown.enter)="comment(item.pose_id)" [rows]="1"
+                    <textarea #titleInput
+                        (keydown.enter)="comment(item.pose_id,titleInput)" [rows]="1"
                         style="border-radius: 10px 10px 10px 10px;width: 100%;"
                         pInputTextarea placeholder="แสดงความคิดเห็น"
                         [autoResize]="this.setButTrue"></textarea>
@@ -266,7 +225,7 @@
                         style="border-radius: 30px 30px 30px 30px;width: 40px;height: 40px;margin-left: -6px;"
                         pButton pRipple type="submit" icon="pi pi-send"
                         class="p-button-rounded p-button-text p-button-plain"
-                        (click)="comment(item.pose_id)"></button>
+                        (click)="comment(item.pose_id,titleInput.value)"></button>
                 </div>
 
             </div>
