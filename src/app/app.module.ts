@@ -36,6 +36,7 @@ import { PoseComponent } from './pose/pose.component';
 import { GroupComponent } from './group/group.component';
 import {MenuModule} from 'primeng/menu';
 import { ProFriendsComponent } from './pro-friends/pro-friends.component';
+import { PoseGroupComponent } from './pose-group/pose-group.component';
 
 
 const appRoutes: Routes = [
@@ -43,8 +44,8 @@ const appRoutes: Routes = [
   { path: 'home',component: HomeComponent},
   { path: 'profile',component: ProfileComponent},
   { path: 'signin',component: SigninComponent},
-  { path: 'listgroup',component: ListgroupComponent},
-  { path: 'nav',component: NavbarComponent},
+  { path: 'group/:id',component: ListgroupComponent},
+  { path: 'poseg',component: PoseGroupComponent},
   { path: 'friend/:id',component: ProFriendsComponent},
 ];
 @NgModule({
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     TapBarFriendComponent,
     PoseComponent,
     GroupComponent,
-    ProFriendsComponent
+    ProFriendsComponent,
+    PoseGroupComponent
   ],
   imports: [
     MenuModule,
