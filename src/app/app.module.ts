@@ -37,6 +37,7 @@ import { GroupComponent } from './group/group.component';
 import {MenuModule} from 'primeng/menu';
 import { ProFriendsComponent } from './pro-friends/pro-friends.component';
 import { PoseGroupComponent } from './pose-group/pose-group.component';
+import { TapBarGroupComponent } from './tap-bar-group/tap-bar-group.component';
 
 
 const appRoutes: Routes = [
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     PoseComponent,
     GroupComponent,
     ProFriendsComponent,
-    PoseGroupComponent
+    PoseGroupComponent,
+    TapBarGroupComponent
   ],
   imports: [
     MenuModule,

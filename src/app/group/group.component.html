@@ -1,18 +1,39 @@
+<p-dialog header="แก้ไขโปรไฟล์" [(visible)]="popupCreateGroup" [modal]="true" [style]="{width:'60vm',height:'40vm'}" 
+[baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  
+        <div>
+            <label for="test">ขื่อกลุ่ม</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span><input type="text" class="p-inputtext-sm"  pInputText [(ngModel)]="groupname" /></span>
+        </div>
+        <br>
+   
+        <br>
+        <div style="float: right;">
+
+            <button pButton pRipple type="button" (click)="popupCreateGroup=false" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
+            <button pButton pRipple type="button" (click)="creatGroup();popupCreateGroup=false" icon="pi pi-check" label="บันทึก" class="p-button-success"></button>
+        </div>
+
+</p-dialog>
+
 <div class="box" style="position: fixed;" >
     <div class="p-grid" >
         <div class="p-col-fixed" style="width: 290px;">
+
             
-            <div class="p-grid" style="background:#3c3c3c; border-radius: 30px;margin-top: 15px;">
+            
+             <div class="p-grid" style="background:#3c3c3c; border-radius: 30px;margin-top: 15px;" (click)="popupCreateGroup = true">
                 <div class="p-col-8">
                     <div class="p-grid">
                         <div class="p-col-fixed " style="width:70px;">
-                            <img class="element" style="border-radius: 50%;width: 50px;height: 50px;"
+                            <img class="element" style="border-radius: 50%;width: 50px;height: 50px;" (click)="popupCreateGroup = true"
                                 src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
                                 alt="Girl in a jacket">
                         </div>
                         <div class="p-col">
                             <div style="margin-top: 15px;">
-                                <h2>สร้างกลุ่ม</h2>
+                                <h2 (click)="popupCreateGroup = true">สร้างกลุ่ม</h2>
                             </div>
                         </div>
                     </div>
@@ -22,7 +43,7 @@
                 <div class="p-col-4">
                     <div class="element" style="text-align: right;">
 
-                        <i class="pi pi-plus" style="font-size: 2rem;color: snow;"></i>
+                        <i (click)="popupCreateGroup = true" class="pi pi-plus" style="font-size: 2rem;color: snow;"></i>
 
                     </div>
 
@@ -50,10 +71,13 @@
                 <div class="p-grid" *ngFor="let groups of this.group" style="margin-top: 0px;">
 
 
-                    <div class="p-col-fixed " style="width:70px;">
-                        <img class="element" style="border-radius: 50%;width: 40px;height: 40px;"
-                            src="https://steamuserimages-a.akamaihd.net/ugc/960852728834729155/A9919256625131414B8E81FB5FE7862912A7923E/"
-                            alt="Girl in a jacket">
+                    <div class="p-col-fixed " >
+                        
+                        <div style="border-radius: 50%;width: 40px;height: 40px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;">
+                            <img class="Y2VudGVy" src="http://203.154.83.62:1238/photo/{{groups.user_create}}/group/{{groups.img_profile}}">
+
+                        </div>
+
                     </div>
 
                     <div class="p-col">

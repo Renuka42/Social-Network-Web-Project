@@ -12,10 +12,12 @@
                         <div class="p-fluid">
                             <div class="p-field">
                                 <label for="username">Username</label><br>
+                                <h3 *ngIf="usernameSignintestState == false" style="color: crimson;">ไม่ถูกต้อง ไม่ควรมีอักขระหรือช่องว่าง</h3>
                                 <input id="usernameSignin" type="text" pInputText [(ngModel)]="usernameSignin">
                             </div>
                             <div div class="p-field">
                                 <label for="Password">Password</label><br>
+                                <h3 *ngIf="passwordSignintestState == false" style="color: crimson;">ไม่ถูกต้อง ไม่ควรมีอักขระหรือช่องว่าง</h3>
                                 <input id="PasswordSignin" type="password" pInputText [(ngModel)]="passwordSignin">
                                 <br>
                             </div>
@@ -93,7 +95,7 @@
                         <br>
                         <h2 style="text-align: center; font-size: 30px;">FACESART</h2><br>
                         <p-card>
-
+                            <h3 *ngIf="this.state == false" style="color: crimson;">Username หรือ Passweord ไม่ถูกต้อง</h3>
                             <div class="p-fluid">
                                 <div class="p-field">
                                     <label for="Username">Username</label>

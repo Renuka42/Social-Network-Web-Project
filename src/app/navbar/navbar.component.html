@@ -97,13 +97,14 @@
             </div>
             <div class="p-col-4"><button style="margin-top: 5px;" pButton pRipple type="button" icon="pi pi-heart"
                     class="p-button-rounded p-button-secondary p-button-sm" (click)="showModalDialog()"></button>
+
                     <p-dialog header="Log OUT" [(visible)]="displayModal"  [style]="{width: '500px'}" [baseZIndex]="1000">
-                    <p class="p-m-0">sehnyrdjkkyhldrjko;tfk.</p>
-                    <ng-template pTemplate="footer">
-                        <p-button (click)="displayModal=false" label="No" styleClass="p-button-text"></p-button>
-                        <p-button (click)="displayModal=false" label="Yes" styleClass="p-button-text"></p-button>
-                    </ng-template>
-                </p-dialog>
+                        <p class="p-m-0">ต้องการออกจากระบบหรือไม่</p>
+                        <ng-template pTemplate="footer">
+                            <p-button (click)="displayModal=false" label="No" styleClass="p-button-text"></p-button>
+                            <p-button (click)="displayModal=false;logout()" label="Yes" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                    </p-dialog>
                 
             </div>
         </div>

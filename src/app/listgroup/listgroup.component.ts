@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-listgroup',
@@ -23,13 +26,58 @@ export class ListgroupComponent implements OnInit {
   pose_temp = 0;
   comment_text: any;
   checkLike: any;
+  token: any;
+  groupPage: any;
 
-  constructor() { }
+  useridf: any;
+  popupCreateGroup = false;
 
-  ngOnInit(): void {
-  
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone, private cookieService: CookieService)  {
+    if (cookieService.check('user_id') == false || cookieService.check('token') == false) {
+      this.router.navigateByUrl("");
+    }
+
+
+    this.groupPage = this.route.snapshot.paramMap.get('id');
+    this.user_id = cookieService.get('user_id');
+    this.token = this.tokenUser(cookieService.get('token'));
+    this.selectgroup();
+   }
+
+   ngOnInit(): void {
+
+    window.addEventListener('scroll', this.scroll, true);
+    
+
+  }
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.scroll, true);
   }
 
+  scroll = (event: any): void => {
+    
+  };
+
+  selectgroup() {
+    
+    this.http.get("http://203.154.83.62:1238/select/group/details/"+this.groupPage, this.token)
+    .subscribe(response => {
+      this.group = response;
+      console.log(this.group);
+    }, error => {
+      console.log("fail");
+    });
+  }
+
+  addgroupF() {
+    let json = { user_request: this.user_id+"", name_id: this.useridf, group_id: this.group[0].group_id+"" };
+    this.http.post("http://203.154.83.62:1238/group/add", JSON.stringify(json), this.token).subscribe(response => {
+      console.log(response);
+      window.location.reload();
+    }, error => {
+      console.log("fail");
+    });
+  }
 
   //สำหรับตั้งค่า Temp
   setTempComment(index: any) {
@@ -157,11 +205,67 @@ export class ListgroupComponent implements OnInit {
     }
     return styles;
   }
+  setFixedBart(fix:any) {
+    
+    let styles;
+    if (fix == 1) {
+      console.log("fewef");
+      styles = {
+        'position':'fixed',
+      }
+    } else {
+      styles = {
+        
+      }
+    }
+    return styles;
+  }
 
   //สำหรับเรียก pop up
   display: boolean = false;
   visibleSidebar3: any;
   showDialog() {
     this.display = true;
+  }
+  setButTrue = true;
+  uploadedFiles: any[] = [];
+  myUploader(even: any) {
+    for (let files of even.files) {
+      this.uploadedFiles.push(files);
+    }
+    const file = this.uploadedFiles[0];
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('userid', this.user_id);
+    formData.append('group', this.group[0].group_id);
+    formData.append('folder', "group");
+    this.http.post("http://203.154.83.62:1238/del/kuy/small/file", formData)
+      .subscribe(response => {
+        this.uploadedFiles = [];
+        window.location.reload();
+      }, err => {
+        //handle error
+      });
+  }
+
+  setMyStylestest() {
+    let styles;
+    styles = {
+      'border-radius': 50 + '%',
+      'width': 50 + 'px',
+      'height': 50 + 'px'
+    }
+    return styles;
+  }
+
+   //สำหรับเชื่อม token webApi
+   tokenUser(token: any) {
+    const headerDict = {
+      'TOKEN': token
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    return requestOptions;
   }
 }

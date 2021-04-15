@@ -138,7 +138,7 @@ export class PoseComponent implements OnInit {
 
   scroll = (event: any): void => {
     if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight)) {
-      //this.selectPose();
+      this.selectPose();
     }
   };
 

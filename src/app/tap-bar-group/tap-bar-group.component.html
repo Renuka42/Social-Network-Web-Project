@@ -1,0 +1,99 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mitr&display=swap" rel="stylesheet">
+
+<div class="box">
+    <div class="p-grid">
+        <div class="p-col-12 "></div>
+        <div class="p-col-12">
+
+            
+
+            <div class="p-grid">
+
+                <div class="p-col-9">
+
+                    <div class="p-grid">
+                        <div class="p-col-fixed ZWxlbWVudA" style="width:70px;" *ngFor="let item of this.profile">
+                            <div
+                                style="border-radius: 50%;width: 50px;height: 50px;overflow: hidden;background-color: rgb(255, 255, 255);margin-top: 3px;">
+                                <img *ngIf="item.img_profile_base64_temp != null" class="Y2VudGVy"
+                                    src="http://203.154.83.62:1238/photo/{{this.user_id}}/profile/{{item.img_profile_base64_temp}}">
+                                <img *ngIf="item.img_profile_base64_temp == null" class="Y2VudGVy"
+                                    src="http://203.154.83.62:1238/photo/temp/user">
+
+                            </div>
+                        </div>
+
+                        <div class="p-col">
+                            <div *ngFor="let profiles of this.profile" style="line-height: 0px;">
+                                <h3>{{profiles.name}}</h3>
+                                <p style="font-size: 20px;">{{profiles.name_id}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="p-col-3">
+                    <div class="element" style="text-align: right;">
+                        <a routerLink="/profile">
+                            <h3>โปรไฟล์</h3>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr style="background-color: #3c3c3c;">
+
+            <div>
+
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <h3>สมาชิกในกลุ่ม</h3>
+                    </div>
+                    <div class="p-col-6" style="text-align: right;">
+                        <h3>ดูทั้งหมด</h3>
+                    </div>
+                </div>
+
+
+
+                <div class="p-grid" *ngFor="let friend of this.friend_all" style="margin-top: 0px;">
+
+
+
+                    <div class="p-col-fixed ZWxlbWVudA" >
+
+                        <div
+                            style="border-radius: 50%;width: 40px;height: 40px;overflow: hidden;background-color: rgb(255, 255, 255);">
+                            <img class="Y2VudGVy"
+                                src="http://203.154.83.62:1238/photo/{{friend.u_id}}/profile/{{friend.img_profile_base64_temp}}">
+
+                        </div>
+                    </div>
+
+                    <div class="p-col" >
+                        <div class="element">
+                            <a routerLink = "/friend/{{friend.u_id}}" ><h3>{{friend.name}}</h3></a>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="p-col-12"> </div>
+    </div>
+
+
+
+</div>

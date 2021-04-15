@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   GroupSelect: boolean = true;
   displayModal: boolean = false;
 
+
   constructor(private ngZone: NgZone,private http: HttpClient,private cookieService: CookieService) {
 
     this.user_id = cookieService.get('user_id');
@@ -42,6 +43,7 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit(): void {
+   
   }
 
   inputClike(mode:any){
@@ -131,6 +133,11 @@ export class NavbarComponent implements OnInit {
   
     showModalDialog() {
       this.displayModal = true;
+  }
+
+  logout(){
+    this.cookieService.deleteAll();
+    window.location.reload();
   }
 
 }

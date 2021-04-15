@@ -12,6 +12,8 @@ export class GroupComponent implements OnInit {
   user_id: any;
   token: any;
   group: any;
+  popupCreateGroup = false;
+  groupname: any;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private ngZone: NgZone, private cookieService: CookieService) {
 
@@ -38,6 +40,18 @@ export class GroupComponent implements OnInit {
       console.log("fail");
     });
   }
+
+  creatGroup() {
+    let json = { user_id: this.user_id, name: this.groupname };
+    this.http.post("http://203.154.83.62:1238/group/create", JSON.stringify(json), this.token).subscribe(response => {
+      this.group = response;
+      window.location.reload();
+    }, error => {
+      console.log("fail");
+    });
+  }
+
+
 
       //สำหรับเชื่อม token webApi
       tokenUser(token: any) {

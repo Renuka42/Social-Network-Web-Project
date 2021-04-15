@@ -9,3 +9,10 @@
     font-family: 'Kanit', sans-serif;
     color: rgb(255, 255, 255);
   }
+  .Y2VudGVy {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: auto;
+    height: 100%;
+  }

@@ -63,12 +63,18 @@ export class ProFriendsComponent implements OnInit {
   stopLoading = false;
   scroll = (event:any): void => {
     if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-80) && this.showDivLoading == true) {
-      console.log("end");
-      this.showDivLoading = false;
-      this.poseLoadAddData = this.poseLoadAddData + 9;
-      this.selectProfileYourself('photo');
+      // console.log("end");
+      // this.showDivLoading = false;
+      // this.poseLoadAddData = this.poseLoadAddData + 9;
+      // this.selectProfileYourself('photo');
     }
   };
+
+  loadposed(){
+    this.poseLoadAddData = this.poseLoadAddData + 9;
+    this.selectProfileYourself('photo');
+  }
+ 
   
 
   selectProfileDetall() {

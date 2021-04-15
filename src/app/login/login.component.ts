@@ -5,6 +5,7 @@ import { TokenService } from '../token.service';
 import { CookieService } from 'ngx-cookie-service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
   visibleSidebar2: any;
 
   aFormGroup: any;
+  state = true;
   constructor(private http: HttpClient, private router: Router, private ngZone: NgZone, private tokens: TokenService,private cookieService: CookieService,private formBuilder: FormBuilder) {
     // if(cookieService.check('user_id') == true || cookieService.check('token') == true){
     //   this.router.navigateByUrl("/home");
@@ -75,11 +77,12 @@ export class LoginComponent implements OnInit {
  }
 
   login() {
-
+    this.state = true;
     let json = {username: this.username,password: this.password};
     this.http.post("http://203.154.83.62:1238/user/login", JSON.stringify(json)).subscribe(response => {
     var array = Object.values(response);
     if(array != null){
+      
       this.tokens.token = array[0]["token"];
       var tokenUserID = this.tokens.token.split("."); 
       let strToJSONUserid = JSON.parse(atob(tokenUserID[1]));
@@ -95,18 +98,47 @@ export class LoginComponent implements OnInit {
     }
     }, () => {
       console.log("fail");
+      this.state = false;
     });
   }
+
+
+  usernameSignintestState = true;
+  passwordSignintestState = true;
    Signin(){
+
+    let stateusername = false;
+    let statepassword = false;
+    if(this.usernameSignintest(this.usernameSignin,0) == true){
+      this.usernameSignintestState = true;
+      stateusername = true;
+    }
+    if(this.usernameSignintest(this.passwordSignin,1) == true){
+      this.passwordSignintestState = true;
+      statepassword = true;
+    }
+
+     if(stateusername == true && statepassword == true){
+        let json = { username: this.usernameSignin, password: this.passwordSignin,name_id: this.name_idSignin,name: this.nameSignin};
+        console.log(json);
+        this.http.post("http://203.154.83.62:1238/user/register", JSON.stringify(json)).subscribe(response => {
+          location.reload();
+        }, () => {
+          console.log("fail");
+        });
+     }
     
+  }
+
     
-    let json = { username: this.usernameSignin, password: this.passwordSignin,name_id: this.name_idSignin,name: this.nameSignin};
-    console.log(json);
-    this.http.post("http://203.154.83.62:1238/user/register", JSON.stringify(json)).subscribe(response => {
-      location.reload();
-    }, () => {
-      console.log("fail");
-    });
+    usernameSignintest(str: any,mode: any){
+      var english = /^[A-Za-z0-9]*$/;
+      if(!english.test(str)||str.indexOf(' ') >= 0){
+        if(mode == 0){this.usernameSignintestState = false;
+        }else{this.passwordSignintestState = false};
+        return false;
+      }
+      return true;
   }
 
   showResponse(event:any) {

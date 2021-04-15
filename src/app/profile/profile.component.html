@@ -27,19 +27,19 @@
   
                 <div>
                     <label for="test">ขื่อ</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span><input type="text" class="p-inputtext-sm" placeholder="{{item.name}}" pInputText /></span>
+                    <span><input type="text" class="p-inputtext-sm" placeholder="{{item.name}}" pInputText [(ngModel)]="usernameC" /></span>
                 </div>
                 <br>
                 <div>
                     <label for="test">Name ID</label> &nbsp;
-                    <span><input type="text" class="p-inputtext-sm" placeholder="{{item.name_id}}" pInputText /></span>
+                    <span><input type="text" class="p-inputtext-sm" placeholder="{{item.name_id}}" pInputText  [(ngModel)]="name_id"/></span>
                 </div>
         </div>
         <br>
         <div style="float: right;">
 
             <button pButton pRipple type="button" (click)="displayResponsive=false" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
-            <button pButton pRipple type="button" (click)="displayResponsive=false" icon="pi pi-check" label="บันทึก" class="p-button-success"></button>
+            <button pButton pRipple type="button" (click)="cheangname();displayResponsive=false" icon="pi pi-check" label="บันทึก" class="p-button-success"></button>
         </div>
 
 </p-dialog>
@@ -428,11 +428,39 @@
                     <div class="p-col">
 
                     </div>
+                    
                 </div>
+                
             </div>
+            
         </div>
+        
+    </div>
+    
+    
+    <div class="p-grid">
+        
+        <div class="p-col-3">
+
+        </div>
+ <div class="p-col-6">
+    <p-card [style]="{'background-color':'rgb(60, 60, 60)','border-radius':'15px 15px 15px 15px'}">
+        <div style="text-align: center;" > 
+        <button class="element" (click)="loadposed()"
+            style="border-radius: 10px 10px 10px 10px;margin-left: -10px;margin-top: 2px;"
+            pButton pRipple type="submit" icon="pi pi-check"
+            class="p-button-rounded p-button-outlined"></button>
+        <h1>กดโหลดโพตส์เพิ่มเติม</h1>
+
     </div>
 
+    </p-card>
+        </div>
+ <div class="p-col-3">
+
+        </div>
+        
+    </div>
 
 
 </body>

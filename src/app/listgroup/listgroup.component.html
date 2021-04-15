@@ -1,4 +1,25 @@
 
+<p-dialog header="แก้ไขโปรไฟล์" [(visible)]="popupCreateGroup" [modal]="true" [style]="{width:'60vm',height:'40vm'}" 
+[baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  
+        <div>
+            <label for="test">Name ID เพื่อน</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span><input type="text" class="p-inputtext-sm"  pInputText [(ngModel)]="useridf" /></span>
+        </div>
+        <br>
+   
+        <br>
+        <div style="float: right;">
+
+            <button pButton pRipple type="button" (click)="popupCreateGroup=false" label="ยกเลิก"  class="p-button-secondary"></button> &nbsp;
+            <button pButton pRipple type="button" (click)="addgroupF();popupCreateGroup=false" icon="pi pi-check" label="บันทึก" class="p-button-success"></button>
+        </div>
+
+</p-dialog>
+
+
+
 <p-overlayPanel #op>
     <ng-template pTemplate>
         
@@ -6,7 +27,7 @@
 </p-overlayPanel>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" >
     
     <!-- <head>
         <meta charset="UTF-8">
@@ -17,7 +38,7 @@
         <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
     </head> -->
 
-    <body>
+    <body style="background-color:rgb(30, 30, 30);">
         
         <app-navbar></app-navbar>
  
@@ -28,20 +49,17 @@
             <br><br>
         </div> -->
 
-        <div class="p-grid" style="background-color:rgb(243, 243, 243);">
+        <div class="p-grid" style="background-color:rgb(30, 30, 30);">
             <div class="p-col-12">
                 <div class="box">
                     <div class="p-grid">
                         <div class="p-col"></div>
-                        <div class="p-col-fixed" style="width: 1000px;">
+                        <div class="p-col-fixed" style="width: 1150px;">
                         <!-- --------------------------------------------- -->
                             <header>
-                                <div class="bioo">
-                                <img src="https://www.naewna.com/uploads/news/source/490917.jpg" alt="background" class="bg" style="text-align: center;">
-                                    <!-- <div class="desc">
-                                        <h3>@carlf</h3>
-                                        <p>Carl Fredricksen is the protagonist in Up. He also appeared in Dug's Special Mission as a minor character.</p>
-                                    </div> -->
+                                <div class="bioo" *ngFor="let item of this.group">
+                                <img src="http://203.154.83.62:1238/photo/{{item.user_create}}/group/{{item.img_profile}}" alt="background" class="bg" style="text-align: center">
+                                    
                                 </div>
                                 
                                 <div class="avatarcontainer">
@@ -52,17 +70,48 @@
                     
                             </header>
                     
-                            <div class="content">
+                            <div class="content" *ngFor="let item of this.group">
                                 <div class="data">
-                                    <span>GroupName</span>
+                                    <span>{{item.name}}</span>
                                     <ul>
                                         <li>🔒 กลุ่มลับ </li>
-                                        <li>สมาชิก 10 คน</li>
+                                        <li>สมาชิก {{item.user_all}} คน</li>
                                     </ul>
                                 </div>
+                               
                     
-                                <!-- <div class="follow"> <div class="icon-twitter"></div> Follow</div> -->
+                                
                             </div>
+
+                            <div *ngFor="let item of this.group">
+
+                                <div class="p-grid">
+
+                                    <div class="p-col-6">
+                                        <div *ngIf="item.user_create == user_id">
+                                            <button (click)="popupCreateGroup=true" pButton pRipple type="button" label="เพิ่มเพื่อน" class="p-button-raised p-button-info"></button>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="p-col-6" style="text-align: right;">
+                                        <div *ngIf="item.user_create == user_id">
+                                            <p-fileUpload [style]="setMyStylestest()" mode="basic" [auto]="setButTrue"
+                                            chooseLabel=" " [customUpload]="setButTrue" accept="image/*"
+                                            (uploadHandler)="myUploader($event)">
+                                            </p-fileUpload>
+                                            <h3>เปลี่ยนรูปภาพ</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                
+                                   
+                                
+
+                            </div>
+                            
                        
                             <hr>
                            
@@ -70,10 +119,16 @@
                        
                             <div class="p-grid" >
                                     
-                                <div class="p-col-9">
+                                <div class="p-col-8">
                                     <app-pose-group></app-pose-group>
                                 </div>
-                                <div class="p-col-3">
+                                <div class="p-col-4">
+
+                                    <div  class="sticky">
+
+                                        <app-tap-bar-group></app-tap-bar-group>
+
+                                    </div>
                                     
                                 </div>
                             

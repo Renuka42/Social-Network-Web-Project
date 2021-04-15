@@ -48,12 +48,14 @@ export class ProfileComponent implements OnInit {
   itemsPose: any;
 
   constructor(private http: HttpClient, private router: Router, private MetforFacesArt: TokenService, cookieService: CookieService) {
+    
     if (cookieService.check('user_id') == false || cookieService.check('token') == false) {
       this.router.navigateByUrl("");
     }
     this.user_id = cookieService.get('user_id');
     this.token = this.tokenUser(cookieService.get('token'));
     this.selectProfileYourself("photo");
+
 
     
 
@@ -69,14 +71,19 @@ export class ProfileComponent implements OnInit {
   }
   showDivLoading = true;
   stopLoading = false;
-  scroll = (event:any): void => {
-    // if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-80) && this.showDivLoading == true) {
-    //   console.log("end");
-    //   this.showDivLoading = false;
-    //   this.poseLoadAddData = this.poseLoadAddData + 9;
-    //   this.selectProfileYourself('photo');
-    // }
-  };
+   scroll = (event:any): void => {
+  //   if (event.target.scrollingElement.offsetHeight + event.target.scrollingElement.scrollTop >= (event.target.scrollingElement.scrollHeight-80) && this.showDivLoading == true) {
+  //     console.log("end");
+  //     this.showDivLoading = false;
+  //     this.poseLoadAddData = this.poseLoadAddData + 9;
+  //     this.selectProfileYourself('photo');
+  //   }
+   };
+
+   loadposed(){
+     this.poseLoadAddData = this.poseLoadAddData + 9;
+     this.selectProfileYourself('photo');
+   }
   
   selectIndexComment : any;
   memuCom(index:any,indexPose:any) {
@@ -244,6 +251,19 @@ export class ProfileComponent implements OnInit {
       this.selectComment(pose_id, "new");
       this.array[0]["comment_comment_length"] = this.array[0]["comment_comment_length"] + 1;
 
+    }, error => {
+      console.log("fail");
+    });
+
+  }
+
+  usernameC: any;
+  name_id: any;
+  cheangname(){
+    let json = { name:this.usernameC, name_id:this.name_id, user_id:this.user_id};
+    console.log(json);
+    this.http.post("http://203.154.83.62:1238/user/change", JSON.stringify(json), this.token).subscribe(response => {
+      window.location.reload();
     }, error => {
       console.log("fail");
     });
